@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Task Name="PlcVisionApplication" Id="{748e86a4-8bc1-4e26-897c-aafafde94257}">
+    <!--CycleTime in micro seconds.-->
+    <CycleTime>1000</CycleTime>
+    <Priority>1</Priority>
+    <PouCall>
+      <Name>Core2_VisionApplication</Name>
+    </PouCall>
+    <TaskFBGuid>{36ddb2ee-2248-43e5-ba67-4f447d565975}</TaskFBGuid>
+    <Fb_init>{b665988e-0f11-4f5a-bc97-02aadca77baa}</Fb_init>
+    <Fb_exit>{98de0ea9-88f4-4aae-9b42-f15ca4d43de9}</Fb_exit>
+    <CycleUpdate>{b9ea9d3b-b537-49a7-a467-5effe693f8d3}</CycleUpdate>
+    <PostCycleUpdate>{d98523b9-246c-4c0e-871d-4c3567aedd0c}</PostCycleUpdate>
+  </Task>
+</TcPlcObject>

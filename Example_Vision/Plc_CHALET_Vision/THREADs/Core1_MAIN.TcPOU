@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="Core1_MAIN" Id="{19f277bd-4097-4636-9c24-875ea110dece}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM Core1_MAIN
+VAR
+	(* Declare single vision objects *)
+	//--- Image Provider ------------
+	//fbImageProvider 			: FB_Gige_Vision(nAddressExposureTime := 16#30000024, nEndian := 0);	
+	//fbImageProvider 			: FB_GigE_Beckhoff;
+	fbImageProvider 			: FB_ImageFromFile;
+
+	
+	//--- Trigger Controller ------------
+	//fbTriggerController 		: FB_GigeSoftwaretrigger;
+	//fbTriggerController		: FB_EtherCAT_Trigger;
+	//fbCameraController 		: FB_EL2258_1Ch_TSO();	
+	//fbCameraController 		: FB_EL2595();	
+
+	
+	//--- Illumination Controller1 ------------
+	//fbIllumination1 			: FB_EL2595();
+	//fbIllumination1			: FB_VIx2000();
+
+	
+	//--- Illumination Controller2 ------------
+	//fbIllumination2 			: FB_EL2595();
+	//fbIllumination2			: FB_VIx2000();	
+
+	
+
+	
+	(* Build system *)
+	(* The system requires a minimum of one lighting. But could also handle two at the same time. If not needed pass 0 *)
+	fbVisionSystem : FB_VisionSystem(	ipImageProvider				:= fbImageProvider, 
+										ipCameraController 			:= 0, 
+										ipIlluminationController1 	:= 0, 
+										ipIlluminationController2 	:= 0);
+										
+	ipVisionSystem : I_VisionSystem := fbVisionSystem;
+
+	(* The mode defines how the individual camera components interact with each other. This can be switched at PLC runtime*)
+	fbPulsMode : FB_VisionMode_Pulse_combined;
+	
+	(* Puls Settings *)
+	nOrange 	: UINT(0..511) 	:= 0; 		//0-511
+	nGreen 		: UINT(0..511)	:= 50; 		//0-511
+	nBlue 		: UINT(0..511) 	:= 50;		//0-511
+	nInfrared 	: UINT(0..511)	:= 500; 	//0-511
+	nExposure_1us 			: UDINT := 40_000;
+	nExposureDelay_100ns	: UDINT := 10;
+	nIlluminationOverride   : USINT := 100;
+	
+	(* State machine *)
+	bInitDone 	: BOOL;
+	nSeq 		: UINT;	
+	hr 			: HRESULT;
+
+	(* Commands *)
+	bTriggerOnce : BOOL := TRUE;
+	bTriggerNonStop, bTriggerFixRate : BOOL;
+	bAutoReset					: BOOL := TRUE;
+	bReConfigure			: BOOL;	
+	nFixRateDelayMs 		: UINT := 2000;
+	nNextTrigger			: T_DCTIME64;
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF NOT bInitDone THEN
+	fbVisionSystem.Initialize();
+	bInitDone := fbVisionSystem.Initialized;
+	RETURN;
+END_IF
+
+CASE nSeq OF
+	00: // Initialize
+		nSeq := 10;
+	
+	10: // Select Mode
+		hr := ipVisionSystem.SetMode(fbPulsMode);
+		
+		IF hr = S_OK THEN
+			nSeq := 15;
+		ELSIF FAILED(hr) OR ipVisionSystem.Error THEN
+			nSeq := 90;			
+		END_IF
+	
+	15: // Configure Mode	
+		hr := fbPulsMode.Configure(	nOrange 	:= nOrange,	// 0-511
+									nGreen 		:= nGreen,	// 0-511
+									nBlue 		:= nBlue,	// 0-511
+									nInfrared 	:= nInfrared, // 0-511
+									nExposureDelay_100ns := nExposureDelay_100ns, 
+									nExposure_1us := nExposure_1us,
+									nIlluminationDuration_1us:= nExposure_1us, 
+									nIlluminationOverride := nIlluminationOverride(*1-100*)	);
+			
+		IF hr = S_OK THEN
+			nSeq := 20;
+		ELSIF FAILED(hr) OR ipVisionSystem.Error THEN
+			nSeq := 90;			
+		END_IF
+		
+	
+	20: // Activate trigger
+		IF bReConfigure THEN
+			// Re-config
+			bReConfigure := FALSE;
+			nSeq := 15;
+
+		ELSIF NOT ipVisionSystem.Operational OR ipVisionSystem.Busy THEN
+			;//Wait for System beeing operational and not busy
+					
+		ELSIF bTriggerOnce THEN
+			//Trigger once - next posible time
+			bTriggerOnce := FALSE;
+			hr := fbPulsMode.TriggerNow();	
+			
+		ELSIF bTriggerNonStop  THEN
+			// Trigger here nonstop - as fast as possible
+			hr := fbPulsMode.TriggerNow();
+
+		ELSIF bTriggerFixRate AND nFixRateDelayMs > 0 THEN
+			// Trigger here cyclical nonstop - each x ms
+			nNextTrigger := fbPulsMode.LastTriggerTime + nFixRateDelayMs * 1000000(*ms in ns*);			
+			nNextTrigger :=  MAX(nNextTrigger, fbPulsMode.NextPossibleTriggerTime);
+			hr := fbPulsMode.TriggerAtDcTime(nNextTrigger);
+		END_IF		
+		
+		IF FAILED(hr) OR ipVisionSystem.Error THEN
+			nSeq := 90;			
+		END_IF
+		
+	90: // Handle errors;
+		IF bAutoReset THEN
+			hr := ipVisionSystem.Reset();
+			nSeq := 0;
+		END_IF
+
+END_CASE
+
+
+//Cyclic call
+ipVisionSystem.Update();
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

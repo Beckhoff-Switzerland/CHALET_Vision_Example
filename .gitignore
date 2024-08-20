@@ -60,6 +60,6 @@ LineIDs.dbg
 *.tcs
 *.mp4
 *.jpg
-*.png
+#*.png
 *.gif
 *.bmp
