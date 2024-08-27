@@ -32,4 +32,5 @@ The images can now be read into the controller by toggling the BOOL Core1_MAIN.b
 In the “Core2_VisionApplication” program, an attempt is constantly made to read out an image. The counter Core2_VisionApplication.nImageCounter increases if processing is successful
 
 The final image can be viewed with the “ADS Image Watch” tool
+
 ![image](https://github.com/user-attachments/assets/cf551b4e-889f-44a5-ad80-71750497ced5)
