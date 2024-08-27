@@ -8,6 +8,8 @@ The first step is to instantiate the hardware-dependent function blocks. These g
 - CameraController - Software trigger, EtherCAT, EL2258, EL2595,...
 - llumination - VIx2000(Beckhoff LED), EL2595
   
+ ![CHALET_Vision_principle](https://github.com/user-attachments/assets/911d8609-bae2-4461-8d49-6e3e61b398cd)
+ 
 These are linked together when the FB_VisionSystem is created. The system forms the entire unit of a camera station.
 
 What is the ‘Mode’ ?
@@ -23,3 +25,11 @@ The mode is an easily exchangeable function block at runtime that receives all i
 
 ---
 ## Quick Start
+The example is preconfigured to an 'ImageFromFile' image source and individual test images are already transferred to the controller via PLC deployment when the TwinCat project is downloaded to the controller.
+
+The images can now be read into the controller by toggling the BOOL Core1_MAIN.bTriggerOnce.
+
+In the “Core2_VisionApplication” program, an attempt is constantly made to read out an image. The counter Core2_VisionApplication.nImageCounter increases if processing is successful
+
+The final image can be viewed with the “ADS Image Watch” tool
+![image](https://github.com/user-attachments/assets/cf551b4e-889f-44a5-ad80-71750497ced5)
