@@ -90,7 +90,7 @@ CASE nSeq OF
 									nGreen 		:= nGreen,	// 0-511
 									nBlue 		:= nBlue,	// 0-511
 									nInfrared 	:= nInfrared, // 0-511
-									nExposureDelay_100ns := nExposureDelay_100ns, 
+									//nExposureDelay_100ns := nExposureDelay_100ns, 
 									nExposure_1us := nExposure_1us,
 									nIlluminationDuration_1us:= nExposure_1us, 
 									nIlluminationOverride := nIlluminationOverride(*1-100*)	);

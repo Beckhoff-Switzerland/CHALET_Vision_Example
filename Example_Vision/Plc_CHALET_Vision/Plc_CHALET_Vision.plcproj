@@ -95,10 +95,10 @@
   </ItemGroup>
   <ItemGroup>
     <PlaceholderResolution Include="CHALET_BaseComponents">
-      <Resolution>CHALET_BaseComponents, * (Beckhoff CH)</Resolution>
+      <Resolution>CHALET_BaseComponents, 3.4.6 (Beckhoff CH)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="CHALET_Vision">
-      <Resolution>CHALET_Vision, 2.0.1 (Beckhoff CH)</Resolution>
+      <Resolution>CHALET_Vision, 2.1.2 (Beckhoff CH)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="Tc2_EtherCAT">
       <Resolution>Tc2_EtherCAT, * (Beckhoff Automation GmbH)</Resolution>

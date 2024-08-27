@@ -3434,7 +3434,7 @@
 		<ImageData Id="1001">424de6000000000000007600000028000000100000000e0000000100040000000000700000003d9605003d96050010000000000000000000000000008000008000000080800080000000800080008080000080808000c0c0c0000000ff0000ff000000ffff00ff000000ff00ff00ffff0000ffffff00d00ddddddddddddd000000dddddddddd000000dddddddddd000000800000000000000080000000000000008000000000000000800000000099999080000000000000008000000000000000800000000000000080000000000000008000000000000000dddddddddd000000dddddddddd</ImageData>
 		<ImageData Id="1002">424de6000000000000007600000028000000100000000e000000010004000000000070000000000000000000000000000000000000000000000000008000008000000080800080000000800080008080000080808000c0c0c0000000ff0000ff000000ffff00ff000000ff00ff00ffff0000ffffff00ffffffffffffffffff788833338887ffff78883bb38887ffffffff3bb3ffffffffffff8778fffffffffffffffffffffffffffffffff999ffff78f78fffffffffff78f78ffff999ffff78f7888fffffffff78f78f78f999ffff78f78f78ffffffff78f7888ff999ffffffffffffffffff</ImageData>
 	</ImageDatas>
-	<Project ProjectGUID="{63C165C6-0C5A-4264-87F7-6816FD62AE21}" TargetNetId="192.168.1.20.1.1" Target64Bit="true" ShowHideConfigurations="#x2c7">
+	<Project ProjectGUID="{63C165C6-0C5A-4264-87F7-6816FD62AE21}" TargetNetId="192.168.1.20.1.1" ShowHideConfigurations="#x2c7">
 		<System>
 			<Settings MaxCpus="4" NonWinCpus="2" RouterMemory="524288000" MaxStackSize="128">
 				<Cpu CpuId="2"/>
@@ -3467,7 +3467,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{0234F32A-48A0-4F76-9E06-4DD517A1494C}" Name="Plc_CHALET_Vision" PrjFilePath="Plc_CHALET_Vision\Plc_CHALET_Vision.plcproj" TmcFilePath="Plc_CHALET_Vision\Plc_CHALET_Vision.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Plc_CHALET_Vision\Plc_CHALET_Vision.tmc" TmcHash="{FFC374A4-6CA4-C5C4-43E0-0B6FD5769AEC}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Plc_CHALET_Vision\Plc_CHALET_Vision.tmc" TmcHash="{3F871CAF-5F73-165E-CA35-346FE8E572AC}">
 					<Name>Plc_CHALET_Vision Instance</Name>
 					<ProjectVariant PvUseSParameter="2">
 						<Variant>
