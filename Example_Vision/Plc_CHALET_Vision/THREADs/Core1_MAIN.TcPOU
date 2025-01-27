@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
   <POU Name="Core1_MAIN" Id="{19f277bd-4097-4636-9c24-875ea110dece}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM Core1_MAIN
 VAR
 	(* Declare single vision objects *)
 	//--- Image Provider ------------
 	//fbImageProvider 			: FB_Gige_Vision(nAddressExposureTime := 16#30000024, nEndian := 0);	
-	//fbImageProvider 			: FB_GigE_Beckhoff;
-	fbImageProvider 			: FB_ImageFromFile;
+	fbImageProvider 			: FB_GigE_Beckhoff;
+	//fbImageProvider 			: FB_ImageFromFile;
 
 	
 	//--- Trigger Controller ------------
 	//fbTriggerController 		: FB_GigeSoftwaretrigger;
-	//fbTriggerController		: FB_EtherCAT_Trigger;
+	fbTriggerController			: FB_EtherCAT_Trigger;
 	//fbCameraController 		: FB_EL2258_1Ch_TSO();	
 	//fbCameraController 		: FB_EL2595();	
 
@@ -32,7 +32,7 @@ VAR
 	(* Build system *)
 	(* The system requires a minimum of one lighting. But could also handle two at the same time. If not needed pass 0 *)
 	fbVisionSystem : FB_VisionSystem(	ipImageProvider				:= fbImageProvider, 
-										ipCameraController 			:= 0, 
+										ipCameraTriggerController 	:= fbTriggerController, 
 										ipIlluminationController1 	:= 0, 
 										ipIlluminationController2 	:= 0);
 										

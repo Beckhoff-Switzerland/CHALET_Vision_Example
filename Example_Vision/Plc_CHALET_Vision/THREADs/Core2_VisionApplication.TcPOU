@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
   <POU Name="Core2_VisionApplication" Id="{3044bfc2-af47-4475-aa52-20e83efee7e7}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM Core2_VisionApplication
 VAR
@@ -54,8 +54,8 @@ IF Core1_MAIN.ipVisionSystem.TryGetImage(stImageWithInfo) = S_OK THEN
 	fbFeedback.hr := F_VN_ResizeImage(
 							ipSrcImage:= stImageWithInfo.ipImage, 
 							ipDestImage:= stImageWithInfo.ipImage, 
-							nWidth:= 400, 
-							nHeight:= 200, 
+							nWidth:= MIN(500, stImageWithInfo.stInfo.nWidth), //500 or smaller
+							nHeight:= MIN(300, stImageWithInfo.stInfo.nHeight), //300 or smaller
 							eInterpolationType:= ETcVnInterpolationType.TCVN_IT_AREA_BASED, 
 							hrPrev:= fbFeedback.hr);
 	

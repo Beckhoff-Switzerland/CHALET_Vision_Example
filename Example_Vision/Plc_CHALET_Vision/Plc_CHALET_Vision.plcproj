@@ -59,10 +59,38 @@
     <PlaceholderReference Include="CHALET_BaseComponents">
       <DefaultResolution>CHALET_BaseComponents, * (Beckhoff CH)</DefaultResolution>
       <Namespace>CHALET_BaseComponents</Namespace>
+      <Parameters>
+        <Parameter ListName="BASEPARAMETERLIST" xmlns="">
+          <Key>MAX_OBJECTS</Key>
+          <Value>150</Value>
+        </Parameter>
+        <Parameter ListName="BASEPARAMETERLIST" xmlns="">
+          <Key>MAX_COE_READ</Key>
+          <Value>20</Value>
+        </Parameter>
+        <Parameter ListName="BASEPARAMETERLIST" xmlns="">
+          <Key>MAX_COE_WRITE</Key>
+          <Value>20</Value>
+        </Parameter>
+      </Parameters>
     </PlaceholderReference>
     <PlaceholderReference Include="CHALET_Vision">
       <DefaultResolution>CHALET_Vision, * (Beckhoff CH)</DefaultResolution>
       <Namespace>CHALET_Vision</Namespace>
+      <Parameters>
+        <Parameter ListName="VISIONPARAMETERLIST" xmlns="">
+          <Key>MAX_VN_REGISTER_READ</Key>
+          <Value>1</Value>
+        </Parameter>
+        <Parameter ListName="VISIONPARAMETERLIST" xmlns="">
+          <Key>MAX_VN_REGISTER_WRITE</Key>
+          <Value>1</Value>
+        </Parameter>
+        <Parameter ListName="VISIONPARAMETERLIST" xmlns="">
+          <Key>ILLUMINATION_WAIT_FOR_TRIGGER_FEEDBACK</Key>
+          <Value>FALSE</Value>
+        </Parameter>
+      </Parameters>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc2_EtherCAT">
       <DefaultResolution>Tc2_EtherCAT, * (Beckhoff Automation GmbH)</DefaultResolution>
@@ -75,14 +103,72 @@
     <PlaceholderReference Include="Tc2_System">
       <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_System</Namespace>
+      <Parameters>
+        <Parameter ListName="PARAM" xmlns="">
+          <Key>TABLE_UPPER_BOUND</Key>
+          <Value>15</Value>
+        </Parameter>
+        <Parameter ListName="PARAM" xmlns="">
+          <Key>STRING_LENGTH_EXP</Key>
+          <Value>255</Value>
+        </Parameter>
+        <Parameter ListName="PARAM" xmlns="">
+          <Key>STRING_LENGTH_ADDRESS</Key>
+          <Value>20</Value>
+        </Parameter>
+        <Parameter ListName="PARAM" xmlns="">
+          <Key>STRING_LENGTH_COMMENT</Key>
+          <Value>255</Value>
+        </Parameter>
+        <Parameter ListName="PARAM" xmlns="">
+          <Key>STRING_LENGTH_OUTSTRING</Key>
+          <Value>255</Value>
+        </Parameter>
+        <Parameter ListName="PARAM" xmlns="">
+          <Key>TABLE_SHOW_VALID_ITEMS</Key>
+          <Value>FALSE</Value>
+        </Parameter>
+      </Parameters>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Utilities">
       <DefaultResolution>Tc2_Utilities, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_Utilities</Namespace>
+      <Parameters>
+        <Parameter ListName="PARAMETERLIST" xmlns="">
+          <Key>NMAXLICENSES</Key>
+          <Value>50</Value>
+        </Parameter>
+        <Parameter ListName="PARAMETERLIST" xmlns="">
+          <Key>NMAXLICENSEDEVICES</Key>
+          <Value>16</Value>
+        </Parameter>
+        <Parameter ListName="PARAMETERLIST" xmlns="">
+          <Key>NMAXCPUCOUNT</Key>
+          <Value>64</Value>
+        </Parameter>
+        <Parameter ListName="PARAMETERLIST" xmlns="">
+          <Key>CMAXCHARACTERS</Key>
+          <Value>16#FFFFFFF0</Value>
+        </Parameter>
+        <Parameter ListName="PARAMETERLIST" xmlns="">
+          <Key>NMAXFILESONDONGLE</Key>
+          <Value>20</Value>
+        </Parameter>
+        <Parameter ListName="PARAMETERLIST" xmlns="">
+          <Key>CMAXCSVFIELDVALUESIZE</Key>
+          <Value>255</Value>
+        </Parameter>
+      </Parameters>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc3_EventLogger">
       <DefaultResolution>Tc3_EventLogger, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc3_EventLogger</Namespace>
+      <Parameters>
+        <Parameter ListName="PARAMETERLIST" xmlns="">
+          <Key>CSOURCENAMESIZE</Key>
+          <Value>256</Value>
+        </Parameter>
+      </Parameters>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc3_Module">
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
@@ -98,7 +184,7 @@
       <Resolution>CHALET_BaseComponents, 3.4.6 (Beckhoff CH)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="CHALET_Vision">
-      <Resolution>CHALET_Vision, 2.1.2 (Beckhoff CH)</Resolution>
+      <Resolution>CHALET_Vision, * (Beckhoff CH)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="Tc2_EtherCAT">
       <Resolution>Tc2_EtherCAT, * (Beckhoff Automation GmbH)</Resolution>
