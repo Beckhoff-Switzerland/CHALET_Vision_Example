@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.62" ClassName="CFlbTermDef" SubType="9099">
+	<ImageDatas>
+		<ImageData Id="1000">424de6000000000000007600000028000000100000000e0000000100040000000000700000003d9605003d96050010000000000000000000000000008000008000000080800080000000800080008080000080808000c0c0c0000000ff0000ff000000ffff00ff000000ff00ff00ffff0000ffffff00d00ddddddddddddd000000dddddddddd000000dddddddddd000000800000000000000080000000000000008000000000000000800000000099999080000000000000008000000000000000800000000000000080000000000000008000000000000000dddddddddd000000dddddddddd</ImageData>
+	</ImageDatas>
+	<Box Id="6" BoxType="9099" BoxFlags="#x00000020">
+		<Name>__FILENAME__</Name>
+		<ImageId>1000</ImageId>
+		<EtherCAT SlaveType="2" PdiType="#x0c80" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="39" VendorId="#x00000002" ProductCode="#x74bdbe08" RevisionNo="#x000001f4" InfoDataAddr="true" InfoDataDcTimes="true" TimeoutStateChange1="2000" TimeoutStateChange2="9000" TimeoutMailbox2="2000" DownloadSlotCfg="true" PortPhys="1" MaxSlotCount="25" SlotPdoIncrement="16" SlotIndexIncrement="16" Type="VCS2000-0500 | Area scan camera, 2.5 GBit/s, Sony IMX264, monochrome, 5.0 MP" Desc="VCS2000-0500">
+			<SyncMan>001080002600010001000000240080008000001026010000</SyncMan>
+			<SyncMan>801080002200010002000000240080008000801022010000</SyncMan>
+			<SyncMan>001108006400010003000000000000008000001164010000</SyncMan>
+			<SyncMan>001400002000000004000000000000008000001420010000</SyncMan>
+			<Fmmu>0000000000000000001100020100000001000000000000000000000000000000</Fmmu>
+			<Fmmu>0000000000000000000000010000000002000000000000000000000000000000</Fmmu>
+			<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
+			<DcData>0103000000000000000000000000000000000000010000000000000000000000</DcData>
+			<DcMode>53796e6368726f6e0000000000000000534d2d53796e6368726f6e000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</DcMode>
+			<DcMode>444300000000000000000000000000004443206163746976652028436f6e74726f6c6c65722068616e646c6564290000000000000000000000000000000001030000000000000000000000000000000000000000000000000000000000000000</DcMode>
+			<Pdo Name="DC Timestamp" Index="#x1610" InOut="1" Flags="#x0090" SyncMan="2">
+				<Entry Name="Timestamp" Index="#xf710" Sub="#x01">
+					<Type>ULINT</Type>
+					<Comment><![CDATA[When the timestamp is hit, a trigger is issued.]]></Comment>
+				</Entry>
+			</Pdo>
+			<CoeProfile ProfileNo="5001"/>
+			<EtherCATp>
+				<Device>
+					<Us DevCurrent="0.4"/>
+					<Up/>
+				</Device>
+				<Port>
+					<Us Resistance="0.11"/>
+					<Up Resistance="0.11"/>
+				</Port>
+			</EtherCATp>
+			<Slot Name="Operating Mode">
+				<SlotData>0000010001000600100000001000000000000000000000000000000000000000</SlotData>
+				<ModuleIdent>1107296257</ModuleIdent>
+				<ModuleIdent>1107296258</ModuleIdent>
+				<Module Id="#x03090001" Type="Opmode DC Timestamp" Class="">
+					<Name>Gerät</Name>
+					<ImageId>408</ImageId>
+					<ModuleData>0200000001000042000004000000000000000000000000000000000000000000</ModuleData>
+					<PdoIndex>5648</PdoIndex>
+				</Module>
+			</Slot>
+			<SlotGroupData Name="Gerät">
+				<SlotGroup>0</SlotGroup>
+			</SlotGroupData>
+		</EtherCAT>
+	</Box>
+</TcSmItem>

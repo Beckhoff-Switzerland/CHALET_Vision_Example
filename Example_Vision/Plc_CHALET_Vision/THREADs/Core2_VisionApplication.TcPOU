@@ -12,17 +12,16 @@ VAR
 	afWhiteBalance 	: TcVnVector4_LREAL := [1.0, 1.0, 1.0, 1.0]; //RGBA
 	sTextInImage 	: STRING;
 
-
 	//Different to the use of HRESULT, this FB automatically generates a TC3_Eventlogger message
 	fbFeedback 	 : FB_CH_Feedback(ipSourceInfo := fbSourceInfo);	//hrImage	 : HRESULT;
 	fbSourceInfo : FB_TcSourceInfo;
 	
-	nStartTime, nEndTime : T_DCTIME64; // [ns] - zero time starts on 01.01.2000
+	nStartTime : T_DCTIME64; //[ns] - zero time starts on 01.01.2000
 	fTimeDifferenceMs : LREAL;	//[ms]
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[//If TryGetImage returns trues S_OK(0), a new image is available
-IF Core1_MAIN.ipVisionSystem.TryGetImage(stImageWithInfo) = S_OK THEN
+      <ST><![CDATA[//If TryGetImage returns S_OK(0), a new image is available
+IF Core1_MAIN.fbCamera.TryGetImage(stImageWithInfo) = S_OK THEN
 	nImageCounter := nImageCounter +1;
 	nStartTime := F_GetActualDcTime64();
 	
@@ -33,11 +32,11 @@ IF Core1_MAIN.ipVisionSystem.TryGetImage(stImageWithInfo) = S_OK THEN
 	//If pixel are encoded in bayer bg convert to rgb - cameraImage is rb, imageFromFile is non rg
 	IF stImageWithInfo.stInfo.stPixelFormat.ePixelEncoding = ETcVnPixelEncoding.TCVN_PE_BAYER_RG THEN
 		fbFeedback.ActiveCommand := 'F_VN_ConvertColorSpace TCVN_CST_BAYER_RG_TO_RGB';
-		fbFeedback.hr := 	F_VN_ConvertColorSpace(
-								ipSrcImage:=stImageWithInfo.ipImage, 
-								ipDestImage:=stImageWithInfo.ipImage, 
-								eTransform:=ETcVnColorSpaceTransform.TCVN_CST_BAYER_RG_TO_RGB, 
-								hrPrev:=fbFeedback.hr );
+		fbFeedback.hr := F_VN_ConvertColorSpace(
+							ipSrcImage:=stImageWithInfo.ipImage, 
+							ipDestImage:=stImageWithInfo.ipImage, 
+							eTransform:=ETcVnColorSpaceTransform.TCVN_CST_BAYER_RG_TO_RGB, 
+							hrPrev:=fbFeedback.hr );
 	END_IF
 	
 	
@@ -52,29 +51,29 @@ IF Core1_MAIN.ipVisionSystem.TryGetImage(stImageWithInfo) = S_OK THEN
 	(*Resize an image using a specific interpolation type.*)
 	fbFeedback.ActiveCommand := 'F_VN_ResizeImage';	
 	fbFeedback.hr := F_VN_ResizeImage(
-							ipSrcImage:= stImageWithInfo.ipImage, 
-							ipDestImage:= stImageWithInfo.ipImage, 
-							nWidth:= MIN(500, stImageWithInfo.stInfo.nWidth), //500 or smaller
-							nHeight:= MIN(300, stImageWithInfo.stInfo.nHeight), //300 or smaller
-							eInterpolationType:= ETcVnInterpolationType.TCVN_IT_AREA_BASED, 
-							hrPrev:= fbFeedback.hr);
+						ipSrcImage:= stImageWithInfo.ipImage, 
+						ipDestImage:= stImageWithInfo.ipImage, 
+						nWidth:= 400, 
+						nHeight:= 200, 
+						eInterpolationType:= ETcVnInterpolationType.TCVN_IT_AREA_BASED, 
+						hrPrev:= fbFeedback.hr);
 	
 						
 	(* Gets a struct containing all common meta infos of the image. *)
 	fbFeedback.ActiveCommand := 'F_VN_GetImageInfo';	
 	fbFeedback.hr := F_VN_GetImageInfo(
-							ipImage:= stImageWithInfo.ipImage, 
-							stImageInfo:= stImageWithInfo.stInfo, 
-							hrPrev:= fbFeedback.hr);						
+						ipImage:= stImageWithInfo.ipImage, 
+						stImageInfo:= stImageWithInfo.stInfo, 
+						hrPrev:= fbFeedback.hr);						
 							
 							
 	(* Multiply each image pixel by a vector (1 element for each image channel) using saturation arithmetics. *)
 	fbFeedback.ActiveCommand := 'F_VN_MultiplyImageWithVector - WhiteBalance';	
-	fbFeedback.hr := 	F_VN_MultiplyImageWithVector(
-							aVector:=afWhiteBalance , 
-							ipSrcImage:= stImageWithInfo.ipImage, 
-							ipDestImage:= stImageWithInfo.ipImage, 
-							hrPrev:= fbFeedback.hr  );
+	fbFeedback.hr := F_VN_MultiplyImageWithVector(
+						aVector:= afWhiteBalance , 
+						ipSrcImage:= stImageWithInfo.ipImage, 
+						ipDestImage:= stImageWithInfo.ipImage, 
+						hrPrev:= fbFeedback.hr  );
 	
 						
 	(* Write text into an image. *)
@@ -97,13 +96,15 @@ IF Core1_MAIN.ipVisionSystem.TryGetImage(stImageWithInfo) = S_OK THEN
 	The source image must not be used anywhere else and the transformation is very fast. 
 	If you want to use ipSrcImage after this function call, use F_VN_CopyIntoDisplayableImage instead. *)
 	fbFeedback.ActiveCommand := 'F_VN_TransformIntoDisplayableImage';	
-	fbFeedback.hr := 	F_VN_TransformIntoDisplayableImage(
-							ipSrcImage:=stImageWithInfo.ipImage,
-							ipDestImage:=ipDisplayableImage,
-							hrPrev:=fbFeedback.hr  );
+	fbFeedback.hr := F_VN_TransformIntoDisplayableImage(
+						ipSrcImage:=stImageWithInfo.ipImage,
+						ipDestImage:=ipDisplayableImage,
+						hrPrev:=fbFeedback.hr);
+						
+						
 							
-	nEndTime := F_GetActualDcTime64();		
-	fTimeDifferenceMs := TO_LREAL(nEndTime - nStartTime)/1000_000(*ns to ms*);			
+	
+	fTimeDifferenceMs := TO_LREAL(F_GetActualDcTime64() - nStartTime)/1_000_000(*ns to ms*);			
 END_IF
 
 ]]></ST>

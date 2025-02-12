@@ -24,14 +24,13 @@
         <Event>
           <CommandType>Copy</CommandType>
           <DeploymentType>ActivateConfiguration</DeploymentType>
-          <Command1>%SOLUTIONPATH%Example_Vision\Plc_CHALET_Vision\DeploymentTestimage</Command1>
-          <Command2>C:\Users\Public\TcVision\FileSources\CHALET_Images</Command2>
+          <Command1 />
+          <Command2 />
         </Event>
       </Events>
     </DeploymentEvents>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="DeploymentTestimage" />
     <Folder Include="THREADs">
       <ExcludeFromBuild>false</ExcludeFromBuild>
     </Folder>
@@ -78,17 +77,25 @@
       <DefaultResolution>CHALET_Vision, * (Beckhoff CH)</DefaultResolution>
       <Namespace>CHALET_Vision</Namespace>
       <Parameters>
-        <Parameter ListName="VISIONPARAMETERLIST" xmlns="">
-          <Key>MAX_VN_REGISTER_READ</Key>
+        <Parameter ListName="VISIONPARAMETERLIST">
+          <Key>MAX_VN_REGISTER_READ_WRITE</Key>
           <Value>1</Value>
         </Parameter>
-        <Parameter ListName="VISIONPARAMETERLIST" xmlns="">
-          <Key>MAX_VN_REGISTER_WRITE</Key>
-          <Value>1</Value>
-        </Parameter>
-        <Parameter ListName="VISIONPARAMETERLIST" xmlns="">
+        <Parameter ListName="VISIONPARAMETERLIST">
           <Key>ILLUMINATION_WAIT_FOR_TRIGGER_FEEDBACK</Key>
           <Value>FALSE</Value>
+        </Parameter>
+        <Parameter ListName="VISIONPARAMETERLIST">
+          <Key>MAX_NEXT_TRIGGER_IN_FUTURE_MS</Key>
+          <Value>10000</Value>
+        </Parameter>
+        <Parameter ListName="VISIONPARAMETERLIST">
+          <Key>CAMERA_TRIGGER_RESPONSE_TIME_NS</Key>
+          <Value>3000000</Value>
+        </Parameter>
+        <Parameter ListName="VISIONPARAMETERLIST">
+          <Key>CTS_TRIGGERS_SAVED_INTERNAL</Key>
+          <Value>3</Value>
         </Parameter>
       </Parameters>
     </PlaceholderReference>
@@ -181,10 +188,10 @@
   </ItemGroup>
   <ItemGroup>
     <PlaceholderResolution Include="CHALET_BaseComponents">
-      <Resolution>CHALET_BaseComponents, 3.4.6 (Beckhoff CH)</Resolution>
+      <Resolution>CHALET_BaseComponents, 3.6.6 (Beckhoff CH)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="CHALET_Vision">
-      <Resolution>CHALET_Vision, * (Beckhoff CH)</Resolution>
+      <Resolution>CHALET_Vision, 4.0.0 (Beckhoff CH)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="Tc2_EtherCAT">
       <Resolution>Tc2_EtherCAT, * (Beckhoff Automation GmbH)</Resolution>
@@ -207,20 +214,6 @@
     <PlaceholderResolution Include="Tc3_Vision">
       <Resolution>Tc3_Vision, * (Beckhoff Automation GmbH)</Resolution>
     </PlaceholderResolution>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="DeploymentTestimage\el6652__web_preview.png">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="DeploymentTestimage\el6752__web_preview.png">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="DeploymentTestimage\ep1918-0002__web_preview.png">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="DeploymentTestimage\meta.xml">
-      <SubType>Content</SubType>
-    </Content>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>

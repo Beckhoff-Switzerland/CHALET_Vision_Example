@@ -3,7 +3,7 @@
   <Task Name="PlcVisionApplication" Id="{748e86a4-8bc1-4e26-897c-aafafde94257}">
     <!--CycleTime in micro seconds.-->
     <CycleTime>1000</CycleTime>
-    <Priority>1</Priority>
+    <Priority>3</Priority>
     <PouCall>
       <Name>Core2_VisionApplication</Name>
     </PouCall>
