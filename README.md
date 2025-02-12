@@ -4,6 +4,7 @@ This repository is a detailed example application how to use the [CHALET_Vision]
 In essence, this repository simplifies the process of integrating Beckhoff GigE Vision cameras into a Beckhoff PLC environment by providing a pre-built function block and a clear example of its usage.  The emphasis on EtherCAT timestamp triggering highlights its suitability for applications demanding precise timing.
 - [VCS2000 | Area scan cameras](https://www.beckhoff.com/en-en/products/vision/cameras/vcs2000-area-scan-cameras-2.5%C2%A0gbit-s/) 
 - [VUI2000 | Area scan camera unit](https://www.beckhoff.com/en-en/products/vision/units/vui2000/)
+  
 The function block provides a method to trigger images, properties for the important camera parameters and an interface to read out the captured image.
 
 Functionality of the FB:
