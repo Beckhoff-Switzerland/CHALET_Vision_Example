@@ -36,16 +36,16 @@
     </Folder>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PlcVisionApplication.TcTTO">
+    <Compile Include="Task_PlcVisionApplication.TcTTO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Task_PlcMain.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="THREADs\Core1_MAIN.TcPOU">
+    <Compile Include="THREADs\PRG1_MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="THREADs\Core2_VisionApplication.TcPOU">
+    <Compile Include="THREADs\PRG2_VisionApplication.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -58,44 +58,14 @@
     <PlaceholderReference Include="CHALET_BaseComponents">
       <DefaultResolution>CHALET_BaseComponents, * (Beckhoff CH)</DefaultResolution>
       <Namespace>CHALET_BaseComponents</Namespace>
-      <Parameters>
-        <Parameter ListName="BASEPARAMETERLIST" xmlns="">
-          <Key>MAX_OBJECTS</Key>
-          <Value>150</Value>
-        </Parameter>
-        <Parameter ListName="BASEPARAMETERLIST" xmlns="">
-          <Key>MAX_COE_READ</Key>
-          <Value>20</Value>
-        </Parameter>
-        <Parameter ListName="BASEPARAMETERLIST" xmlns="">
-          <Key>MAX_COE_WRITE</Key>
-          <Value>20</Value>
-        </Parameter>
-      </Parameters>
     </PlaceholderReference>
     <PlaceholderReference Include="CHALET_Vision">
       <DefaultResolution>CHALET_Vision, * (Beckhoff CH)</DefaultResolution>
       <Namespace>CHALET_Vision</Namespace>
       <Parameters>
         <Parameter ListName="VISIONPARAMETERLIST">
-          <Key>MAX_VN_REGISTER_READ_WRITE</Key>
-          <Value>1</Value>
-        </Parameter>
-        <Parameter ListName="VISIONPARAMETERLIST">
-          <Key>ILLUMINATION_WAIT_FOR_TRIGGER_FEEDBACK</Key>
-          <Value>FALSE</Value>
-        </Parameter>
-        <Parameter ListName="VISIONPARAMETERLIST">
           <Key>MAX_NEXT_TRIGGER_IN_FUTURE_MS</Key>
           <Value>10000</Value>
-        </Parameter>
-        <Parameter ListName="VISIONPARAMETERLIST">
-          <Key>CAMERA_TRIGGER_RESPONSE_TIME_NS</Key>
-          <Value>3000000</Value>
-        </Parameter>
-        <Parameter ListName="VISIONPARAMETERLIST">
-          <Key>CTS_TRIGGERS_SAVED_INTERNAL</Key>
-          <Value>3</Value>
         </Parameter>
       </Parameters>
     </PlaceholderReference>
@@ -110,72 +80,14 @@
     <PlaceholderReference Include="Tc2_System">
       <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_System</Namespace>
-      <Parameters>
-        <Parameter ListName="PARAM" xmlns="">
-          <Key>TABLE_UPPER_BOUND</Key>
-          <Value>15</Value>
-        </Parameter>
-        <Parameter ListName="PARAM" xmlns="">
-          <Key>STRING_LENGTH_EXP</Key>
-          <Value>255</Value>
-        </Parameter>
-        <Parameter ListName="PARAM" xmlns="">
-          <Key>STRING_LENGTH_ADDRESS</Key>
-          <Value>20</Value>
-        </Parameter>
-        <Parameter ListName="PARAM" xmlns="">
-          <Key>STRING_LENGTH_COMMENT</Key>
-          <Value>255</Value>
-        </Parameter>
-        <Parameter ListName="PARAM" xmlns="">
-          <Key>STRING_LENGTH_OUTSTRING</Key>
-          <Value>255</Value>
-        </Parameter>
-        <Parameter ListName="PARAM" xmlns="">
-          <Key>TABLE_SHOW_VALID_ITEMS</Key>
-          <Value>FALSE</Value>
-        </Parameter>
-      </Parameters>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Utilities">
       <DefaultResolution>Tc2_Utilities, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_Utilities</Namespace>
-      <Parameters>
-        <Parameter ListName="PARAMETERLIST" xmlns="">
-          <Key>NMAXLICENSES</Key>
-          <Value>50</Value>
-        </Parameter>
-        <Parameter ListName="PARAMETERLIST" xmlns="">
-          <Key>NMAXLICENSEDEVICES</Key>
-          <Value>16</Value>
-        </Parameter>
-        <Parameter ListName="PARAMETERLIST" xmlns="">
-          <Key>NMAXCPUCOUNT</Key>
-          <Value>64</Value>
-        </Parameter>
-        <Parameter ListName="PARAMETERLIST" xmlns="">
-          <Key>CMAXCHARACTERS</Key>
-          <Value>16#FFFFFFF0</Value>
-        </Parameter>
-        <Parameter ListName="PARAMETERLIST" xmlns="">
-          <Key>NMAXFILESONDONGLE</Key>
-          <Value>20</Value>
-        </Parameter>
-        <Parameter ListName="PARAMETERLIST" xmlns="">
-          <Key>CMAXCSVFIELDVALUESIZE</Key>
-          <Value>255</Value>
-        </Parameter>
-      </Parameters>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc3_EventLogger">
       <DefaultResolution>Tc3_EventLogger, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc3_EventLogger</Namespace>
-      <Parameters>
-        <Parameter ListName="PARAMETERLIST" xmlns="">
-          <Key>CSOURCENAMESIZE</Key>
-          <Value>256</Value>
-        </Parameter>
-      </Parameters>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc3_Module">
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
@@ -188,31 +100,31 @@
   </ItemGroup>
   <ItemGroup>
     <PlaceholderResolution Include="CHALET_BaseComponents">
-      <Resolution>CHALET_BaseComponents, 3.6.6 (Beckhoff CH)</Resolution>
+      <Resolution>CHALET_BaseComponents, 3.6.8 (Beckhoff CH)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="CHALET_Vision">
-      <Resolution>CHALET_Vision, 4.0.0 (Beckhoff CH)</Resolution>
+      <Resolution>CHALET_Vision, 4.1.4 (Beckhoff CH)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="Tc2_EtherCAT">
-      <Resolution>Tc2_EtherCAT, * (Beckhoff Automation GmbH)</Resolution>
+      <Resolution>Tc2_EtherCAT, 3.5.1.0 (Beckhoff Automation GmbH)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="Tc2_Standard">
-      <Resolution>Tc2_Standard, * (Beckhoff Automation GmbH)</Resolution>
+      <Resolution>Tc2_Standard, 3.4.5.0 (Beckhoff Automation GmbH)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="Tc2_System">
-      <Resolution>Tc2_System, * (Beckhoff Automation GmbH)</Resolution>
+      <Resolution>Tc2_System, 3.6.4.0 (Beckhoff Automation GmbH)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="Tc2_Utilities">
-      <Resolution>Tc2_Utilities, * (Beckhoff Automation GmbH)</Resolution>
+      <Resolution>Tc2_Utilities, 3.8.2.0 (Beckhoff Automation GmbH)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="Tc3_EventLogger">
-      <Resolution>Tc3_EventLogger, * (Beckhoff Automation GmbH)</Resolution>
+      <Resolution>Tc3_EventLogger, 3.3.10.0 (Beckhoff Automation GmbH)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="Tc3_Module">
-      <Resolution>Tc3_Module, * (Beckhoff Automation GmbH)</Resolution>
+      <Resolution>Tc3_Module, 3.4.5.0 (Beckhoff Automation GmbH)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="Tc3_Vision">
-      <Resolution>Tc3_Vision, * (Beckhoff Automation GmbH)</Resolution>
+      <Resolution>Tc3_Vision, 4.0.6.5 (Beckhoff Automation GmbH)</Resolution>
     </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>

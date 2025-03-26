@@ -1,11 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
-  <POU Name="Core1_MAIN" Id="{19f277bd-4097-4636-9c24-875ea110dece}" SpecialFunc="None">
-    <Declaration><![CDATA[PROGRAM Core1_MAIN
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
+  <POU Name="PRG1_MAIN" Id="{19f277bd-4097-4636-9c24-875ea110dece}" SpecialFunc="None">
+    <Declaration><![CDATA[//This program is called by a task with high priority. 
+//It is therefore called cyclically with high precision. For exact triggering, motion, fast reaction, ....
+PROGRAM PRG1_MAIN
 VAR
-	(* Camera *)
-	fbCamera 				: FB_GigE_Standalone;
-
+	(* Camera and file souce*)
+	fbCamera 				: CHALET_Vision.FB_GigE_Standalone;
+	fbFileSource 			: CHALET_Vision.FB_FileSource;
+	
 	(* Settings *)
 	nExposure_1us 			: UDINT := 40_000;
 	eTriggerSource			: E_TriggerSource := E_TriggerSource.EtherCAT;
@@ -13,20 +16,25 @@ VAR
 	(* Commands *)
 	bInitDone				: BOOL;
 	bReset					: BOOL;
-	nFixRateDelayMs 		: UDINT := 2000;
+	nFixRateDelayMs 		: ULINT := 2000;
 	nNextTrigger			: T_DCTIME64;
 	bTriggerOnceEC			: BOOL; //Send an EtherCAT Trigger (Timestamp)	
 	bTriggerOnceSW			: BOOL; //Send an Software Trigger
-	bTriggerFixRateEC		: BOOL;
+	bTriggerFixRateEC		: BOOL; //Cyclical trigger with given time nFixRateDelayMs
+	bTriggerOnceFileSource	: BOOL; //Trigger an image from a file specified in the filesource
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF NOT bInitDone THEN
+	bInitDone := TRUE;
+	//Remove camera or filesource if not used
 	fbCamera.Initialize();
-	bInitDone := fbCamera.Initialized;
+	bInitDone := bInitDone AND fbCamera.Initialized; 
+	
+	fbFileSource.Initialize();
+	bInitDone := bInitDone AND fbFileSource.Initialized;
 	RETURN;
 END_IF
-
 
 //Example 1: Send an EtherCAT timestamp on the earliest posible time
 IF bTriggerOnceEC THEN
@@ -34,7 +42,6 @@ IF bTriggerOnceEC THEN
 	nNextTrigger := fbCamera.TriggerEtherCAT.EarliestPossibleTriggerTime;
 	fbCamera.TriggerEtherCat.Trigger(nNextTrigger);
 END_IF
-
 
 //Example 2: Send an EtherCAT timestamp each 2ms
 IF bTriggerFixRateEC AND nFixRateDelayMs > 0 AND fbCamera.TriggerEtherCat.EmptySpaceInBuffer THEN
@@ -45,11 +52,18 @@ IF bTriggerFixRateEC AND nFixRateDelayMs > 0 AND fbCamera.TriggerEtherCat.EmptyS
 	fbCamera.TriggerEtherCat.Trigger(nNextTrigger);
 END_IF	
 
-//Example 3: Send atrigger request via Gige-Vision. 
+//Example 3: Send a trigger request via Gige-Vision. 
 //To do this, the trigger source must be switched to software trigger in the camera register
-IF bTriggerOnceSW AND (eTriggerSource = E_TriggerSource.SoftwareTrigger)THEN
+IF bTriggerOnceSW AND (fbCamera.Simulation OR (eTriggerSource = E_TriggerSource.SoftwareTrigger))THEN
 	bTriggerOnceSW := FALSE;
 	fbCamera.TriggerSoftware();
+END_IF
+
+//Example 4: Trigger image from file source
+//For test purposes, an FB_VN_FileSourceControl can also be used in parallel with the camera to retrieve images that have already been saved.
+IF bTriggerOnceFileSource THEN
+	bTriggerOnceFileSource := FALSE;
+	fbFileSource.TriggerImage();
 END_IF
 
 //Access to the Gige-Vision register
@@ -64,18 +78,16 @@ IF fbCamera.RegisterCamera <> 0 THEN
 	//And many more...
 END_IF
 
-
-//Reset here if in error state
+//Reset here if camera is in error state
 IF bReset AND (fbCamera.State = TCVN_CS_ERROR) THEN
 	bReset := FALSE;
 	fbCamera.Reset();
 END_IF
 
 
-
 //Cyclic call
 fbCamera.Update();
-]]></ST>
+fbFileSource.Update();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

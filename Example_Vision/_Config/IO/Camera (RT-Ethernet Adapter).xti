@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.62" ClassName="CDevEthernetAdapterDef" SubType="109">
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.65" ClassName="CDevEthernetAdapterDef" SubType="109">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{03010035-0000-0000-E000-000000000064}" TcBaseType="true">ITcIoEthProtocol</Name>
@@ -738,7 +738,7 @@
 					</Interface>
 				</Interfaces>
 				<Parameters>
-					<Parameter>
+					<Parameter ShowSubItems="true">
 						<Name>TcIoIpSettings</Name>
 						<BitSize>128</BitSize>
 						<SubItem>
@@ -870,7 +870,7 @@
 						<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
 						<PTCID>#x03011133</PTCID>
 					</Parameter>
-					<Parameter>
+					<Parameter ShowSubItems="true">
 						<Name>MulticastIpList</Name>
 						<BitSize>0</BitSize>
 						<BaseType GUID="{18071995-0000-0000-0000-00000000003E}">IPADDR</BaseType>
@@ -970,7 +970,7 @@
 						</Default>
 						<PTCID>#x03011131</PTCID>
 					</Parameter>
-					<Parameter OnlineParameter="true">
+					<Parameter OnlineParameter="true" ShowSubItems="true">
 						<Name>IpStackDiagnosis</Name>
 						<BitSize>768</BitSize>
 						<BaseType GUID="{38621CD5-4239-4327-97F7-35F1414B7265}">IpStackDiagnosis</BaseType>
@@ -997,16 +997,28 @@
 						<Name>ChildCategory</Name>
 						<Value>IpProtocol</Value>
 					</Property>
+					<Property>
+						<Name>Category</Name>
+						<Value>NeedEthernetAdapterPort</Value>
+					</Property>
+					<Property>
+						<Name>Category</Name>
+						<Value>NeedIoIdleTask</Value>
+					</Property>
+					<Property>
+						<Name>ChildCategory</Name>
+						<Value>IpProtocol</Value>
+					</Property>
 				</Properties>
 				<ParentOTCID>#x03010010</ParentOTCID>
 				<ParameterValues>
 					<Value>
 						<Name>TcIoIpSettings.IpAddress</Name>
-						<Value>0</Value>
+						<Value>3232235826</Value>
 					</Value>
 					<Value>
 						<Name>TcIoIpSettings.SubnetMask</Name>
-						<Value>0</Value>
+						<Value>4294967040</Value>
 					</Value>
 					<Value>
 						<Name>TcIoIpSettings.Gateway</Name>
@@ -1018,7 +1030,7 @@
 					</Value>
 					<Value>
 						<Name>TcIoIpSettings.ManualSettings</Name>
-						<EnumText>FALSE</EnumText>
+						<EnumText>TRUE</EnumText>
 					</Value>
 					<Value>
 						<Name>IpMaxReceivers</Name>

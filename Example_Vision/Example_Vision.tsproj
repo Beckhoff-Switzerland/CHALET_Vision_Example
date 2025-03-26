@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.62">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.65">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{DB6B59A0-4FB0-4B14-A83C-AC7A76AD688D}">JobTaskId</Name>
@@ -1313,8 +1313,8 @@
 			</Settings>
 			<Licenses>
 				<Target>
-					<ManualSelect>{4989A799-AEEA-4FEE-88EF-666B99EEFB45}</ManualSelect>
 					<ManualSelect>{B1065A48-8131-4608-A378-D67FA8BD826E}</ManualSelect>
+					<ManualSelect>{4989A799-AEEA-4FEE-88EF-666B99EEFB45}</ManualSelect>
 					<ManualSelect>{3DDCAB25-BF0E-412C-A721-DC77C1B8099C}</ManualSelect>
 				</Target>
 			</Licenses>
@@ -1331,7 +1331,7 @@
 				<Task Id="5" Priority="6" CycleTime="100000" AmsPort="352" AdtTasks="true">
 					<Name>VnTask ADS (Camera1)</Name>
 				</Task>
-				<Task Id="6" Priority="7" CycleTime="100000" AmsPort="353" AdtTasks="true">
+				<Task Id="6" Priority="15" CycleTime="100000" AmsPort="353" AdtTasks="true">
 					<Name>VnTask ImgAcq (FileSource1)</Name>
 				</Task>
 			</Tasks>

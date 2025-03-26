@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.62" ClassName="CVisionCameraDef">
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.65" ClassName="CVisionCameraDef">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{C10B6EE2-EA6E-4FED-AC4E-D3C8366F26C0}">ITcVnData</Name>
@@ -2700,8 +2700,9 @@
 	<ImageDatas>
 		<ImageData Id="1000">424d360300000000000036000000280000001000000010000000010018000000000000000000c40e0000c40e00000000000000000000554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3be1d7d1e1d7d1e1d7d1e1d7d1e1d7d1e1d7d1e1d7d1dfd6cfdfd6cfdfd6cfdfd6cfdfd6cfdfd6cfdfd6cf554f3b554f3be3dbd4e3dbd4554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3bdfd6cfdfd6cf554f3b554f3be3dbd4e3dbd4554f3bc1b39ac1b399c0b299bfb097beae94bbac90b8a88cb7a488554f3bdfd6cfdfd6cf554f3b554f3bece4dfece4df554f3bc6b9a3c6b8a2c5b7a0c4b59fc2b49bbfb197bdae92baaa8d554f3bdfd6cfdfd6cf554f3b554f3bece4dfece4df554f3bcbbfaacbbeaac9bda9c9bba5c6b8a2c3b59ec0b298bdae93554f3bdfd6cfdfd6cf554f3b554f3bece4dfece4df554f3bcfc6b1d0c4b1cec3afcdc1adcabea8c7baa5c4b69ec0b298554f3be1d7d1dfd6cf554f3b554f3beee6e1eee6e1554f3bd4cabad4cabad2c9b6d1c6b3cec3afcabfa9c8baa4c4b59e554f3be1d7d1dfd6cf554f3b554f3bf2ebe7f2ebe7554f3b554f3b554f3bd7cfbed4cbbad2c7b4cec2af554f3b554f3b554f3be3dbd4e1d7d1554f3b554f3bf2ebe7f2ebe7f5eeebf2ebe7554f3bdad4c4d8cfbfd4cabad0c6b3554f3be7ded9e3dbd4e3dbd4e1d7d1554f3b554f3bf5eeebf5eeebf5eeebf5eeeb554f3bded8cbdad3c4d7cdbdd2c8b6554f3bece4dfe3dbd4e3dbd4e1d7d1554f3b554f3bf5eeebf5eeeb554f3b554f3b554f3be1dbcfdcd6c7d8cfbfd3c9b8554f3b554f3b554f3be3dbd4e1d7d1554f3b554f3bf5eeebf7f0ed554f3be8e3dbe5e1d7e1dbcfddd5c8d8cfbfd3cab7cec4b0c9bda8554f3be3dbd4e1d7d1554f3b554f3bf5eeebf5eeeb554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3be3dbd4e1d7d1554f3b554f3bf5eeebf5eeebf5eeebf5eeebf5eeebf2ebe7f2ebe7eee6e1ece4dfece4dfece4dfe3dbd4e3dbd4e1d7d1554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b</ImageData>
 	</ImageDatas>
-	<TreeItem Id="1" VisionObjectGUID="{E538212A-901F-4F8B-A88E-6B29D57627F2}">
+	<TreeItem Id="1" VisionObjectGUID="{68F48BE4-7733-411A-9E4B-0D3C3ADE95EC}">
 		<Name>__FILENAME__</Name>
+		<ImageId>383</ImageId>
 		<Xml>
 			<TcSmExtensions>
 				<TcSmExtension Guid="{E1903838-ED0C-4FE8-A3F7-E433F11BFE82}">
@@ -2717,9 +2718,9 @@
 							<DoAutoStartStreaming Type="System.Boolean">False</DoAutoStartStreaming>
 							<AutoCalcMaxPacketNumber Type="System.Boolean">True</AutoCalcMaxPacketNumber>
 							<CommunicationTimeout Type="System.Int32">3000</CommunicationTimeout>
-							<Visibility Type="System.String">Invisible</Visibility>
-							<ExpandedNodes Type="System.String">Root;Camera Features;LUT Control;Light Control;Light Controller Selector;Optic Control;Optic Controller Selector</ExpandedNodes>
-							<SelectedNodeName Type="System.String">Optic Controller Present</SelectedNodeName>
+							<Visibility Type="System.String">Beginner</Visibility>
+							<ExpandedNodes Type="System.String">Root;Camera Features</ExpandedNodes>
+							<SelectedNodeName Type="System.String"/>
 							<useSelector Type="System.Boolean">True</useSelector>
 							<UsePacketDelayInConfigMode Type="System.Boolean">True</UsePacketDelayInConfigMode>
 						</CameraConfig>
@@ -2767,7 +2768,7 @@
 								<RegisterValue>30-30-30-2D</RegisterValue>
 							</Register>
 							<Register Address="0x00000070">
-								<RegisterValue>30-35-30-30</RegisterValue>
+								<RegisterValue>30-32-30-30</RegisterValue>
 							</Register>
 							<Register Address="0x00000074">
 								<RegisterValue>00-00-00-00</RegisterValue>
@@ -2935,7 +2936,7 @@
 								<RegisterValue>30-30-74-70</RegisterValue>
 							</Register>
 							<Register Address="0x000000E0">
-								<RegisterValue>7A-6E-66-00</RegisterValue>
+								<RegisterValue>7A-6D-35-00</RegisterValue>
 							</Register>
 							<Register Address="0x000000E4">
 								<RegisterValue>00-00-00-00</RegisterValue>
@@ -3084,7 +3085,7 @@
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x02FA0000">
-								<RegisterValue>00-00-C5-68</RegisterValue>
+								<RegisterValue>00-00-B3-98</RegisterValue>
 							</Register>
 							<Register Address="0x41000000">
 								<RegisterValue>00-00-00-00</RegisterValue>
@@ -3099,16 +3100,16 @@
 								<RegisterValue>00-00-00-02</RegisterValue>
 							</Register>
 							<Register Address="0x32110008">
-								<RegisterValue>00-00-00-03</RegisterValue>
+								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x10000008">
-								<RegisterValue>00-00-09-A0</RegisterValue>
+								<RegisterValue>00-00-07-90</RegisterValue>
 							</Register>
 							<Register Address="0x31001030">
 								<RegisterValue>00-00-00-01</RegisterValue>
 							</Register>
 							<Register Address="0x1000000C">
-								<RegisterValue>00-00-08-08</RegisterValue>
+								<RegisterValue>00-00-04-C0</RegisterValue>
 							</Register>
 							<Register Address="0x31001034">
 								<RegisterValue>00-00-00-01</RegisterValue>
@@ -3120,10 +3121,10 @@
 								<RegisterValue>00-00-0D-AC</RegisterValue>
 							</Register>
 							<Register Address="0x10000150">
-								<RegisterValue>49-4D-58-32</RegisterValue>
+								<RegisterValue>49-4D-58-33</RegisterValue>
 							</Register>
 							<Register Address="0x10000154">
-								<RegisterValue>36-34-4C-4C</RegisterValue>
+								<RegisterValue>39-32-4C-4C</RegisterValue>
 							</Register>
 							<Register Address="0x10000158">
 								<RegisterValue>52-2D-43-00</RegisterValue>
@@ -3196,33 +3197,33 @@
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x10000300">
-								<RegisterValue>00-00-01-F4</RegisterValue>
+								<RegisterValue>00-00-07-90</RegisterValue>
 							</Register>
 							<Register Address="0x10000300">
 								<Selector SelectorName="RegionSelector">0</Selector>
-								<RegisterValue>00-00-01-F4</RegisterValue>
+								<RegisterValue>00-00-07-90</RegisterValue>
 							</Register>
 							<Register Address="0x10000330">
-								<RegisterValue>00-00-01-04</RegisterValue>
+								<RegisterValue>00-00-01-08</RegisterValue>
 							</Register>
 							<Register Address="0x10000360">
-								<RegisterValue>00-00-09-A0</RegisterValue>
+								<RegisterValue>00-00-07-90</RegisterValue>
 							</Register>
 							<Register Address="0x10000390">
-								<RegisterValue>00-00-00-04</RegisterValue>
+								<RegisterValue>00-00-00-08</RegisterValue>
 							</Register>
 							<Register Address="0x10000500">
-								<RegisterValue>00-00-01-F4</RegisterValue>
+								<RegisterValue>00-00-01-90</RegisterValue>
 							</Register>
 							<Register Address="0x10000500">
 								<Selector SelectorName="RegionSelector">0</Selector>
-								<RegisterValue>00-00-01-F4</RegisterValue>
+								<RegisterValue>00-00-01-90</RegisterValue>
 							</Register>
 							<Register Address="0x10000530">
 								<RegisterValue>00-00-00-04</RegisterValue>
 							</Register>
 							<Register Address="0x10000560">
-								<RegisterValue>00-00-08-08</RegisterValue>
+								<RegisterValue>00-00-04-C0</RegisterValue>
 							</Register>
 							<Register Address="0x10000590">
 								<RegisterValue>00-00-00-04</RegisterValue>
@@ -3238,7 +3239,7 @@
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x10000860">
-								<RegisterValue>00-00-07-AC</RegisterValue>
+								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x10000890">
 								<RegisterValue>00-00-00-04</RegisterValue>
@@ -3254,7 +3255,7 @@
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x10000A60">
-								<RegisterValue>00-00-06-14</RegisterValue>
+								<RegisterValue>00-00-03-30</RegisterValue>
 							</Register>
 							<Register Address="0x10000A90">
 								<RegisterValue>00-00-00-04</RegisterValue>
@@ -3293,11 +3294,11 @@
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x31000400">
-								<RegisterValue>00-00-00-01</RegisterValue>
+								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x31000400">
 								<Selector SelectorName="TriggerSelector">3</Selector>
-								<RegisterValue>00-00-00-01</RegisterValue>
+								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x31000408">
 								<RegisterValue>00-00-00-02</RegisterValue>
@@ -3309,8 +3310,14 @@
 							<Register Address="0x30000010">
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
+							<Register Address="0x30000008">
+								<RegisterValue>00-00-37-FB</RegisterValue>
+							</Register>
+							<Register Address="0x31001028">
+								<RegisterValue>00-00-00-0A</RegisterValue>
+							</Register>
 							<Register Address="0x31001020">
-								<RegisterValue>00-00-2F-71</RegisterValue>
+								<RegisterValue>00-00-38-0B</RegisterValue>
 							</Register>
 							<Register Address="0x10000200">
 								<RegisterValue>00-00-00-01</RegisterValue>
@@ -3342,18 +3349,11 @@
 								<Selector SelectorName="TriggerSelector">0</Selector>
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
-							<Register Address="0x31000410">
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x31000410">
-								<Selector SelectorName="TriggerSelector">3</Selector>
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
 							<Register Address="0x30000020">
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x30000024">
-								<RegisterValue>00-00-9C-40</RegisterValue>
+								<RegisterValue>00-00-C3-50</RegisterValue>
 							</Register>
 							<Register Address="0x3100102C">
 								<RegisterValue>00-00-00-0F</RegisterValue>
@@ -3840,10 +3840,10 @@
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x50000004">
-								<RegisterValue>00-00-00-02</RegisterValue>
+								<RegisterValue>00-00-00-04</RegisterValue>
 							</Register>
 							<Register Address="0x01F91A00">
-								<RegisterValue>00-4D-4D-00</RegisterValue>
+								<RegisterValue>00-23-EC-00</RegisterValue>
 							</Register>
 							<Register Address="0x00000000">
 								<RegisterValue>00-02-00-01</RegisterValue>
@@ -3876,7 +3876,7 @@
 								<RegisterValue>00-00-00-01</RegisterValue>
 							</Register>
 							<Register Address="0x0000000C">
-								<RegisterValue>05-9E-E0-BB</RegisterValue>
+								<RegisterValue>05-9E-E1-10</RegisterValue>
 							</Register>
 							<Register Address="0x04F91B00">
 								<RegisterValue>00-00-00-01</RegisterValue>
@@ -3886,11 +3886,11 @@
 								<RegisterValue>00-00-00-01</RegisterValue>
 							</Register>
 							<Register Address="0x04F91B04">
-								<RegisterValue>05-9E-E0-BB</RegisterValue>
+								<RegisterValue>05-9E-E1-10</RegisterValue>
 							</Register>
 							<Register Address="0x04F91B04">
 								<Selector SelectorName="GevInterfaceSelector">0</Selector>
-								<RegisterValue>05-9E-E0-BB</RegisterValue>
+								<RegisterValue>05-9E-E1-10</RegisterValue>
 							</Register>
 							<Register Address="0x04F80800">
 								<RegisterValue>00-00-00-00</RegisterValue>
@@ -3914,11 +3914,11 @@
 								<RegisterValue>00-00-00-05</RegisterValue>
 							</Register>
 							<Register Address="0x00000024">
-								<RegisterValue>A9-FE-9A-A2</RegisterValue>
+								<RegisterValue>C0-A8-01-05</RegisterValue>
 							</Register>
 							<Register Address="0x00000024">
 								<Selector SelectorName="GevInterfaceSelector">0</Selector>
-								<RegisterValue>A9-FE-9A-A2</RegisterValue>
+								<RegisterValue>C0-A8-01-05</RegisterValue>
 							</Register>
 							<Register Address="0x00000034">
 								<RegisterValue>FF-FF-00-00</RegisterValue>
@@ -3935,11 +3935,11 @@
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x20000000">
-								<RegisterValue>00-00-00-01</RegisterValue>
+								<RegisterValue>00-00-00-04</RegisterValue>
 							</Register>
 							<Register Address="0x20000000">
 								<Selector SelectorName="GevInterfaceSelector">0</Selector>
-								<RegisterValue>00-00-00-01</RegisterValue>
+								<RegisterValue>00-00-00-04</RegisterValue>
 							</Register>
 							<Register Address="0x00000200">
 								<RegisterValue>6C-6F-63-61</RegisterValue>
@@ -4713,18 +4713,18 @@
 								<RegisterValue>00-00-00-01</RegisterValue>
 							</Register>
 							<Register Address="0x0000064C">
-								<RegisterValue>A9-FE-9A-A2</RegisterValue>
+								<RegisterValue>C0-A8-01-05</RegisterValue>
 							</Register>
 							<Register Address="0x0000064C">
 								<Selector SelectorName="GevInterfaceSelector">0</Selector>
-								<RegisterValue>A9-FE-9A-A2</RegisterValue>
+								<RegisterValue>C0-A8-01-05</RegisterValue>
 							</Register>
 							<Register Address="0x0000065C">
-								<RegisterValue>FF-FF-00-00</RegisterValue>
+								<RegisterValue>FF-FF-FF-00</RegisterValue>
 							</Register>
 							<Register Address="0x0000065C">
 								<Selector SelectorName="GevInterfaceSelector">0</Selector>
-								<RegisterValue>FF-FF-00-00</RegisterValue>
+								<RegisterValue>FF-FF-FF-00</RegisterValue>
 							</Register>
 							<Register Address="0x0000066C">
 								<RegisterValue>00-00-00-00</RegisterValue>
@@ -4734,7 +4734,7 @@
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x07F80800">
-								<RegisterValue>00-00-00-00</RegisterValue>
+								<RegisterValue>C0-A8-01-05</RegisterValue>
 							</Register>
 							<Register Address="0x08F80800">
 								<RegisterValue>FF-FF-00-00</RegisterValue>
@@ -4758,10 +4758,10 @@
 								<RegisterValue>3B-9A-CA-00</RegisterValue>
 							</Register>
 							<Register Address="0x00000948">
-								<RegisterValue>00-00-00-0A</RegisterValue>
+								<RegisterValue>00-00-00-01</RegisterValue>
 							</Register>
 							<Register Address="0x0000094C">
-								<RegisterValue>C9-E6-5B-30</RegisterValue>
+								<RegisterValue>56-8A-98-F8</RegisterValue>
 							</Register>
 							<Register Address="0x00000950">
 								<RegisterValue>00-00-00-00</RegisterValue>
@@ -4782,8 +4782,12 @@
 							<Register Address="0x12200D08">
 								<RegisterValue>00-00-00-04</RegisterValue>
 							</Register>
-							<Register Address="0x30000008">
-								<RegisterValue>00-00-2A-36</RegisterValue>
+							<Register Address="0x31000410">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x31000410">
+								<Selector SelectorName="TriggerSelector">3</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x31000110">
 								<RegisterValue>00-00-00-00</RegisterValue>
@@ -4854,216 +4858,6 @@
 							<Register Address="0x32000000">
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
-							<Register Address="0x41000100">
-								<RegisterValue>00-00-00-0B</RegisterValue>
-							</Register>
-							<Register Address="0x41000200">
-								<RegisterValue>31-8D-67-D8</RegisterValue>
-							</Register>
-							<Register Address="0x41000110">
-								<RegisterValue>00-00-00-0A</RegisterValue>
-							</Register>
-							<Register Address="0x41000210">
-								<RegisterValue>C9-E6-5B-30</RegisterValue>
-							</Register>
-							<Register Address="0x30000408">
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x30000408">
-								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x30001000">
-								<RegisterValue>4D-75-6C-74</RegisterValue>
-							</Register>
-							<Register Address="0x30001000">
-								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
-								<RegisterValue>4D-75-6C-74</RegisterValue>
-							</Register>
-							<Register Address="0x30001004">
-								<RegisterValue>69-70-6C-65</RegisterValue>
-							</Register>
-							<Register Address="0x30001004">
-								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
-								<RegisterValue>69-70-6C-65</RegisterValue>
-							</Register>
-							<Register Address="0x30001008">
-								<RegisterValue>20-50-69-78</RegisterValue>
-							</Register>
-							<Register Address="0x30001008">
-								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
-								<RegisterValue>20-50-69-78</RegisterValue>
-							</Register>
-							<Register Address="0x3000100C">
-								<RegisterValue>65-6C-73-20</RegisterValue>
-							</Register>
-							<Register Address="0x3000100C">
-								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
-								<RegisterValue>65-6C-73-20</RegisterValue>
-							</Register>
-							<Register Address="0x30001010">
-								<RegisterValue>50-61-74-74</RegisterValue>
-							</Register>
-							<Register Address="0x30001010">
-								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
-								<RegisterValue>50-61-74-74</RegisterValue>
-							</Register>
-							<Register Address="0x30001014">
-								<RegisterValue>65-72-6E-73</RegisterValue>
-							</Register>
-							<Register Address="0x30001014">
-								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
-								<RegisterValue>65-72-6E-73</RegisterValue>
-							</Register>
-							<Register Address="0x30001018">
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x30001018">
-								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x3000101C">
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x3000101C">
-								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x30001020">
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x30001020">
-								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x30001024">
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x30001024">
-								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x30001028">
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x30001028">
-								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x3000102C">
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x3000102C">
-								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x30001030">
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x30001030">
-								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x30001034">
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x30001034">
-								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x30001038">
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x30001038">
-								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x3000103C">
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x3000103C">
-								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x3000040C">
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x3000040C">
-								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x30000440">
-								<RegisterValue>00-00-02-FF</RegisterValue>
-							</Register>
-							<Register Address="0x30000410">
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x30000410">
-								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x30000414">
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x30000414">
-								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x30000418">
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x30000418">
-								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x3000041C">
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x3000041C">
-								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x30000420">
-								<RegisterValue>00-00-00-01</RegisterValue>
-							</Register>
-							<Register Address="0x30000420">
-								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
-								<RegisterValue>00-00-00-01</RegisterValue>
-							</Register>
-							<Register Address="0x30000424">
-								<RegisterValue>00-00-00-01</RegisterValue>
-							</Register>
-							<Register Address="0x30000424">
-								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
-								<RegisterValue>00-00-00-01</RegisterValue>
-							</Register>
-							<Register Address="0x30000428">
-								<RegisterValue>00-00-00-01</RegisterValue>
-							</Register>
-							<Register Address="0x30000428">
-								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
-								<RegisterValue>00-00-00-01</RegisterValue>
-							</Register>
-							<Register Address="0x3000042C">
-								<RegisterValue>00-00-00-01</RegisterValue>
-							</Register>
-							<Register Address="0x3000042C">
-								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
-								<RegisterValue>00-00-00-01</RegisterValue>
-							</Register>
-							<Register Address="0x30000434">
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x30000434">
-								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x35000104">
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x35000100">
-								<RegisterValue>00-00-A5-1B</RegisterValue>
-							</Register>
 							<Register Address="0x000000A8">
 								<RegisterValue>42-65-63-6B</RegisterValue>
 							</Register>
@@ -5099,9 +4893,6 @@
 							</Register>
 							<Register Address="0x000000D4">
 								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x00000934">
-								<RegisterValue>FB-C4-00-07</RegisterValue>
 							</Register>
 							<Register Address="0x00000958">
 								<RegisterValue>00-00-00-64</RegisterValue>
@@ -5147,7 +4938,7 @@
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x32110008">
-								<RegisterValue>00-00-00-03</RegisterValue>
+								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x30010010">
 								<RegisterValue>00-00-00-00</RegisterValue>
@@ -5164,6 +4955,9 @@
 							<Register Address="0x10000040">
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
+							<Register Address="0x30000010">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
 							<Register Address="0x10000200">
 								<RegisterValue>00-00-00-01</RegisterValue>
 							</Register>
@@ -5177,7 +4971,7 @@
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x30000024">
-								<RegisterValue>00-00-9C-40</RegisterValue>
+								<RegisterValue>00-00-C3-50</RegisterValue>
 							</Register>
 							<Register Address="0x30010040">
 								<RegisterValue>00-00-00-00</RegisterValue>
@@ -5216,10 +5010,10 @@
 								<RegisterValue>00-00-00-05</RegisterValue>
 							</Register>
 							<Register Address="0x0000064C">
-								<RegisterValue>A9-FE-9A-A2</RegisterValue>
+								<RegisterValue>C0-A8-01-04</RegisterValue>
 							</Register>
 							<Register Address="0x0000065C">
-								<RegisterValue>FF-FF-00-00</RegisterValue>
+								<RegisterValue>FF-FF-FF-00</RegisterValue>
 							</Register>
 							<Register Address="0x0000066C">
 								<RegisterValue>00-00-00-00</RegisterValue>
@@ -5229,9 +5023,6 @@
 							</Register>
 							<Register Address="0x00000960">
 								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x35000000">
-								<RegisterValue>00-00-00-01</RegisterValue>
 							</Register>
 						</DesiredValues>
 					</TreeValueCache>
@@ -12755,6 +12546,26 @@
 							</Group>
 						</RegisterDescription>
 					</GenApiFileCache>
+					<CameraInfoCache>
+						<DeviceInformation>
+							<Version>131073</Version>
+							<DeviceMode>2147483649</DeviceMode>
+							<MacAddress>4389265680</MacAddress>
+							<IpAddress>3232235781</IpAddress>
+							<SubnetMask>4294901760</SubnetMask>
+							<DefaultGateway>0</DefaultGateway>
+							<ManufacturerName>Beckhoff</ManufacturerName>
+							<ModelName>VCS2000-0200</ModelName>
+							<DeviceVersion>1.1.161400 alpha V1</DeviceVersion>
+							<ManufacturerInfo>Beckhoff Automation GmbH &amp; Co. KG</ManufacturerInfo>
+							<SerialNumber>BTN000tpzm5</SerialNumber>
+							<UserDefinedName/>
+							<GvcpCapability>4223926279</GvcpCapability>
+							<TimestampTickFrequency>1000000000</TimestampTickFrequency>
+							<NumberMessageChannels>0</NumberMessageChannels>
+							<PendingTimeout>100</PendingTimeout>
+						</DeviceInformation>
+					</CameraInfoCache>
 					<InitCameraCommandsRoot>
 						<UserSet Name="UserSet" IsChecked="false" Data="0"/>
 						<ForceIp Name="ForceIp" IsChecked="false"/>
@@ -12762,7 +12573,7 @@
 							<CameraRegisterChild Index="0" Name="Device User ID" Address="0x000000E8" Data="00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00" Value="" Key="0" InternalKey="0" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							<CameraRegisterChild Index="1" Name="Device Indicator Mode" Address="0x32110000" Data="00-00-00-01" Value="1" Key="1" InternalKey="1" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							<CameraRegisterChild Index="2" Name="Timestamp Image" Address="0x41000004" Data="00-00-00-00" Value="0" Key="2" InternalKey="2" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="3" Name="Device Default State" Address="0x32110008" Data="00-00-00-03" Value="3" Key="3" InternalKey="3" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="3" Name="Device Default State" Address="0x32110008" Data="00-00-00-00" Value="0" Key="3" InternalKey="3" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							<CameraRegisterChild Index="4" Name="Region Selector" Address="0x30010010" Key="10" InternalKey="10" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
 								<CameraRegisterChild Index="0" Name="Region Mode" Address="0xFFFFFFFF" Key="11" InternalKey="11" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 								<CameraRegisterChild Index="1" Name="Width" Address="0xFFFFFFFF" Key="12" InternalKey="12" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
@@ -12814,169 +12625,176 @@
 							</CameraRegisterChild>
 							<CameraRegisterChild Index="11" Name="Region Selector" Address="0x30010010" Key="4" InternalKey="4" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
 								<CameraRegisterChild Index="0" Name="Region Mode" Address="0x30010800" Data="00-00-00-00" Value="0" Key="5" InternalKey="5" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-								<CameraRegisterChild Index="1" Name="Width" Address="0x10000300" Data="00-00-01-F4" Value="500" Key="6" InternalKey="6" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-								<CameraRegisterChild Index="2" Name="Height" Address="0x10000500" Data="00-00-01-F4" Value="500" Key="7" InternalKey="7" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+								<CameraRegisterChild Index="1" Name="Width" Address="0x10000300" Data="00-00-07-90" Value="1936" Key="6" InternalKey="6" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+								<CameraRegisterChild Index="2" Name="Height" Address="0x10000500" Data="00-00-01-90" Value="400" Key="7" InternalKey="7" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 								<CameraRegisterChild Index="3" Name="Offset X" Address="0x10000800" Data="00-00-00-00" Value="0" Key="8" InternalKey="8" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 								<CameraRegisterChild Index="4" Name="Offset Y" Address="0x10000A00" Data="00-00-00-00" Value="0" Key="9" InternalKey="9" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							</CameraRegisterChild>
 							<CameraRegisterChild Index="12" Name="ReverseX" Address="0x3000005C" Data="00-00-00-00" Value="0" Key="52" InternalKey="52" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							<CameraRegisterChild Index="13" Name="ReverseY" Address="0x30000060" Data="00-00-00-00" Value="0" Key="53" InternalKey="53" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							<CameraRegisterChild Index="14" Name="Pixel Format" Address="0x10000034" Data="01-08-00-01" Value="17301505" Key="54" InternalKey="54" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="15" Name="Exposure Mode" Address="0xFFFFFFFF" Key="70" InternalKey="70" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="16" Name="Exposure Time" Address="0x30000024" Data="00-00-9C-40" Value="40000" Key="71" InternalKey="71" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="17" Name="Gain Selector" Address="0x30000080" Key="72" InternalKey="72" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
-								<CameraRegisterChild Index="0" Name="Gain" Address="0x30000084" Data="00-00-00-00" Value="0" Key="73" InternalKey="73" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="15" Name="Acquisition Mode" Address="0x10000040" Data="00-00-00-00" Value="0" Key="55" InternalKey="55" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="16" Name="Acquisition Frame Count" Address="0xFFFFFFFF" Key="56" InternalKey="56" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="17" Name="Acquisition Frame Rate" Address="0xFFFFFFFF" Key="57" InternalKey="57" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="18" Name="Acquisition Frame Rate Enable" Address="0x30000010" Data="00-00-00-00" Value="0" Key="58" InternalKey="58" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="19" Name="Acquisition Settings Selector" Address="0x10000220" Data="00-00-00-00" Value="0" Key="59" InternalKey="59" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="20" Name="Trigger Selector" Address="0x31000008" Key="65" InternalKey="65" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+								<CameraRegisterChild Index="0" Name="Trigger Mode" Address="0x31000400" Data="00-00-00-00" Value="0" Key="66" InternalKey="66" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+								<CameraRegisterChild Index="1" Name="Trigger Source" Address="0xFFFFFFFF" Data="00-00-00-02" Value="2" Key="67" InternalKey="67" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+								<CameraRegisterChild Index="2" Name="Trigger Activation" Address="0xFFFFFFFF" Data="00-00-00-00" Value="0" Key="68" InternalKey="68" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+								<CameraRegisterChild Index="3" Name="Trigger Delay" Address="0xFFFFFFFF" Data="00-00-00-00" Value="0" Key="69" InternalKey="69" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							</CameraRegisterChild>
-							<CameraRegisterChild Index="18" Name="Gain Selector" Address="0x30000080" Key="80" InternalKey="80" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
-								<CameraRegisterChild Index="0" Name="Gain" Address="0xFFFFFFFF" Key="81" InternalKey="81" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="21" Name="Trigger Selector" Address="0x31000008" Key="60" InternalKey="60" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+								<CameraRegisterChild Index="0" Name="Trigger Mode" Address="0x31000100" Data="00-00-00-00" Value="0" Key="61" InternalKey="61" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+								<CameraRegisterChild Index="1" Name="Trigger Source" Address="0xFFFFFFFF" Data="00-00-00-00" Value="0" Key="62" InternalKey="62" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+								<CameraRegisterChild Index="2" Name="Trigger Activation" Address="0xFFFFFFFF" Data="00-00-00-00" Value="0" Key="63" InternalKey="63" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+								<CameraRegisterChild Index="3" Name="Trigger Delay" Address="0xFFFFFFFF" Data="00-00-00-00" Value="0" Key="64" InternalKey="64" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							</CameraRegisterChild>
-							<CameraRegisterChild Index="19" Name="Black Level Selector" Address="0xFFFFFFFF" Key="82" InternalKey="82" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-01">
-								<CameraRegisterChild Index="0" Name="Black Level" Address="0x3000001C" Data="00-00-00-00" Value="0" Key="83" InternalKey="83" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							</CameraRegisterChild>
-							<CameraRegisterChild Index="20" Name="Gain Selector" Address="0x30000080" Key="74" InternalKey="74" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+							<CameraRegisterChild Index="22" Name="Exposure Mode" Address="0xFFFFFFFF" Key="70" InternalKey="70" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="23" Name="Exposure Time" Address="0x30000024" Data="00-00-C3-50" Value="50000" Key="71" InternalKey="71" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="24" Name="Gain Selector" Address="0x30000080" Key="74" InternalKey="74" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
 								<CameraRegisterChild Index="0" Name="Gain" Address="0x30000088" Data="00-00-00-00" Value="0" Key="75" InternalKey="75" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							</CameraRegisterChild>
-							<CameraRegisterChild Index="21" Name="Gain Selector" Address="0x30000080" Key="76" InternalKey="76" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+							<CameraRegisterChild Index="25" Name="Gain Selector" Address="0x30000080" Key="76" InternalKey="76" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
 								<CameraRegisterChild Index="0" Name="Gain" Address="0xFFFFFFFF" Key="77" InternalKey="77" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							</CameraRegisterChild>
-							<CameraRegisterChild Index="22" Name="Gain Selector" Address="0x30000080" Key="78" InternalKey="78" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+							<CameraRegisterChild Index="26" Name="Gain Selector" Address="0x30000080" Key="78" InternalKey="78" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
 								<CameraRegisterChild Index="0" Name="Gain" Address="0xFFFFFFFF" Key="79" InternalKey="79" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							</CameraRegisterChild>
-							<CameraRegisterChild Index="23" Name="Gamma" Address="0x30000300" Data="00-00-03-E8" Value="1" Key="92" InternalKey="92" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="24" Name="LUT Enabled" Address="0x35000000" Data="00-00-00-01" Value="1" Key="93" InternalKey="93" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="25" Name="Counter Selector" Address="0x37000000" Key="94" InternalKey="94" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
-								<CameraRegisterChild Index="0" Name="Counter Event Source" Address="0x37000100" Data="00-00-00-00" Value="0" Key="95" InternalKey="95" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-								<CameraRegisterChild Index="1" Name="Counter Reset" Address="0xFFFFFFFF" Data="00-00-00-00" Value="0" Key="96" InternalKey="96" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-								<CameraRegisterChild Index="2" Name="Counter Value" Address="0x37000300" Data="00-00-00-00" Value="0" Key="97" InternalKey="97" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="27" Name="Gain Selector" Address="0x30000080" Key="80" InternalKey="80" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+								<CameraRegisterChild Index="0" Name="Gain" Address="0xFFFFFFFF" Key="81" InternalKey="81" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							</CameraRegisterChild>
-							<CameraRegisterChild Index="26" Name="Counter Selector" Address="0x37000000" Key="106" InternalKey="106" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+							<CameraRegisterChild Index="28" Name="Gain Selector" Address="0x30000080" Key="72" InternalKey="72" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+								<CameraRegisterChild Index="0" Name="Gain" Address="0x30000084" Data="00-00-00-00" Value="0" Key="73" InternalKey="73" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							</CameraRegisterChild>
+							<CameraRegisterChild Index="29" Name="Black Level Selector" Address="0xFFFFFFFF" Key="82" InternalKey="82" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-01">
+								<CameraRegisterChild Index="0" Name="Black Level" Address="0x3000001C" Data="00-00-00-00" Value="0" Key="83" InternalKey="83" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							</CameraRegisterChild>
+							<CameraRegisterChild Index="30" Name="Gamma" Address="0x30000300" Data="00-00-03-E8" Value="1" Key="92" InternalKey="92" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="31" Name="LUT Enabled" Address="0x35000000" Data="00-00-00-01" Value="1" Key="93" InternalKey="93" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="32" Name="Counter Selector" Address="0x37000000" Key="98" InternalKey="98" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+								<CameraRegisterChild Index="0" Name="Counter Event Source" Address="0x37000104" Data="00-00-00-00" Value="0" Key="99" InternalKey="99" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+								<CameraRegisterChild Index="1" Name="Counter Reset" Address="0xFFFFFFFF" Data="00-00-00-00" Value="0" Key="100" InternalKey="100" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+								<CameraRegisterChild Index="2" Name="Counter Value" Address="0x37000304" Data="00-00-00-00" Value="0" Key="101" InternalKey="101" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							</CameraRegisterChild>
+							<CameraRegisterChild Index="33" Name="Counter Selector" Address="0x37000000" Key="102" InternalKey="102" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+								<CameraRegisterChild Index="0" Name="Counter Event Source" Address="0x37000108" Data="00-00-00-00" Value="0" Key="103" InternalKey="103" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+								<CameraRegisterChild Index="1" Name="Counter Reset" Address="0xFFFFFFFF" Data="00-00-00-00" Value="0" Key="104" InternalKey="104" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+								<CameraRegisterChild Index="2" Name="Counter Value" Address="0x37000308" Data="00-00-00-00" Value="0" Key="105" InternalKey="105" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							</CameraRegisterChild>
+							<CameraRegisterChild Index="34" Name="Counter Selector" Address="0x37000000" Key="106" InternalKey="106" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
 								<CameraRegisterChild Index="0" Name="Counter Event Source" Address="0x3700010C" Data="00-00-00-00" Value="0" Key="107" InternalKey="107" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 								<CameraRegisterChild Index="1" Name="Counter Reset" Address="0xFFFFFFFF" Data="00-00-00-00" Value="0" Key="108" InternalKey="108" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 								<CameraRegisterChild Index="2" Name="Counter Value" Address="0x3700030C" Data="00-00-00-00" Value="0" Key="109" InternalKey="109" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							</CameraRegisterChild>
-							<CameraRegisterChild Index="27" Name="User Set Selector" Address="0x30001100" Key="114" InternalKey="114" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
-								<CameraRegisterChild Index="0" Name="User Set Description" Address="0xFFFFFFFF" Key="115" InternalKey="115" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="35" Name="Counter Selector" Address="0x37000000" Key="110" InternalKey="110" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+								<CameraRegisterChild Index="0" Name="Counter Event Source" Address="0x37000110" Data="00-00-00-00" Value="0" Key="111" InternalKey="111" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+								<CameraRegisterChild Index="1" Name="Counter Reset" Address="0xFFFFFFFF" Data="00-00-00-00" Value="0" Key="112" InternalKey="112" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+								<CameraRegisterChild Index="2" Name="Counter Value" Address="0x37000310" Data="00-00-00-00" Value="0" Key="113" InternalKey="113" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							</CameraRegisterChild>
-							<CameraRegisterChild Index="28" Name="User Set Selector" Address="0x30001100" Key="116" InternalKey="116" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+							<CameraRegisterChild Index="36" Name="Counter Selector" Address="0x37000000" Key="94" InternalKey="94" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+								<CameraRegisterChild Index="0" Name="Counter Event Source" Address="0x37000100" Data="00-00-00-00" Value="0" Key="95" InternalKey="95" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+								<CameraRegisterChild Index="1" Name="Counter Reset" Address="0xFFFFFFFF" Data="00-00-00-00" Value="0" Key="96" InternalKey="96" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+								<CameraRegisterChild Index="2" Name="Counter Value" Address="0x37000300" Data="00-00-00-00" Value="0" Key="97" InternalKey="97" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							</CameraRegisterChild>
+							<CameraRegisterChild Index="37" Name="User Set Selector" Address="0x30001100" Key="116" InternalKey="116" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
 								<CameraRegisterChild Index="0" Name="User Set Description" Address="0x30001140" Data="55-73-65-72-53-65-74-31-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00" Value="UserSet1" Key="117" InternalKey="117" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							</CameraRegisterChild>
-							<CameraRegisterChild Index="29" Name="User Set Selector" Address="0x30001100" Key="118" InternalKey="118" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+							<CameraRegisterChild Index="38" Name="User Set Selector" Address="0x30001100" Key="118" InternalKey="118" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
 								<CameraRegisterChild Index="0" Name="User Set Description" Address="0x30001160" Data="55-73-65-72-53-65-74-32-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00" Value="UserSet2" Key="119" InternalKey="119" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							</CameraRegisterChild>
-							<CameraRegisterChild Index="30" Name="User Set Selector" Address="0x30001100" Key="120" InternalKey="120" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+							<CameraRegisterChild Index="39" Name="User Set Selector" Address="0x30001100" Key="120" InternalKey="120" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
 								<CameraRegisterChild Index="0" Name="User Set Description" Address="0x30001180" Data="55-73-65-72-53-65-74-33-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00" Value="UserSet3" Key="121" InternalKey="121" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							</CameraRegisterChild>
-							<CameraRegisterChild Index="31" Name="User Set Selector" Address="0x30001100" Key="122" InternalKey="122" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+							<CameraRegisterChild Index="40" Name="User Set Selector" Address="0x30001100" Key="122" InternalKey="122" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
 								<CameraRegisterChild Index="0" Name="User Set Description" Address="0x300011A0" Data="55-73-65-72-53-65-74-34-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00" Value="UserSet4" Key="123" InternalKey="123" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							</CameraRegisterChild>
-							<CameraRegisterChild Index="32" Name="User Set Default" Address="0x30001500" Data="00-00-00-00" Value="0" Key="124" InternalKey="124" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="33" Name="User Set Feature Selector" Address="0x30001504" Key="125" InternalKey="125" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
-								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="126" InternalKey="126" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="41" Name="User Set Selector" Address="0x30001100" Key="114" InternalKey="114" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+								<CameraRegisterChild Index="0" Name="User Set Description" Address="0xFFFFFFFF" Key="115" InternalKey="115" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							</CameraRegisterChild>
-							<CameraRegisterChild Index="34" Name="User Set Feature Selector" Address="0x30001504" Key="127" InternalKey="127" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+							<CameraRegisterChild Index="42" Name="User Set Default" Address="0x30001500" Data="00-00-00-00" Value="0" Key="124" InternalKey="124" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="43" Name="User Set Feature Selector" Address="0x30001504" Key="127" InternalKey="127" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
 								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="128" InternalKey="128" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							</CameraRegisterChild>
-							<CameraRegisterChild Index="35" Name="Counter Selector" Address="0x37000000" Key="110" InternalKey="110" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
-								<CameraRegisterChild Index="0" Name="Counter Reset" Address="0xFFFFFFFF" Data="00-00-00-00" Value="0" Key="112" InternalKey="112" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-								<CameraRegisterChild Index="1" Name="Counter Value" Address="0x37000310" Data="00-00-00-00" Value="0" Key="113" InternalKey="113" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-								<CameraRegisterChild Index="2" Name="Counter Event Source" Address="0x37000110" Data="00-00-00-00" Value="0" Key="111" InternalKey="111" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							</CameraRegisterChild>
-							<CameraRegisterChild Index="36" Name="User Set Feature Selector" Address="0x30001504" Key="131" InternalKey="131" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
-								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="132" InternalKey="132" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							</CameraRegisterChild>
-							<CameraRegisterChild Index="37" Name="User Set Feature Selector" Address="0x30001504" Key="133" InternalKey="133" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
-								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="134" InternalKey="134" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							</CameraRegisterChild>
-							<CameraRegisterChild Index="38" Name="User Set Feature Selector" Address="0x30001504" Key="135" InternalKey="135" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
-								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="136" InternalKey="136" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							</CameraRegisterChild>
-							<CameraRegisterChild Index="39" Name="User Set Feature Selector" Address="0x30001504" Key="137" InternalKey="137" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
-								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="138" InternalKey="138" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							</CameraRegisterChild>
-							<CameraRegisterChild Index="40" Name="User Set Feature Selector" Address="0x30001504" Key="129" InternalKey="129" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+							<CameraRegisterChild Index="44" Name="User Set Feature Selector" Address="0x30001504" Key="129" InternalKey="129" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
 								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="130" InternalKey="130" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							</CameraRegisterChild>
-							<CameraRegisterChild Index="41" Name="User Set Feature Selector" Address="0x30001504" Key="141" InternalKey="141" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
-								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="142" InternalKey="142" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="45" Name="User Set Feature Selector" Address="0x30001504" Key="131" InternalKey="131" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="132" InternalKey="132" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							</CameraRegisterChild>
-							<CameraRegisterChild Index="42" Name="User Set Feature Selector" Address="0x30001504" Key="143" InternalKey="143" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
-								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="144" InternalKey="144" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="46" Name="User Set Feature Selector" Address="0x30001504" Key="133" InternalKey="133" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="134" InternalKey="134" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							</CameraRegisterChild>
-							<CameraRegisterChild Index="43" Name="User Set Feature Selector" Address="0x30001504" Key="145" InternalKey="145" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
-								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="146" InternalKey="146" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="47" Name="User Set Feature Selector" Address="0x30001504" Key="135" InternalKey="135" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="136" InternalKey="136" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							</CameraRegisterChild>
-							<CameraRegisterChild Index="44" Name="User Set Feature Selector" Address="0x30001504" Key="147" InternalKey="147" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
-								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="148" InternalKey="148" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="48" Name="User Set Feature Selector" Address="0x30001504" Key="137" InternalKey="137" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="138" InternalKey="138" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							</CameraRegisterChild>
-							<CameraRegisterChild Index="45" Name="User Set Feature Selector" Address="0x30001504" Key="149" InternalKey="149" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
-								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="150" InternalKey="150" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							</CameraRegisterChild>
-							<CameraRegisterChild Index="46" Name="User Set Feature Selector" Address="0x30001504" Key="151" InternalKey="151" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
-								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="152" InternalKey="152" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							</CameraRegisterChild>
-							<CameraRegisterChild Index="47" Name="User Set Feature Selector" Address="0x30001504" Key="153" InternalKey="153" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
-								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="154" InternalKey="154" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							</CameraRegisterChild>
-							<CameraRegisterChild Index="48" Name="Brightness" Address="0xFFFFFFFF" Key="155" InternalKey="155" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="49" Name="Trigger Mode" Address="0xFFFFFFFF" Key="156" InternalKey="156" SelectedIndex="32767" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="50" Name="Duration" Address="0xFFFFFFFF" Key="157" InternalKey="157" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="51" Name="Delay" Address="0xFFFFFFFF" Key="158" InternalKey="158" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="52" Name="Brightness" Address="0xFFFFFFFF" Key="159" InternalKey="159" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="53" Name="Trigger Mode" Address="0xFFFFFFFF" Key="160" InternalKey="160" SelectedIndex="32767" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="54" Name="Duration" Address="0xFFFFFFFF" Key="161" InternalKey="161" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="55" Name="Delay" Address="0xFFFFFFFF" Key="162" InternalKey="162" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="56" Name="Brightness" Address="0xFFFFFFFF" Key="163" InternalKey="163" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="57" Name="Trigger Mode" Address="0xFFFFFFFF" Key="164" InternalKey="164" SelectedIndex="32767" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="58" Name="Duration" Address="0xFFFFFFFF" Key="165" InternalKey="165" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="59" Name="Delay" Address="0xFFFFFFFF" Key="166" InternalKey="166" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="60" Name="Brightness" Address="0xFFFFFFFF" Key="167" InternalKey="167" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="61" Name="Trigger Mode" Address="0xFFFFFFFF" Key="168" InternalKey="168" SelectedIndex="32767" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="62" Name="User Set Feature Selector" Address="0x30001504" Key="139" InternalKey="139" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+							<CameraRegisterChild Index="49" Name="User Set Feature Selector" Address="0x30001504" Key="139" InternalKey="139" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
 								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="140" InternalKey="140" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							</CameraRegisterChild>
-							<CameraRegisterChild Index="63" Name="Duration" Address="0xFFFFFFFF" Key="169" InternalKey="169" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="64" Name="Delay" Address="0xFFFFFFFF" Key="170" InternalKey="170" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="65" Name="Gev Physical Link Configuration" Address="0x01F80800" Data="00-00-00-00" Value="0" Key="173" InternalKey="173" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="66" Name="Force IP Address" Address="0x07F80800" Data="00-00-00-00" Value="0" Key="174" InternalKey="174" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="67" Name="Force Subnet Mask" Address="0x08F80800" Data="FF-FF-00-00" Value="4294901760" Key="175" InternalKey="175" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="68" Name="Force Default Gateway" Address="0x09F80800" Data="00-00-00-00" Value="0" Key="176" InternalKey="176" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="69" Name="Gev Heartbeat Timeout" Address="0x00000938" Data="00-00-0B-B8" Value="3000" Key="177" InternalKey="177" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="70" Name="Gev Discovery Ack Delay" Address="0x00000950" Data="00-00-00-00" Value="0" Key="178" InternalKey="178" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="71" Name="Gev GVSP Extended ID Mode" Address="0x00000960" Data="00-00-00-00" Value="0" Key="179" InternalKey="179" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="50" Name="User Set Feature Selector" Address="0x30001504" Key="141" InternalKey="141" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="142" InternalKey="142" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							</CameraRegisterChild>
+							<CameraRegisterChild Index="51" Name="User Set Feature Selector" Address="0x30001504" Key="143" InternalKey="143" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="144" InternalKey="144" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							</CameraRegisterChild>
+							<CameraRegisterChild Index="52" Name="User Set Feature Selector" Address="0x30001504" Key="145" InternalKey="145" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="146" InternalKey="146" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							</CameraRegisterChild>
+							<CameraRegisterChild Index="53" Name="User Set Feature Selector" Address="0x30001504" Key="147" InternalKey="147" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="148" InternalKey="148" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							</CameraRegisterChild>
+							<CameraRegisterChild Index="54" Name="User Set Feature Selector" Address="0x30001504" Key="149" InternalKey="149" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="150" InternalKey="150" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							</CameraRegisterChild>
+							<CameraRegisterChild Index="55" Name="User Set Feature Selector" Address="0x30001504" Key="151" InternalKey="151" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="152" InternalKey="152" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							</CameraRegisterChild>
+							<CameraRegisterChild Index="56" Name="User Set Feature Selector" Address="0x30001504" Key="153" InternalKey="153" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="154" InternalKey="154" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							</CameraRegisterChild>
+							<CameraRegisterChild Index="57" Name="User Set Feature Selector" Address="0x30001504" Key="125" InternalKey="125" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="126" InternalKey="126" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							</CameraRegisterChild>
+							<CameraRegisterChild Index="58" Name="Brightness" Address="0xFFFFFFFF" Key="155" InternalKey="155" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="59" Name="Trigger Mode" Address="0xFFFFFFFF" Key="156" InternalKey="156" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="60" Name="Duration" Address="0xFFFFFFFF" Key="157" InternalKey="157" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="61" Name="Delay" Address="0xFFFFFFFF" Key="158" InternalKey="158" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="62" Name="Brightness" Address="0xFFFFFFFF" Key="159" InternalKey="159" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="63" Name="Trigger Mode" Address="0xFFFFFFFF" Key="160" InternalKey="160" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="64" Name="Duration" Address="0xFFFFFFFF" Key="161" InternalKey="161" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="65" Name="Delay" Address="0xFFFFFFFF" Key="162" InternalKey="162" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="66" Name="Brightness" Address="0xFFFFFFFF" Key="163" InternalKey="163" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="67" Name="Trigger Mode" Address="0xFFFFFFFF" Key="164" InternalKey="164" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="68" Name="Duration" Address="0xFFFFFFFF" Key="165" InternalKey="165" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="69" Name="Delay" Address="0xFFFFFFFF" Key="166" InternalKey="166" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="70" Name="Brightness" Address="0xFFFFFFFF" Key="167" InternalKey="167" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="71" Name="Trigger Mode" Address="0xFFFFFFFF" Key="168" InternalKey="168" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="72" Name="Duration" Address="0xFFFFFFFF" Key="169" InternalKey="169" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="73" Name="Delay" Address="0xFFFFFFFF" Key="170" InternalKey="170" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="74" Name="Gev Physical Link Configuration" Address="0x01F80800" Data="00-00-00-00" Value="0" Key="173" InternalKey="173" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="75" Name="Force IP Address" Address="0x07F80800" Data="C0-A8-01-05" Value="3232235781" Key="174" InternalKey="174" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="76" Name="Force Subnet Mask" Address="0x08F80800" Data="FF-FF-00-00" Value="4294901760" Key="175" InternalKey="175" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="77" Name="Force Default Gateway" Address="0x09F80800" Data="00-00-00-00" Value="0" Key="176" InternalKey="176" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="78" Name="Gev Heartbeat Timeout" Address="0x00000938" Data="00-00-0B-B8" Value="3000" Key="177" InternalKey="177" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="79" Name="Gev Discovery Ack Delay" Address="0x00000950" Data="00-00-00-00" Value="0" Key="178" InternalKey="178" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="80" Name="Gev GVSP Extended ID Mode" Address="0x00000960" Data="00-00-00-00" Value="0" Key="179" InternalKey="179" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 						</CameraRegister>
 					</InitCameraCommandsRoot>
-					<CameraInfoCache>
-						<DeviceInformation>
-							<Version>131073</Version>
-							<DeviceMode>2147483649</DeviceMode>
-							<MacAddress>4389265595</MacAddress>
-							<IpAddress>2852035234</IpAddress>
-							<SubnetMask>4294901760</SubnetMask>
-							<DefaultGateway>0</DefaultGateway>
-							<ManufacturerName>Beckhoff</ManufacturerName>
-							<ModelName>VCS2000-0500</ModelName>
-							<DeviceVersion>1.1.161400 alpha V1</DeviceVersion>
-							<ManufacturerInfo>Beckhoff Automation GmbH &amp; Co. KG</ManufacturerInfo>
-							<SerialNumber>BTN000tpznf</SerialNumber>
-							<UserDefinedName/>
-							<GvcpCapability>4223926279</GvcpCapability>
-							<TimestampTickFrequency>1000000000</TimestampTickFrequency>
-							<NumberMessageChannels>0</NumberMessageChannels>
-							<PendingTimeout>100</PendingTimeout>
-						</DeviceInformation>
-					</CameraInfoCache>
 				</TcSmExtension>
 			</TcSmExtensions>
 		</Xml>
-		<Module Id="#x01010030" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcIoGigEVision|4.0.5.10" TcSmClass="CTComVisionObjDef">
-			<Name>Camera1 Image Acquisition (CGevImageAcquisition)</Name>
+		<Module Id="#x01010030" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcIoGigEVision|4.0.6.5" TcSmClass="CTComVisionObjDef">
+			<Name>Camera1 Beckhoff Image Acquisition (CGevImageAcquisition)</Name>
 			<ImageId>1000</ImageId>
-			<TmcDesc GUID="{8B8C3693-0B4E-4D00-A22A-AFC6977207C3}" TcSmClass="CTComVisionObjDef">
-				<Name>CGevImageAcquisition</Name>
-				<CLSID ClassFactory="TcIoGigEVision">{8B8C3693-0B4E-4D00-A22A-AFC6977207C3}</CLSID>
+			<TmcDesc GUID="{29B0E489-75B5-4F6B-A044-ACFA04320CC3}" TcSmClass="CTComVisionObjDef">
+				<Name>CBeckhoffGevImageAcquisition</Name>
+				<CLSID ClassFactory="TcIoGigEVision">{29B0E489-75B5-4F6B-A044-ACFA04320CC3}</CLSID>
 				<Licenses>
 					<License>
-						<LicenseId>{2FF93140-10E2-4662-A464-31B8A4673F26}</LicenseId>
+						<LicenseId>{1DB1131F-B824-47F7-B18B-069498C683AA}</LicenseId>
 					</License>
 				</Licenses>
 				<InitSequence>PSO</InitSequence>
@@ -13147,7 +12965,7 @@
 					</Value>
 					<Value>
 						<Name>CameraIpAddress</Name>
-						<Value>2852035234</Value>
+						<Value>3232235780</Value>
 					</Value>
 					<Value>
 						<Name>StartAcquisitionCommands[0]</Name>
@@ -13187,7 +13005,7 @@
 					</Value>
 					<Value>
 						<Name>InitCameraCommands</Name>
-						<Data>8b00000000000000770000000000000042cbdb1399998d428f386733fbaf00b13800000001000000010000001f0020000000000000000000496e697469616c697a6174696f6e20436f6d6d616e64732048656164657200496e697469616c697a6174696f6e20436f6d6d616e647320436f6d6d656e740000000400006c00610073007300650073000000ff</Data>
+						<Data>8b00000000000000770000000000000042cbdb1399998d428f386733fbaf00b13800000001000000010000001f0020000000000000000000496e697469616c697a6174696f6e20436f6d6d616e64732048656164657200496e697469616c697a6174696f6e20436f6d6d616e647320436f6d6d656e740000000400006c0061007300730065007300000000</Data>
 					</Value>
 					<Value>
 						<Name>InitializationTimeout</Name>
@@ -13221,8 +13039,8 @@
 					</Value>
 				</InterfacePointerValues>
 			</TmcDesc>
-			<Module Id="#x01010040" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcIoGigEVision|4.0.5.10" TcSmClass="CTComVisionObjDef">
-				<Name>Gvcp Module (CGvcpProtocol)</Name>
+			<Module Id="#x01010040" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcIoGigEVision|4.0.6.5" TcSmClass="CTComVisionObjDef">
+				<Name>Camera1 Gvcp Module (CGvcpProtocol)</Name>
 				<ImageId>1000</ImageId>
 				<TmcDesc GUID="{A2F12437-8A89-453B-BAFC-5E9934B8C8DC}" TcSmClass="CTComVisionObjDef">
 					<Name>CGvcpProtocol</Name>
@@ -13364,8 +13182,8 @@
 					</ParameterValues>
 				</TmcDesc>
 			</Module>
-			<Module Id="#x01010050" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcIoGigEVision|4.0.5.10" TcSmClass="CTComVisionObjDef">
-				<Name>Gvsp Module (CGvspProtocol)</Name>
+			<Module Id="#x01010050" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcIoGigEVision|4.0.6.5" TcSmClass="CTComVisionObjDef">
+				<Name>Camera1 Gvsp Module (CGvspProtocol)</Name>
 				<ImageId>1000</ImageId>
 				<TmcDesc GUID="{9D2B8D47-8462-4251-80A0-5AA35A79EF48}" TcSmClass="CTComVisionObjDef">
 					<Name>CGvspProtocol</Name>
@@ -13584,7 +13402,7 @@
 				</TmcDesc>
 			</Module>
 		</Module>
-		<Module Id="#x01010060" Disabled="true" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcIoGigEVision|4.0.5.10" TcSmClass="CTComVisionObjDef">
+		<Module Id="#x01010060" Disabled="true" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcIoGigEVision|4.0.6.5" TcSmClass="CTComVisionObjDef">
 			<Name>Camera1 Image Acquisition Simulation (CGevImageAcquisitionSimulation)</Name>
 			<ImageId>1000</ImageId>
 			<TmcDesc GUID="{F6C5A2D8-F17E-45DE-A68A-B78B3B54B4EC}" TcSmClass="CTComVisionObjDef">
@@ -13695,7 +13513,7 @@
 					</Value>
 					<Value>
 						<Name>PlaybackMode</Name>
-						<Value>0</Value>
+						<Value>1</Value>
 					</Value>
 					<Value>
 						<Name>PlaybackStrategy</Name>
@@ -13703,15 +13521,15 @@
 					</Value>
 					<Value>
 						<Name>PlaybackSpeed</Name>
-						<Value>0</Value>
+						<Value>1</Value>
 					</Value>
 					<Value>
 						<Name>Loop</Name>
-						<EnumText>FALSE</EnumText>
+						<EnumText>TRUE</EnumText>
 					</Value>
 					<Value>
 						<Name>FilePath</Name>
-						<String></String>
+						<String>C:\Users\Public\TcVision\CameraStreams\test1.tcs</String>
 					</Value>
 				</ParameterValues>
 				<InterfacePointerValues>
@@ -13722,7 +13540,7 @@
 				</InterfacePointerValues>
 			</TmcDesc>
 		</Module>
-		<Module Id="#x01010070" Disabled="true" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcIoGigEVision|4.0.5.10" TcSmClass="CTComVisionObjDef">
+		<Module Id="#x01010070" Disabled="true" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcIoGigEVision|4.0.6.5" TcSmClass="CTComVisionObjDef">
 			<Name>Camera1 Ads Communicator (CGevAdsCommunicator)</Name>
 			<ImageId>1000</ImageId>
 			<TmcDesc GUID="{D3AC2B42-00B6-4F04-B20D-A1A9E3949D9B}" TcSmClass="CTComVisionObjDef">
@@ -13825,12 +13643,12 @@
 					</Value>
 					<Value>
 						<Name>GevImageAcquisition</Name>
-						<OTCID>#x01010030</OTCID>
+						<OTCID>#x00000000</OTCID>
 					</Value>
 				</InterfacePointerValues>
 			</TmcDesc>
 		</Module>
-		<Module Id="#x01010080" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcVision|4.0.5.10" TcSmClass="CTComVisionObjDef">
+		<Module Id="#x01010080" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcVision|4.0.6.5" TcSmClass="CTComVisionObjDef">
 			<Name>Camera1 Image Provider (CGevImageProvider)</Name>
 			<ImageId>1000</ImageId>
 			<TmcDesc GUID="{F81ECC63-F412-4CF1-ABEC-DA193F5F64AE}" TcSmClass="CTComVisionObjDef">
@@ -14084,6 +13902,6 @@
 				</InterfacePointerValues>
 			</TmcDesc>
 		</Module>
-		<MacAddress>00:01:05:9E:E0:BB</MacAddress>
+		<MacAddress>00:01:05:9e:e1:10</MacAddress>
 	</TreeItem>
 </TcSmItem>
