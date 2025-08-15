@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.12">
   <POU Name="PRG2_VisionApplication" Id="{3044bfc2-af47-4475-aa52-20e83efee7e7}" SpecialFunc="None">
     <Declaration><![CDATA[//This program is called by a task with medium-low priority. 
 //Since complex image processing takes several cycles, it is important that this task can be interrupted by others. 
@@ -15,6 +15,7 @@ VAR
 	ipDisplayableImage 	: ITcVnDisplayableImage;
 	nImageCounter 	: UDINT;
 	nSharpness		: ULINT;
+	nSharpnessLastImg : ULINT;
 	aColor 			: TcVnVector4_LREAL; //RGBA
 	afWhiteBalance 	: TcVnVector4_LREAL := [1.0, 1.0, 1.0, 1.0]; //RGBA
 	sTextInImage 	: STRING;
@@ -22,17 +23,16 @@ VAR
 	fReduceImageSizeFactor : LREAL := 0.2;
 
 	//Different to the use of HRESULT, this FB automatically generates a TC3_Eventlogger message
-	fbFeedback 	 : FB_CH_Feedback(ipSourceInfo := fbSourceInfo);	//hrImage	 : HRESULT;
+	fbFeedback 	 : FB_CH_Feedback(ipSourceInfo := fbSourceInfo); //hrImage	 : HRESULT;
 	fbSourceInfo : FB_TcSourceInfo;
-	nStartTime : T_DCTIME64; //[ns] - zero time starts on 01.01.2000
+	nStartTime : T_DCTIME64; //[ns] zero time starts on 01.01.2000
 	fTimeDifferenceMs : LREAL;	//[ms]
 	
 	//Save image to harddisk
 	bSaveImage : BOOL;
-	sPathFolder : STRING := 'C:\Users\Public\TcVision\SavedImages\';
-	sPathFull : STRING;
+	sPathFolder : STRING(255) := 'C:\Users\Public\TcVision\SavedImages\';
+	sPathFull : STRING(255);
 	fbWriteImage : FB_VN_WriteImage;
-	
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[//If TryGetImage returns S_OK(0), a new image is available
@@ -71,7 +71,7 @@ IF bNewImageReceived THEN
 	stImageWithInfo.stInfo 					:= stRawImageWithInfo.stInfo;
 	
 	
-	//If pixel are encoded in bayer bg convert to rgb - cameraImage is rb, imageFromFile is non rg
+	(* If pixel are encoded in bayer bg convert to rgb - cameraImage is rb, imageFromFile is non rg *)
 	IF stImageWithInfo.stInfo.stPixelFormat.ePixelEncoding = ETcVnPixelEncoding.TCVN_PE_BAYER_RG THEN
 		fbFeedback.ActiveCommand := 'F_VN_ConvertColorSpace TCVN_CST_BAYER_RG_TO_RGB';
 		fbFeedback.hr := F_VN_ConvertColorSpace(
@@ -83,6 +83,7 @@ IF bNewImageReceived THEN
 	
 	(* Calculate a number that describes the sharpness of the image *)
 	fbFeedback.ActiveCommand := 'F_VND_Sharpness_SumModifiedLaplace';	
+	nSharpnessLastImg := nSharpness;
 	fbFeedback.hr := F_VND_Sharpness_SumModifiedLaplace_ULINT(
 						ipImg			:= stImageWithInfo.ipImage, 
 						nKernelSize		:= 5, 
@@ -125,7 +126,7 @@ IF bNewImageReceived THEN
 	//Variant 2: Use constant
 	  aColor := ColorVector4.Tomato;
 	//Variant 3: freely definable
-	  //aColor[0] := 255; aColor[1] := 255; aColor[2] := 255; aColor[3] := 255;	
+	  //aColor[0] := 255; aColor[1] := 99; aColor[2] := 71; aColor[3] := 255;	
 	sTextInImage := CONCAT('Hello World - ', TO_STRING(nImageCounter));
 	fbFeedback.hr := F_VN_PutText(
 						sText			:= sTextInImage,
@@ -150,7 +151,7 @@ IF bNewImageReceived THEN
 						
 						
 							
-	//Measured time for the vision processing
+	(* Measured time for the vision processing *)
 	fTimeDifferenceMs := TO_LREAL(F_GetActualDcTime64() - nStartTime)/1_000_000(*ns to ms*);			
 END_IF
 
@@ -170,7 +171,9 @@ fbWriteImage(
 	
 IF NOT fbWriteImage.bBusy THEN
 	bSaveImage := FALSE;
-END_IF		
+END_IF
+
+
 //----------------------------------------------------------------------------------------------------
 
 

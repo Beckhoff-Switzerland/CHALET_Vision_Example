@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.65" ClassName="CVisionCameraDef">
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.17" ClassName="CVisionCameraDef">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{C10B6EE2-EA6E-4FED-AC4E-D3C8366F26C0}">ITcVnData</Name>
@@ -91,6 +91,15 @@
 				<BitSize>48</BitSize>
 				<BitOffs>0</BitOffs>
 			</SubItem>
+			<Format Name="MAC" Preview="00-00-00-00-00-00">
+				<Printf>%02X-%02X-%02X-%02X-%02X-%02X</Printf>
+				<Parameter>.b[0]</Parameter>
+				<Parameter>.b[1]</Parameter>
+				<Parameter>.b[2]</Parameter>
+				<Parameter>.b[3]</Parameter>
+				<Parameter>.b[4]</Parameter>
+				<Parameter>.b[5]</Parameter>
+			</Format>
 			<Hides>
 				<Hide GUID="{F45D8924-F151-4141-9296-7C8BB697BD07}"/>
 			</Hides>
@@ -428,6 +437,11 @@
 				<Text><![CDATA[TCVN_PPM_MONO12P]]></Text>
 				<Enum>12</Enum>
 				<Comment><![CDATA[Mono12p or BayerXX12p]]></Comment>
+			</EnumInfo>
+			<EnumInfo>
+				<Text><![CDATA[TCVN_PPM_MONO14P]]></Text>
+				<Enum>13</Enum>
+				<Comment><![CDATA[Mono14p or BayerXX14p]]></Comment>
 			</EnumInfo>
 			<Hides>
 				<Hide GUID="{799146EA-48E8-46D9-B478-8FCDE0DA4294}"/>
@@ -1608,49 +1622,64 @@
 			</Hides>
 		</DataType>
 		<DataType>
-			<Name GUID="{478C4436-6F33-4F6F-B4A8-88074B54DCD4}" TcBaseType="true">ETYPE_VLAN_HEADER</Name>
+			<Name GUID="{478C4436-6F33-4F6F-B4A8-88074B54DCD4}">ETYPE_VLAN_HEADER</Name>
+			<Comment><![CDATA[VLAN header.]]></Comment>
 			<BitSize>32</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
 		</DataType>
 		<DataType>
 			<Name GUID="{03010095-0000-0000-E000-000000000064}" TcBaseType="true">ITcIoUdpProtocolRecv</Name>
+			<Comment><![CDATA[Interface for a UDP protocol receiver.]]></Comment>
 			<BitSize X64="64">32</BitSize>
 			<BaseType GUID="{00000001-0000-0000-E000-000000000064}">ITcUnknown</BaseType>
 			<Method>
 				<Name>ReceiveData</Name>
+				<Comment><![CDATA[Receive data.]]></Comment>
 				<ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
 				<ReturnBitSize>32</ReturnBitSize>
 				<Parameter>
 					<Name>ipAddr</Name>
+					<Comment><![CDATA[IP address]]></Comment>
 					<Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
 					<BitSize>32</BitSize>
 				</Parameter>
 				<Parameter>
 					<Name>udpDestPort</Name>
+					<Comment><![CDATA[UDP destination port]]></Comment>
 					<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
 					<BitSize>16</BitSize>
 				</Parameter>
 				<Parameter>
 					<Name>udpSrcPort</Name>
+					<Comment><![CDATA[UDP source port]]></Comment>
 					<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
 					<BitSize>16</BitSize>
 				</Parameter>
 				<Parameter>
 					<Name>nData</Name>
+					<Comment><![CDATA[Size of the data]]></Comment>
 					<Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
 					<BitSize>32</BitSize>
 				</Parameter>
 				<Parameter>
 					<Name>pData</Name>
+					<Comment><![CDATA[Pointer to the data]]></Comment>
 					<Type GUID="{18071995-0000-0000-0000-000000000018}">PVOID</Type>
 					<BitSize X64="64">32</BitSize>
 				</Parameter>
 				<Parameter>
 					<Name>pVlan</Name>
+					<Comment><![CDATA[VLAN header]]></Comment>
 					<Type GUID="{478C4436-6F33-4F6F-B4A8-88074B54DCD4}" PointerTo="1" Optional="0">ETYPE_VLAN_HEADER</Type>
 					<BitSize X64="64">32</BitSize>
 				</Parameter>
 			</Method>
+			<Properties>
+				<Property>
+					<Name>docuFolder</Name>
+					<Value>Interfaces\GigEVision</Value>
+				</Property>
+			</Properties>
 		</DataType>
 		<DataType>
 			<Name GUID="{7C53C9A1-5EBD-4DFF-B561-5213B6EBED4A}">ITcIoGvspStreamChannelInfo</Name>
@@ -2463,6 +2492,9 @@
 					<Name>docuFolder</Name>
 					<Value>Interfaces\Images</Value>
 				</Property>
+				<Property>
+					<Name>CppApi_NoSmartPointer</Name>
+				</Property>
 			</Properties>
 			<Hides>
 				<Hide GUID="{A11EF414-FACA-4B76-AABF-90C5A8455B82}"/>
@@ -2719,8 +2751,8 @@
 							<AutoCalcMaxPacketNumber Type="System.Boolean">True</AutoCalcMaxPacketNumber>
 							<CommunicationTimeout Type="System.Int32">3000</CommunicationTimeout>
 							<Visibility Type="System.String">Beginner</Visibility>
-							<ExpandedNodes Type="System.String">Root;Camera Features</ExpandedNodes>
-							<SelectedNodeName Type="System.String"/>
+							<ExpandedNodes Type="System.String">Root;Camera Features;Light Control;Light Controller Selector;Channel;Optic Control;Optic Controller Selector</ExpandedNodes>
+							<SelectedNodeName Type="System.String">Brightness</SelectedNodeName>
 							<useSelector Type="System.Boolean">True</useSelector>
 							<UsePacketDelayInConfigMode Type="System.Boolean">True</UsePacketDelayInConfigMode>
 						</CameraConfig>
@@ -2762,13 +2794,13 @@
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x00000068">
-								<RegisterValue>56-43-53-32</RegisterValue>
+								<RegisterValue>56-55-49-32</RegisterValue>
 							</Register>
 							<Register Address="0x0000006C">
 								<RegisterValue>30-30-30-2D</RegisterValue>
 							</Register>
 							<Register Address="0x00000070">
-								<RegisterValue>30-32-30-30</RegisterValue>
+								<RegisterValue>30-32-31-36</RegisterValue>
 							</Register>
 							<Register Address="0x00000074">
 								<RegisterValue>00-00-00-00</RegisterValue>
@@ -2786,7 +2818,7 @@
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x06F90000">
-								<RegisterValue>56-43-53-32</RegisterValue>
+								<RegisterValue>56-55-49-32</RegisterValue>
 							</Register>
 							<Register Address="0x06F90004">
 								<RegisterValue>30-30-30-00</RegisterValue>
@@ -2813,10 +2845,10 @@
 								<RegisterValue>31-2E-31-2E</RegisterValue>
 							</Register>
 							<Register Address="0x0000008C">
-								<RegisterValue>31-36-31-34</RegisterValue>
+								<RegisterValue>31-36-35-32</RegisterValue>
 							</Register>
 							<Register Address="0x00000090">
-								<RegisterValue>30-30-20-61</RegisterValue>
+								<RegisterValue>30-33-20-61</RegisterValue>
 							</Register>
 							<Register Address="0x00000094">
 								<RegisterValue>6C-70-68-61</RegisterValue>
@@ -2846,10 +2878,10 @@
 								<RegisterValue>20-56-31-20</RegisterValue>
 							</Register>
 							<Register Address="0x09F90010">
-								<RegisterValue>31-36-31-34</RegisterValue>
+								<RegisterValue>31-36-35-32</RegisterValue>
 							</Register>
 							<Register Address="0x09F90014">
-								<RegisterValue>30-30-2C-20</RegisterValue>
+								<RegisterValue>30-33-2C-20</RegisterValue>
 							</Register>
 							<Register Address="0x09F90018">
 								<RegisterValue>43-43-20-30</RegisterValue>
@@ -2933,10 +2965,10 @@
 								<RegisterValue>42-54-4E-30</RegisterValue>
 							</Register>
 							<Register Address="0x000000DC">
-								<RegisterValue>30-30-74-70</RegisterValue>
+								<RegisterValue>30-30-74-75</RegisterValue>
 							</Register>
 							<Register Address="0x000000E0">
-								<RegisterValue>7A-6D-35-00</RegisterValue>
+								<RegisterValue>68-36-78-00</RegisterValue>
 							</Register>
 							<Register Address="0x000000E4">
 								<RegisterValue>00-00-00-00</RegisterValue>
@@ -3082,22 +3114,36 @@
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x32000004">
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x32000004">
+								<Selector SelectorName="OpticControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x32000000">
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
+							<Register Address="0x32000008">
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x32000008">
+								<Selector SelectorName="OpticControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
 							<Register Address="0x02FA0000">
-								<RegisterValue>00-00-B3-98</RegisterValue>
+								<RegisterValue>00-00-9F-68</RegisterValue>
 							</Register>
 							<Register Address="0x41000000">
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x50000000">
-								<RegisterValue>00-00-00-01</RegisterValue>
+								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x41000004">
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x32110004">
-								<RegisterValue>00-00-00-02</RegisterValue>
+								<RegisterValue>00-00-00-04</RegisterValue>
 							</Register>
 							<Register Address="0x32110008">
 								<RegisterValue>00-00-00-00</RegisterValue>
@@ -3183,11 +3229,11 @@
 							<Register Address="0x1000001C">
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
-							<Register Address="0x30010010">
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
 							<Register Address="0x30010000">
 								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x30010010">
+								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x30010800">
 								<RegisterValue>00-00-00-00</RegisterValue>
@@ -3213,11 +3259,11 @@
 								<RegisterValue>00-00-00-08</RegisterValue>
 							</Register>
 							<Register Address="0x10000500">
-								<RegisterValue>00-00-01-90</RegisterValue>
+								<RegisterValue>00-00-04-C0</RegisterValue>
 							</Register>
 							<Register Address="0x10000500">
 								<Selector SelectorName="RegionSelector">0</Selector>
-								<RegisterValue>00-00-01-90</RegisterValue>
+								<RegisterValue>00-00-04-C0</RegisterValue>
 							</Register>
 							<Register Address="0x10000530">
 								<RegisterValue>00-00-00-04</RegisterValue>
@@ -3255,7 +3301,7 @@
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x10000A60">
-								<RegisterValue>00-00-03-30</RegisterValue>
+								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x10000A90">
 								<RegisterValue>00-00-00-04</RegisterValue>
@@ -3281,6 +3327,201 @@
 							<Register Address="0x30000400">
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
+							<Register Address="0x30000408">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x30000408">
+								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x30000404">
+								<RegisterValue>00-00-00-0B</RegisterValue>
+							</Register>
+							<Register Address="0x30001000">
+								<RegisterValue>4D-75-6C-74</RegisterValue>
+							</Register>
+							<Register Address="0x30001000">
+								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
+								<RegisterValue>4D-75-6C-74</RegisterValue>
+							</Register>
+							<Register Address="0x30001004">
+								<RegisterValue>69-70-6C-65</RegisterValue>
+							</Register>
+							<Register Address="0x30001004">
+								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
+								<RegisterValue>69-70-6C-65</RegisterValue>
+							</Register>
+							<Register Address="0x30001008">
+								<RegisterValue>20-50-69-78</RegisterValue>
+							</Register>
+							<Register Address="0x30001008">
+								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
+								<RegisterValue>20-50-69-78</RegisterValue>
+							</Register>
+							<Register Address="0x3000100C">
+								<RegisterValue>65-6C-73-20</RegisterValue>
+							</Register>
+							<Register Address="0x3000100C">
+								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
+								<RegisterValue>65-6C-73-20</RegisterValue>
+							</Register>
+							<Register Address="0x30001010">
+								<RegisterValue>50-61-74-74</RegisterValue>
+							</Register>
+							<Register Address="0x30001010">
+								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
+								<RegisterValue>50-61-74-74</RegisterValue>
+							</Register>
+							<Register Address="0x30001014">
+								<RegisterValue>65-72-6E-73</RegisterValue>
+							</Register>
+							<Register Address="0x30001014">
+								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
+								<RegisterValue>65-72-6E-73</RegisterValue>
+							</Register>
+							<Register Address="0x30001018">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x30001018">
+								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3000101C">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3000101C">
+								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x30001020">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x30001020">
+								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x30001024">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x30001024">
+								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x30001028">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x30001028">
+								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3000102C">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3000102C">
+								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x30001030">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x30001030">
+								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x30001034">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x30001034">
+								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x30001038">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x30001038">
+								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3000103C">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3000103C">
+								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3000040C">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3000040C">
+								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x30000440">
+								<RegisterValue>00-00-02-FF</RegisterValue>
+							</Register>
+							<Register Address="0x30000410">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x30000410">
+								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x30000414">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x30000414">
+								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x30000418">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x30000418">
+								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3000041C">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3000041C">
+								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x30000420">
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x30000420">
+								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x30000424">
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x30000424">
+								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x30000428">
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x30000428">
+								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x3000042C">
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x3000042C">
+								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x30000434">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x30000434">
+								<Selector SelectorName="TestPatternGeneratorSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
 							<Register Address="0x1000004C">
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
@@ -3294,30 +3535,24 @@
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x31000400">
-								<RegisterValue>00-00-00-00</RegisterValue>
+								<RegisterValue>00-00-00-01</RegisterValue>
 							</Register>
 							<Register Address="0x31000400">
 								<Selector SelectorName="TriggerSelector">3</Selector>
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x31000408">
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x31000408">
-								<RegisterValue>00-00-00-02</RegisterValue>
-							</Register>
-							<Register Address="0x31000408">
 								<Selector SelectorName="TriggerSelector">3</Selector>
-								<RegisterValue>00-00-00-02</RegisterValue>
+								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x30000010">
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
-							<Register Address="0x30000008">
-								<RegisterValue>00-00-37-FB</RegisterValue>
-							</Register>
-							<Register Address="0x31001028">
-								<RegisterValue>00-00-00-0A</RegisterValue>
-							</Register>
 							<Register Address="0x31001020">
-								<RegisterValue>00-00-38-0B</RegisterValue>
+								<RegisterValue>00-00-83-B4</RegisterValue>
 							</Register>
 							<Register Address="0x10000200">
 								<RegisterValue>00-00-00-01</RegisterValue>
@@ -3333,7 +3568,7 @@
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x31000008">
-								<RegisterValue>00-00-00-00</RegisterValue>
+								<RegisterValue>00-00-00-03</RegisterValue>
 							</Register>
 							<Register Address="0x31000100">
 								<RegisterValue>00-00-00-00</RegisterValue>
@@ -3347,13 +3582,20 @@
 							</Register>
 							<Register Address="0x31000108">
 								<Selector SelectorName="TriggerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x31000410">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x31000410">
+								<Selector SelectorName="TriggerSelector">3</Selector>
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x30000020">
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x30000024">
-								<RegisterValue>00-00-C3-50</RegisterValue>
+								<RegisterValue>00-00-27-10</RegisterValue>
 							</Register>
 							<Register Address="0x3100102C">
 								<RegisterValue>00-00-00-0F</RegisterValue>
@@ -3362,7 +3604,17 @@
 								<RegisterValue>00-40-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x33000004">
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x33000000">
 								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33100000">
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x33100000">
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-01</RegisterValue>
 							</Register>
 							<Register Address="0x30010040">
 								<RegisterValue>00-00-00-00</RegisterValue>
@@ -3839,8 +4091,425 @@
 							<Register Address="0x36000000">
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
-							<Register Address="0x50000004">
-								<RegisterValue>00-00-00-04</RegisterValue>
+							<Register Address="0x33000010">
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x33000010">
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x33100004">
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x33100004">
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x33000008">
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x33000008">
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x33001020">
+								<RegisterValue>47-72-65-65</RegisterValue>
+							</Register>
+							<Register Address="0x33001020">
+								<Selector SelectorName="LightController0ChannelSelector">0</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>47-72-65-65</RegisterValue>
+							</Register>
+							<Register Address="0x33001020">
+								<Selector SelectorName="LightController0ChannelSelector">1</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>47-72-65-65</RegisterValue>
+							</Register>
+							<Register Address="0x33001024">
+								<RegisterValue>6E-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001024">
+								<Selector SelectorName="LightController0ChannelSelector">0</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>6E-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001024">
+								<Selector SelectorName="LightController0ChannelSelector">1</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>6E-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001028">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001028">
+								<Selector SelectorName="LightController0ChannelSelector">0</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001028">
+								<Selector SelectorName="LightController0ChannelSelector">1</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300102C">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300102C">
+								<Selector SelectorName="LightController0ChannelSelector">0</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300102C">
+								<Selector SelectorName="LightController0ChannelSelector">1</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001030">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001030">
+								<Selector SelectorName="LightController0ChannelSelector">0</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001030">
+								<Selector SelectorName="LightController0ChannelSelector">1</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001034">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001034">
+								<Selector SelectorName="LightController0ChannelSelector">0</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001034">
+								<Selector SelectorName="LightController0ChannelSelector">1</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001038">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001038">
+								<Selector SelectorName="LightController0ChannelSelector">0</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001038">
+								<Selector SelectorName="LightController0ChannelSelector">1</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300103C">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300103C">
+								<Selector SelectorName="LightController0ChannelSelector">0</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300103C">
+								<Selector SelectorName="LightController0ChannelSelector">1</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000114">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000114">
+								<Selector SelectorName="LightController0ChannelSelector">0</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000114">
+								<Selector SelectorName="LightController0ChannelSelector">1</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000124">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000124">
+								<Selector SelectorName="LightController0ChannelSelector">0</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000124">
+								<Selector SelectorName="LightController0ChannelSelector">1</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000134">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000134">
+								<Selector SelectorName="LightController0ChannelSelector">0</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000134">
+								<Selector SelectorName="LightController0ChannelSelector">1</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000144">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000144">
+								<Selector SelectorName="LightController0ChannelSelector">0</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000144">
+								<Selector SelectorName="LightController0ChannelSelector">1</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000154">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000154">
+								<Selector SelectorName="LightController0ChannelSelector">0</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000154">
+								<Selector SelectorName="LightController0ChannelSelector">1</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000138">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000138">
+								<Selector SelectorName="LightController0ChannelSelector">2</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001040">
+								<RegisterValue>4F-72-61-6E</RegisterValue>
+							</Register>
+							<Register Address="0x33001040">
+								<Selector SelectorName="LightController0ChannelSelector">2</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>4F-72-61-6E</RegisterValue>
+							</Register>
+							<Register Address="0x33001044">
+								<RegisterValue>67-65-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001044">
+								<Selector SelectorName="LightController0ChannelSelector">2</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>67-65-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001048">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001048">
+								<Selector SelectorName="LightController0ChannelSelector">2</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300104C">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300104C">
+								<Selector SelectorName="LightController0ChannelSelector">2</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001050">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001050">
+								<Selector SelectorName="LightController0ChannelSelector">2</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001054">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001054">
+								<Selector SelectorName="LightController0ChannelSelector">2</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001058">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001058">
+								<Selector SelectorName="LightController0ChannelSelector">2</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300105C">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300105C">
+								<Selector SelectorName="LightController0ChannelSelector">2</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000118">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000118">
+								<Selector SelectorName="LightController0ChannelSelector">2</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000128">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000128">
+								<Selector SelectorName="LightController0ChannelSelector">2</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000148">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000148">
+								<Selector SelectorName="LightController0ChannelSelector">2</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000158">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000158">
+								<Selector SelectorName="LightController0ChannelSelector">2</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300013C">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300013C">
+								<Selector SelectorName="LightController0ChannelSelector">3</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001060">
+								<RegisterValue>42-6C-75-65</RegisterValue>
+							</Register>
+							<Register Address="0x33001060">
+								<Selector SelectorName="LightController0ChannelSelector">3</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>42-6C-75-65</RegisterValue>
+							</Register>
+							<Register Address="0x33001064">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001064">
+								<Selector SelectorName="LightController0ChannelSelector">3</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001068">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001068">
+								<Selector SelectorName="LightController0ChannelSelector">3</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300106C">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300106C">
+								<Selector SelectorName="LightController0ChannelSelector">3</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001070">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001070">
+								<Selector SelectorName="LightController0ChannelSelector">3</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001074">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001074">
+								<Selector SelectorName="LightController0ChannelSelector">3</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001078">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001078">
+								<Selector SelectorName="LightController0ChannelSelector">3</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300107C">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300107C">
+								<Selector SelectorName="LightController0ChannelSelector">3</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300011C">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300011C">
+								<Selector SelectorName="LightController0ChannelSelector">3</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300012C">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300012C">
+								<Selector SelectorName="LightController0ChannelSelector">3</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300014C">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300014C">
+								<Selector SelectorName="LightController0ChannelSelector">3</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300015C">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300015C">
+								<Selector SelectorName="LightController0ChannelSelector">3</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000130">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000130">
+								<Selector SelectorName="LightController0ChannelSelector">0</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x02FA000C">
+								<RegisterValue>00-00-8C-A0</RegisterValue>
+							</Register>
+							<Register Address="0x02FA000C">
+								<Selector SelectorName="OpticControllerSelector">0</Selector>
+								<RegisterValue>00-00-8C-A0</RegisterValue>
+							</Register>
+							<Register Address="0x32000010">
+								<RegisterValue>00-00-02-00</RegisterValue>
+							</Register>
+							<Register Address="0x32000010">
+								<Selector SelectorName="OpticControllerSelector">0</Selector>
+								<RegisterValue>00-00-02-00</RegisterValue>
 							</Register>
 							<Register Address="0x01F91A00">
 								<RegisterValue>00-23-EC-00</RegisterValue>
@@ -3876,7 +4545,7 @@
 								<RegisterValue>00-00-00-01</RegisterValue>
 							</Register>
 							<Register Address="0x0000000C">
-								<RegisterValue>05-9E-E1-10</RegisterValue>
+								<RegisterValue>05-9E-E1-36</RegisterValue>
 							</Register>
 							<Register Address="0x04F91B00">
 								<RegisterValue>00-00-00-01</RegisterValue>
@@ -3886,11 +4555,11 @@
 								<RegisterValue>00-00-00-01</RegisterValue>
 							</Register>
 							<Register Address="0x04F91B04">
-								<RegisterValue>05-9E-E1-10</RegisterValue>
+								<RegisterValue>05-9E-E1-36</RegisterValue>
 							</Register>
 							<Register Address="0x04F91B04">
 								<Selector SelectorName="GevInterfaceSelector">0</Selector>
-								<RegisterValue>05-9E-E1-10</RegisterValue>
+								<RegisterValue>05-9E-E1-36</RegisterValue>
 							</Register>
 							<Register Address="0x04F80800">
 								<RegisterValue>00-00-00-00</RegisterValue>
@@ -3914,18 +4583,18 @@
 								<RegisterValue>00-00-00-05</RegisterValue>
 							</Register>
 							<Register Address="0x00000024">
-								<RegisterValue>C0-A8-01-05</RegisterValue>
+								<RegisterValue>C0-A8-01-14</RegisterValue>
 							</Register>
 							<Register Address="0x00000024">
 								<Selector SelectorName="GevInterfaceSelector">0</Selector>
-								<RegisterValue>C0-A8-01-05</RegisterValue>
+								<RegisterValue>C0-A8-01-14</RegisterValue>
 							</Register>
 							<Register Address="0x00000034">
-								<RegisterValue>FF-FF-00-00</RegisterValue>
+								<RegisterValue>FF-FF-FF-00</RegisterValue>
 							</Register>
 							<Register Address="0x00000034">
 								<Selector SelectorName="GevInterfaceSelector">0</Selector>
-								<RegisterValue>FF-FF-00-00</RegisterValue>
+								<RegisterValue>FF-FF-FF-00</RegisterValue>
 							</Register>
 							<Register Address="0x00000044">
 								<RegisterValue>00-00-00-00</RegisterValue>
@@ -3935,11 +4604,11 @@
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x20000000">
-								<RegisterValue>00-00-00-04</RegisterValue>
+								<RegisterValue>00-00-00-01</RegisterValue>
 							</Register>
 							<Register Address="0x20000000">
 								<Selector SelectorName="GevInterfaceSelector">0</Selector>
-								<RegisterValue>00-00-00-04</RegisterValue>
+								<RegisterValue>00-00-00-01</RegisterValue>
 							</Register>
 							<Register Address="0x00000200">
 								<RegisterValue>6C-6F-63-61</RegisterValue>
@@ -3969,13 +4638,13 @@
 								<RegisterValue>3B-36-30-30</RegisterValue>
 							</Register>
 							<Register Address="0x00000224">
-								<RegisterValue>31-34-35-36</RegisterValue>
+								<RegisterValue>31-34-36-36</RegisterValue>
 							</Register>
 							<Register Address="0x00000228">
-								<RegisterValue>30-3B-36-43</RegisterValue>
+								<RegisterValue>43-3B-36-43</RegisterValue>
 							</Register>
 							<Register Address="0x0000022C">
-								<RegisterValue>38-36-00-00</RegisterValue>
+								<RegisterValue>35-41-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x00000230">
 								<RegisterValue>00-00-00-00</RegisterValue>
@@ -4713,11 +5382,11 @@
 								<RegisterValue>00-00-00-01</RegisterValue>
 							</Register>
 							<Register Address="0x0000064C">
-								<RegisterValue>C0-A8-01-05</RegisterValue>
+								<RegisterValue>C0-A8-01-14</RegisterValue>
 							</Register>
 							<Register Address="0x0000064C">
 								<Selector SelectorName="GevInterfaceSelector">0</Selector>
-								<RegisterValue>C0-A8-01-05</RegisterValue>
+								<RegisterValue>C0-A8-01-14</RegisterValue>
 							</Register>
 							<Register Address="0x0000065C">
 								<RegisterValue>FF-FF-FF-00</RegisterValue>
@@ -4734,7 +5403,7 @@
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x07F80800">
-								<RegisterValue>C0-A8-01-05</RegisterValue>
+								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x08F80800">
 								<RegisterValue>FF-FF-00-00</RegisterValue>
@@ -4761,7 +5430,7 @@
 								<RegisterValue>00-00-00-01</RegisterValue>
 							</Register>
 							<Register Address="0x0000094C">
-								<RegisterValue>56-8A-98-F8</RegisterValue>
+								<RegisterValue>7A-5E-13-68</RegisterValue>
 							</Register>
 							<Register Address="0x00000950">
 								<RegisterValue>00-00-00-00</RegisterValue>
@@ -4782,12 +5451,8 @@
 							<Register Address="0x12200D08">
 								<RegisterValue>00-00-00-04</RegisterValue>
 							</Register>
-							<Register Address="0x31000410">
-								<RegisterValue>00-00-00-00</RegisterValue>
-							</Register>
-							<Register Address="0x31000410">
-								<Selector SelectorName="TriggerSelector">3</Selector>
-								<RegisterValue>00-00-00-00</RegisterValue>
+							<Register Address="0x30000008">
+								<RegisterValue>00-00-41-72</RegisterValue>
 							</Register>
 							<Register Address="0x31000110">
 								<RegisterValue>00-00-00-00</RegisterValue>
@@ -4801,6 +5466,14 @@
 							</Register>
 							<Register Address="0x3000001C">
 								<Selector SelectorName="BlackLevelSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000120">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000120">
+								<Selector SelectorName="LightController0ChannelSelector">0</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x3100010C">
@@ -4855,8 +5528,39 @@
 								<Selector SelectorName="CounterSelector">4</Selector>
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
-							<Register Address="0x32000000">
+							<Register Address="0x33000140">
 								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000140">
+								<Selector SelectorName="LightController0ChannelSelector">0</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000150">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000150">
+								<Selector SelectorName="LightController0ChannelSelector">0</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x41000100">
+								<RegisterValue>00-00-00-02</RegisterValue>
+							</Register>
+							<Register Address="0x41000200">
+								<RegisterValue>1F-4B-15-88</RegisterValue>
+							</Register>
+							<Register Address="0x41000110">
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x41000210">
+								<RegisterValue>7A-5E-13-68</RegisterValue>
+							</Register>
+							<Register Address="0x35000104">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x35000100">
+								<RegisterValue>00-00-4C-C2</RegisterValue>
 							</Register>
 							<Register Address="0x000000A8">
 								<RegisterValue>42-65-63-6B</RegisterValue>
@@ -4894,8 +5598,83 @@
 							<Register Address="0x000000D4">
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
+							<Register Address="0x00000934">
+								<RegisterValue>FB-C4-00-07</RegisterValue>
+							</Register>
 							<Register Address="0x00000958">
 								<RegisterValue>00-00-00-64</RegisterValue>
+							</Register>
+							<Register Address="0x33001000">
+								<RegisterValue>49-6E-66-72</RegisterValue>
+							</Register>
+							<Register Address="0x33001000">
+								<Selector SelectorName="LightController0ChannelSelector">0</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>49-6E-66-72</RegisterValue>
+							</Register>
+							<Register Address="0x33001004">
+								<RegisterValue>61-72-65-64</RegisterValue>
+							</Register>
+							<Register Address="0x33001004">
+								<Selector SelectorName="LightController0ChannelSelector">0</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>61-72-65-64</RegisterValue>
+							</Register>
+							<Register Address="0x33001008">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001008">
+								<Selector SelectorName="LightController0ChannelSelector">0</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300100C">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300100C">
+								<Selector SelectorName="LightController0ChannelSelector">0</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001010">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001010">
+								<Selector SelectorName="LightController0ChannelSelector">0</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001014">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001014">
+								<Selector SelectorName="LightController0ChannelSelector">0</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001018">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33001018">
+								<Selector SelectorName="LightController0ChannelSelector">0</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300101C">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300101C">
+								<Selector SelectorName="LightController0ChannelSelector">0</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000110">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000110">
+								<Selector SelectorName="LightController0ChannelSelector">0</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 						</RegisterValues>
 						<MetaData>
@@ -4943,6 +5722,21 @@
 							<Register Address="0x30010010">
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
+							<Register Address="0x30010800">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x10000300">
+								<RegisterValue>00-00-07-90</RegisterValue>
+							</Register>
+							<Register Address="0x10000500">
+								<RegisterValue>00-00-04-C0</RegisterValue>
+							</Register>
+							<Register Address="0x10000800">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x10000A00">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
 							<Register Address="0x3000005C">
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
@@ -4951,6 +5745,39 @@
 							</Register>
 							<Register Address="0x10000034">
 								<RegisterValue>01-08-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x30000408">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3000040C">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x30000410">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x30000414">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x30000418">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3000041C">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x30000420">
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x30000424">
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x30000428">
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x3000042C">
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x30000434">
+								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x10000040">
 								<RegisterValue>00-00-00-00</RegisterValue>
@@ -4965,13 +5792,13 @@
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x31000008">
-								<RegisterValue>00-00-00-00</RegisterValue>
+								<RegisterValue>00-00-00-03</RegisterValue>
 							</Register>
-							<Register Address="0x31000100">
+							<Register Address="0x31000400">
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x30000024">
-								<RegisterValue>00-00-C3-50</RegisterValue>
+								<RegisterValue>00-00-27-10</RegisterValue>
 							</Register>
 							<Register Address="0x30010040">
 								<RegisterValue>00-00-00-00</RegisterValue>
@@ -4997,6 +5824,19 @@
 							<Register Address="0x36000000">
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
+							<Register Address="0x33000000">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x32000000">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x32000010">
+								<RegisterValue>00-00-02-00</RegisterValue>
+							</Register>
+							<Register Address="0x32000010">
+								<Selector SelectorName="OpticControllerSelector">0</Selector>
+								<RegisterValue>00-00-02-00</RegisterValue>
+							</Register>
 							<Register Address="0x01F80800">
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
@@ -5010,7 +5850,7 @@
 								<RegisterValue>00-00-00-05</RegisterValue>
 							</Register>
 							<Register Address="0x0000064C">
-								<RegisterValue>C0-A8-01-04</RegisterValue>
+								<RegisterValue>C0-A8-01-14</RegisterValue>
 							</Register>
 							<Register Address="0x0000065C">
 								<RegisterValue>FF-FF-FF-00</RegisterValue>
@@ -5022,6 +5862,58 @@
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 							<Register Address="0x00000960">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33100000">
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x33100000">
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x33000010">
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x33000010">
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-01</RegisterValue>
+							</Register>
+							<Register Address="0x33000120">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000120">
+								<Selector SelectorName="LightController0ChannelSelector">0</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000128">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000128">
+								<Selector SelectorName="LightController0ChannelSelector">2</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000124">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x33000124">
+								<Selector SelectorName="LightController0ChannelSelector">1</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300012C">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x3300012C">
+								<Selector SelectorName="LightController0ChannelSelector">3</Selector>
+								<Selector SelectorName="LightControllerSelector">0</Selector>
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x31000408">
+								<RegisterValue>00-00-00-00</RegisterValue>
+							</Register>
+							<Register Address="0x31000410">
 								<RegisterValue>00-00-00-00</RegisterValue>
 							</Register>
 						</DesiredValues>
@@ -5045,7 +5937,7 @@
 								<pFeature>EtherCAT</pFeature>
 								<pFeature>TransportLayerControl</pFeature>
 							</Category>
-							<Port Name="Device">
+							<Port Name="Device" NameSpace="Standard">
 								<ToolTip>Access to GigE Vision device</ToolTip>
 							</Port>
 							<Group Comment="DeviceControl">
@@ -5907,7 +6799,7 @@
 									</EnumEntry>
 									<EnumEntry Name="OpticController">
 										<DisplayName>Optic Controller</DisplayName>
-										<pIsImplemented>OpticController0_IsAvailable</pIsImplemented>
+										<pIsImplemented>OpticController0_IsImplemented</pIsImplemented>
 										<pIsAvailable>OpticController0_IsAvailable</pIsAvailable>
 										<Value>3</Value>
 									</EnumEntry>
@@ -6166,13 +7058,33 @@
 									<pFeature>SensorShutterMode</pFeature>
 									<pFeature>WidthMax</pFeature>
 									<pFeature>HeightMax</pFeature>
+									<pFeature>MaxRegionsAvailable</pFeature>
 									<pFeature>RegionSelector</pFeature>
+									<pFeature>RegionMode</pFeature>
+									<pFeature>Width</pFeature>
+									<pFeature>Height</pFeature>
+									<pFeature>OffsetX</pFeature>
+									<pFeature>OffsetY</pFeature>
 									<pFeature>ReverseX</pFeature>
 									<pFeature>ReverseY</pFeature>
 									<pFeature>PixelFormat</pFeature>
 									<pFeature>PixelSize</pFeature>
 									<pFeature>PixelColorFilter</pFeature>
 									<pFeature>TestPatternGeneratorSelector</pFeature>
+									<pFeature>TestPattern</pFeature>
+									<pFeature>TestPatternDescription</pFeature>
+									<pFeature>TestPatternMode</pFeature>
+									<pFeature>TestPatternParameter1</pFeature>
+									<pFeature>TestPatternParameter2</pFeature>
+									<pFeature>TestPatternHorizontalPosition</pFeature>
+									<pFeature>TestPatternVerticalPosition</pFeature>
+									<pFeature>TestPatternHorizontalStepSize</pFeature>
+									<pFeature>TestPatternVerticalStepSize</pFeature>
+									<pFeature>TestPatternHorizontalNum</pFeature>
+									<pFeature>TestPatternVerticalNum</pFeature>
+									<pFeature>TestPatternColorWidth</pFeature>
+									<pFeature>TestPatternBackGround</pFeature>
+									<pFeature>TestPatternGradientStep</pFeature>
 									<pFeature>SensorColor</pFeature>
 									<pFeature>SensorPolarization</pFeature>
 									<pFeature>SensorHorizontalDriveMode</pFeature>
@@ -6214,51 +7126,7 @@
 									<DisplayName>Regions Available</DisplayName>
 									<Visibility>Invisible</Visibility>
 									<ImposedAccessMode>RO</ImposedAccessMode>
-									<pValue>pRegionsAvailableReg</pValue>
-								</Integer>
-								<Integer Name="Width" NameSpace="Standard">
-									<ToolTip>ROI Width</ToolTip>
-									<Description>Width of the image region of interest (must be an even value)</Description>
-									<DisplayName>Width</DisplayName>
-									<pIsLocked>TLParamsLocked</pIsLocked>
-									<pValue>pRegion0WidthReg</pValue>
-									<pMin>pRegion0MinWidthReg</pMin>
-									<pMax>pRegion0MaxWidthReg</pMax>
-									<pInc>pRegion0IncWidthReg</pInc>
-									<Representation>Linear</Representation>
-								</Integer>
-								<Integer Name="Height" NameSpace="Standard">
-									<ToolTip>ROI Height</ToolTip>
-									<Description>Height of the image region of interest</Description>
-									<DisplayName>Height</DisplayName>
-									<pIsLocked>TLParamsLocked</pIsLocked>
-									<pValue>pRegion0HeightReg</pValue>
-									<pMin>pRegion0MinHeightReg</pMin>
-									<pMax>pRegion0MaxHeightReg</pMax>
-									<pInc>pRegion0IncHeightReg</pInc>
-									<Representation>Linear</Representation>
-								</Integer>
-								<Integer Name="OffsetX" NameSpace="Standard">
-									<ToolTip>Horizontal offset from origin to the region of interest</ToolTip>
-									<Description>Horizontal offset from the origin to the region of interest (in pixels).</Description>
-									<DisplayName>Offset X</DisplayName>
-									<pIsLocked>TLParamsLocked</pIsLocked>
-									<pValue>pRegion0OffsetXReg</pValue>
-									<pMin>pRegion0MinOffsetXReg</pMin>
-									<pMax>pRegion0MaxOffsetXReg</pMax>
-									<pInc>pRegion0IncOffsetXReg</pInc>
-									<Representation>Linear</Representation>
-								</Integer>
-								<Integer Name="OffsetY" NameSpace="Standard">
-									<ToolTip>Top coordinate of region of interest</ToolTip>
-									<Description>Vertical offset in lines of the uppermost pixel relative to the active sensor area.</Description>
-									<DisplayName>Offset Y</DisplayName>
-									<pIsLocked>TLParamsLocked</pIsLocked>
-									<pValue>pRegion0OffsetYReg</pValue>
-									<pMin>pRegion0MinOffsetYReg</pMin>
-									<pMax>pRegion0MaxOffsetYReg</pMax>
-									<pInc>pRegion0IncOffsetYReg</pInc>
-									<Representation>Linear</Representation>
+									<pValue>pRegionsPresentReg</pValue>
 								</Integer>
 								<Integer Name="TestPatternParameter1">
 									<ToolTip>First parameter of test pattern</ToolTip>
@@ -6342,6 +7210,50 @@
 									<pMax>TestPatternColorWidth_Max</pMax>
 									<Representation>Linear</Representation>
 								</Integer>
+								<Integer Name="Width" NameSpace="Standard">
+									<ToolTip>ROI Width</ToolTip>
+									<Description>Width of the image region of interest (must be an even value)</Description>
+									<DisplayName>Width</DisplayName>
+									<pIsLocked>TLParamsLocked</pIsLocked>
+									<pValue>pRegion0WidthReg</pValue>
+									<pMin>pRegion0MinWidthReg</pMin>
+									<pMax>pRegion0MaxWidthReg</pMax>
+									<pInc>pRegion0IncWidthReg</pInc>
+									<Representation>Linear</Representation>
+								</Integer>
+								<Integer Name="Height" NameSpace="Standard">
+									<ToolTip>ROI Height</ToolTip>
+									<Description>Height of the image region of interest</Description>
+									<DisplayName>Height</DisplayName>
+									<pIsLocked>TLParamsLocked</pIsLocked>
+									<pValue>pRegion0HeightReg</pValue>
+									<pMin>pRegion0MinHeightReg</pMin>
+									<pMax>pRegion0MaxHeightReg</pMax>
+									<pInc>pRegion0IncHeightReg</pInc>
+									<Representation>Linear</Representation>
+								</Integer>
+								<Integer Name="OffsetX" NameSpace="Standard">
+									<ToolTip>Horizontal offset from origin to the region of interest</ToolTip>
+									<Description>Horizontal offset from the origin to the region of interest (in pixels).</Description>
+									<DisplayName>Offset X</DisplayName>
+									<pIsLocked>TLParamsLocked</pIsLocked>
+									<pValue>pRegion0OffsetXReg</pValue>
+									<pMin>pRegion0MinOffsetXReg</pMin>
+									<pMax>pRegion0MaxOffsetXReg</pMax>
+									<pInc>pRegion0IncOffsetXReg</pInc>
+									<Representation>Linear</Representation>
+								</Integer>
+								<Integer Name="OffsetY" NameSpace="Standard">
+									<ToolTip>Top coordinate of region of interest</ToolTip>
+									<Description>Vertical offset in lines of the uppermost pixel relative to the active sensor area.</Description>
+									<DisplayName>Offset Y</DisplayName>
+									<pIsLocked>TLParamsLocked</pIsLocked>
+									<pValue>pRegion0OffsetYReg</pValue>
+									<pMin>pRegion0MinOffsetYReg</pMin>
+									<pMax>pRegion0MaxOffsetYReg</pMax>
+									<pInc>pRegion0IncOffsetYReg</pInc>
+									<Representation>Linear</Representation>
+								</Integer>
 								<IntReg Name="pPhysicalWidthReg">
 									<ToolTip>Physical Width register</ToolTip>
 									<Address>0x10000008</Address>
@@ -6382,8 +7294,8 @@
 									<pPort>Device</pPort>
 									<Endianess>BigEndian</Endianess>
 								</IntReg>
-								<IntReg Name="pRegionsAvailableReg">
-									<Description>Maximum regions of interest available.</Description>
+								<IntReg Name="pRegionsPresentReg">
+									<Description>Maximum regions of interest present.</Description>
 									<Address>0x30010000</Address>
 									<Length>4</Length>
 									<AccessMode>RO</AccessMode>
@@ -6420,6 +7332,244 @@
 									<Length>4</Length>
 									<AccessMode>RO</AccessMode>
 									<pPort>Device</pPort>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pHorizontalBinningReg">
+									<ToolTip>Horizontal binning register</ToolTip>
+									<Address>0x31001030</Address>
+									<Length>4</Length>
+									<AccessMode>RO</AccessMode>
+									<pPort>Device</pPort>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pVerticalBinningReg">
+									<ToolTip>Vertical binning register</ToolTip>
+									<Address>0x31001034</Address>
+									<Length>4</Length>
+									<AccessMode>RO</AccessMode>
+									<pPort>Device</pPort>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pReverseXReg">
+									<Streamable>Yes</Streamable>
+									<Address>0x3000005C</Address>
+									<Length>4</Length>
+									<AccessMode>RW</AccessMode>
+									<pPort>Device</pPort>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pReverseYReg">
+									<Streamable>Yes</Streamable>
+									<Address>0x30000060</Address>
+									<Length>4</Length>
+									<AccessMode>RW</AccessMode>
+									<pPort>Device</pPort>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pPixelFormatReg">
+									<ToolTip>Pixel Format register</ToolTip>
+									<Address>0x10000034</Address>
+									<Length>4</Length>
+									<AccessMode>RW</AccessMode>
+									<pPort>Device</pPort>
+									<pInvalidator>UserSetLoad</pInvalidator>
+									<pInvalidator>ReverseX</pInvalidator>
+									<pInvalidator>ReverseY</pInvalidator>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pPixelSizeReg">
+									<ToolTip>Pixel Size register</ToolTip>
+									<Address>0x30000038</Address>
+									<Length>4</Length>
+									<AccessMode>RO</AccessMode>
+									<pPort>Device</pPort>
+									<pInvalidator>PixelFormat</pInvalidator>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pPixelColorFilterReg">
+									<ToolTip>Pixel Color Filter register</ToolTip>
+									<Address>0x30000064</Address>
+									<Length>4</Length>
+									<AccessMode>RO</AccessMode>
+									<pPort>Device</pPort>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pTestPatternGeneratorSelectorReg">
+									<ToolTip>Test Pattern Generator Selector register</ToolTip>
+									<Address>0x30000400</Address>
+									<Length>4</Length>
+									<AccessMode>RO</AccessMode>
+									<pPort>Device</pPort>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pTestPatternCountReg">
+									<ToolTip>Test Pattern Count register</ToolTip>
+									<Address>0x30000404</Address>
+									<Length>4</Length>
+									<AccessMode>RO</AccessMode>
+									<pPort>Device</pPort>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pTestPatternReg">
+									<ToolTip>Test Pattern register</ToolTip>
+									<Address>0x30000408</Address>
+									<Length>4</Length>
+									<AccessMode>RW</AccessMode>
+									<pPort>Device</pPort>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pTestPatternModeReg">
+									<ToolTip>Test Pattern Mode register</ToolTip>
+									<Address>0x3000040C</Address>
+									<Length>4</Length>
+									<AccessMode>RW</AccessMode>
+									<pPort>Device</pPort>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pTestPatternParameter1Reg">
+									<ToolTip>Test Pattern Parameter1 register</ToolTip>
+									<pIsAvailable>TestPatternParameter1_Available</pIsAvailable>
+									<Address>0x30000410</Address>
+									<Length>4</Length>
+									<AccessMode>RW</AccessMode>
+									<pPort>Device</pPort>
+									<pInvalidator>pTestPatternReg</pInvalidator>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pTestPatternParameter2Reg">
+									<ToolTip>Test Pattern Parameter2 register</ToolTip>
+									<pIsAvailable>TestPatternParameter2_Available</pIsAvailable>
+									<Address>0x30000414</Address>
+									<Length>4</Length>
+									<AccessMode>RW</AccessMode>
+									<pPort>Device</pPort>
+									<pInvalidator>pTestPatternReg</pInvalidator>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pTestPatternHorizontalPositionReg">
+									<ToolTip>Test Pattern Horizontal Position register</ToolTip>
+									<pIsAvailable>TestPatternHorizontalPosition_Available</pIsAvailable>
+									<Address>0x30000418</Address>
+									<Length>4</Length>
+									<AccessMode>RW</AccessMode>
+									<pPort>Device</pPort>
+									<pInvalidator>pTestPatternReg</pInvalidator>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pTestPatternVerticalPositionReg">
+									<ToolTip>Test Pattern Vertical Position register</ToolTip>
+									<pIsAvailable>TestPatternVerticalPosition_Available</pIsAvailable>
+									<Address>0x3000041C</Address>
+									<Length>4</Length>
+									<AccessMode>RW</AccessMode>
+									<pPort>Device</pPort>
+									<pInvalidator>pTestPatternReg</pInvalidator>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pTestPatternHorizontalStepSizeReg">
+									<ToolTip>Test Pattern Horizontal Position register</ToolTip>
+									<Address>0x30000420</Address>
+									<Length>4</Length>
+									<AccessMode>RW</AccessMode>
+									<pPort>Device</pPort>
+									<pInvalidator>pTestPatternReg</pInvalidator>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pTestPatternVerticalStepSizeReg">
+									<ToolTip>Test Pattern Vertical Position register</ToolTip>
+									<Address>0x30000424</Address>
+									<Length>4</Length>
+									<AccessMode>RW</AccessMode>
+									<pPort>Device</pPort>
+									<pInvalidator>pTestPatternReg</pInvalidator>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pTestPatternHorizontalNumReg">
+									<ToolTip>Test Pattern Horizontal Number register</ToolTip>
+									<Address>0x30000428</Address>
+									<Length>4</Length>
+									<AccessMode>RW</AccessMode>
+									<pPort>Device</pPort>
+									<pInvalidator>pTestPatternReg</pInvalidator>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pTestPatternVerticalNumReg">
+									<ToolTip>Test Pattern Vertical Number register</ToolTip>
+									<Address>0x3000042C</Address>
+									<Length>4</Length>
+									<AccessMode>RW</AccessMode>
+									<pPort>Device</pPort>
+									<pInvalidator>pTestPatternReg</pInvalidator>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pTestPatternColorWidthReg">
+									<ToolTip>Test Pattern Color Width register</ToolTip>
+									<Address>0x30000430</Address>
+									<Length>4</Length>
+									<AccessMode>RW</AccessMode>
+									<pPort>Device</pPort>
+									<pInvalidator>pTestPatternReg</pInvalidator>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pTestPatternBackGroundReg">
+									<ToolTip>Test Pattern Back Ground register</ToolTip>
+									<Address>0x30000434</Address>
+									<Length>4</Length>
+									<AccessMode>RW</AccessMode>
+									<pPort>Device</pPort>
+									<pInvalidator>pTestPatternReg</pInvalidator>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pTestPatternGradientStepReg">
+									<ToolTip>Test Pattern Gradient Step register</ToolTip>
+									<Address>0x30000438</Address>
+									<Length>4</Length>
+									<AccessMode>RW</AccessMode>
+									<pPort>Device</pPort>
+									<pInvalidator>pTestPatternReg</pInvalidator>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pTestPatternParameterMaskReg">
+									<ToolTip>Test Pattern Parameter Mask register</ToolTip>
+									<Address>0x30000440</Address>
+									<Length>4</Length>
+									<AccessMode>RO</AccessMode>
+									<pPort>Device</pPort>
+									<pInvalidator>pTestPatternReg</pInvalidator>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pSensorColorReg">
+									<Description>True, if a color sensor has been detected.</Description>
+									<Address>0x10000048</Address>
+									<Length>4</Length>
+									<AccessMode>RO</AccessMode>
+									<pPort>Device</pPort>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pSensorPolarizationReg">
+									<Description>True, if a polarization sensor has been detected.</Description>
+									<Address>0x1000004C</Address>
+									<Length>4</Length>
+									<AccessMode>RO</AccessMode>
+									<pPort>Device</pPort>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pSensorHorizontalDriveModeReg">
+									<ToolTip>Horizontal Drive Mode of the sensor</ToolTip>
+									<Address>0x11000010</Address>
+									<Length>4</Length>
+									<AccessMode>RO</AccessMode>
+									<pPort>Device</pPort>
+									<pInvalidator>RegionMode</pInvalidator>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pSensorVerticalDriveModeReg">
+									<ToolTip>Vertical Drive Mode of the sensor</ToolTip>
+									<Address>0x11000014</Address>
+									<Length>4</Length>
+									<AccessMode>RO</AccessMode>
+									<pPort>Device</pPort>
+									<pInvalidator>RegionMode</pInvalidator>
 									<Endianess>BigEndian</Endianess>
 								</IntReg>
 								<IntReg Name="pRegionSelectorReg">
@@ -7615,244 +8765,6 @@
 									<pPort>Device</pPort>
 									<Endianess>BigEndian</Endianess>
 								</IntReg>
-								<IntReg Name="pHorizontalBinningReg">
-									<ToolTip>Horizontal binning register</ToolTip>
-									<Address>0x31001030</Address>
-									<Length>4</Length>
-									<AccessMode>RO</AccessMode>
-									<pPort>Device</pPort>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
-								<IntReg Name="pVerticalBinningReg">
-									<ToolTip>Vertical binning register</ToolTip>
-									<Address>0x31001034</Address>
-									<Length>4</Length>
-									<AccessMode>RO</AccessMode>
-									<pPort>Device</pPort>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
-								<IntReg Name="pReverseXReg">
-									<Streamable>Yes</Streamable>
-									<Address>0x3000005C</Address>
-									<Length>4</Length>
-									<AccessMode>RW</AccessMode>
-									<pPort>Device</pPort>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
-								<IntReg Name="pReverseYReg">
-									<Streamable>Yes</Streamable>
-									<Address>0x30000060</Address>
-									<Length>4</Length>
-									<AccessMode>RW</AccessMode>
-									<pPort>Device</pPort>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
-								<IntReg Name="pPixelFormatReg">
-									<ToolTip>Pixel Format register</ToolTip>
-									<Address>0x10000034</Address>
-									<Length>4</Length>
-									<AccessMode>RW</AccessMode>
-									<pPort>Device</pPort>
-									<pInvalidator>UserSetLoad</pInvalidator>
-									<pInvalidator>ReverseX</pInvalidator>
-									<pInvalidator>ReverseY</pInvalidator>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
-								<IntReg Name="pPixelSizeReg">
-									<ToolTip>Pixel Size register</ToolTip>
-									<Address>0x30000038</Address>
-									<Length>4</Length>
-									<AccessMode>RO</AccessMode>
-									<pPort>Device</pPort>
-									<pInvalidator>PixelFormat</pInvalidator>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
-								<IntReg Name="pPixelColorFilterReg">
-									<ToolTip>Pixel Color Filter register</ToolTip>
-									<Address>0x30000064</Address>
-									<Length>4</Length>
-									<AccessMode>RO</AccessMode>
-									<pPort>Device</pPort>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
-								<IntReg Name="pTestPatternGeneratorSelectorReg">
-									<ToolTip>Test Pattern Generator Selector register</ToolTip>
-									<Address>0x30000400</Address>
-									<Length>4</Length>
-									<AccessMode>RO</AccessMode>
-									<pPort>Device</pPort>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
-								<IntReg Name="pTestPatternCountReg">
-									<ToolTip>Test Pattern Count register</ToolTip>
-									<Address>0x30000404</Address>
-									<Length>4</Length>
-									<AccessMode>RO</AccessMode>
-									<pPort>Device</pPort>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
-								<IntReg Name="pTestPatternReg">
-									<ToolTip>Test Pattern register</ToolTip>
-									<Address>0x30000408</Address>
-									<Length>4</Length>
-									<AccessMode>RW</AccessMode>
-									<pPort>Device</pPort>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
-								<IntReg Name="pTestPatternModeReg">
-									<ToolTip>Test Pattern Mode register</ToolTip>
-									<Address>0x3000040C</Address>
-									<Length>4</Length>
-									<AccessMode>RW</AccessMode>
-									<pPort>Device</pPort>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
-								<IntReg Name="pTestPatternParameter1Reg">
-									<ToolTip>Test Pattern Parameter1 register</ToolTip>
-									<pIsAvailable>TestPatternParameter1_Available</pIsAvailable>
-									<Address>0x30000410</Address>
-									<Length>4</Length>
-									<AccessMode>RW</AccessMode>
-									<pPort>Device</pPort>
-									<pInvalidator>pTestPatternReg</pInvalidator>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
-								<IntReg Name="pTestPatternParameter2Reg">
-									<ToolTip>Test Pattern Parameter2 register</ToolTip>
-									<pIsAvailable>TestPatternParameter2_Available</pIsAvailable>
-									<Address>0x30000414</Address>
-									<Length>4</Length>
-									<AccessMode>RW</AccessMode>
-									<pPort>Device</pPort>
-									<pInvalidator>pTestPatternReg</pInvalidator>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
-								<IntReg Name="pTestPatternHorizontalPositionReg">
-									<ToolTip>Test Pattern Horizontal Position register</ToolTip>
-									<pIsAvailable>TestPatternHorizontalPosition_Available</pIsAvailable>
-									<Address>0x30000418</Address>
-									<Length>4</Length>
-									<AccessMode>RW</AccessMode>
-									<pPort>Device</pPort>
-									<pInvalidator>pTestPatternReg</pInvalidator>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
-								<IntReg Name="pTestPatternVerticalPositionReg">
-									<ToolTip>Test Pattern Vertical Position register</ToolTip>
-									<pIsAvailable>TestPatternVerticalPosition_Available</pIsAvailable>
-									<Address>0x3000041C</Address>
-									<Length>4</Length>
-									<AccessMode>RW</AccessMode>
-									<pPort>Device</pPort>
-									<pInvalidator>pTestPatternReg</pInvalidator>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
-								<IntReg Name="pTestPatternHorizontalStepSizeReg">
-									<ToolTip>Test Pattern Horizontal Position register</ToolTip>
-									<Address>0x30000420</Address>
-									<Length>4</Length>
-									<AccessMode>RW</AccessMode>
-									<pPort>Device</pPort>
-									<pInvalidator>pTestPatternReg</pInvalidator>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
-								<IntReg Name="pTestPatternVerticalStepSizeReg">
-									<ToolTip>Test Pattern Vertical Position register</ToolTip>
-									<Address>0x30000424</Address>
-									<Length>4</Length>
-									<AccessMode>RW</AccessMode>
-									<pPort>Device</pPort>
-									<pInvalidator>pTestPatternReg</pInvalidator>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
-								<IntReg Name="pTestPatternHorizontalNumReg">
-									<ToolTip>Test Pattern Horizontal Number register</ToolTip>
-									<Address>0x30000428</Address>
-									<Length>4</Length>
-									<AccessMode>RW</AccessMode>
-									<pPort>Device</pPort>
-									<pInvalidator>pTestPatternReg</pInvalidator>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
-								<IntReg Name="pTestPatternVerticalNumReg">
-									<ToolTip>Test Pattern Vertical Number register</ToolTip>
-									<Address>0x3000042C</Address>
-									<Length>4</Length>
-									<AccessMode>RW</AccessMode>
-									<pPort>Device</pPort>
-									<pInvalidator>pTestPatternReg</pInvalidator>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
-								<IntReg Name="pTestPatternColorWidthReg">
-									<ToolTip>Test Pattern Color Width register</ToolTip>
-									<Address>0x30000430</Address>
-									<Length>4</Length>
-									<AccessMode>RW</AccessMode>
-									<pPort>Device</pPort>
-									<pInvalidator>pTestPatternReg</pInvalidator>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
-								<IntReg Name="pTestPatternBackGroundReg">
-									<ToolTip>Test Pattern Back Ground register</ToolTip>
-									<Address>0x30000434</Address>
-									<Length>4</Length>
-									<AccessMode>RW</AccessMode>
-									<pPort>Device</pPort>
-									<pInvalidator>pTestPatternReg</pInvalidator>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
-								<IntReg Name="pTestPatternGradientStepReg">
-									<ToolTip>Test Pattern Gradient Step register</ToolTip>
-									<Address>0x30000438</Address>
-									<Length>4</Length>
-									<AccessMode>RW</AccessMode>
-									<pPort>Device</pPort>
-									<pInvalidator>pTestPatternReg</pInvalidator>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
-								<IntReg Name="pTestPatternParameterMaskReg">
-									<ToolTip>Test Pattern Parameter Mask register</ToolTip>
-									<Address>0x30000440</Address>
-									<Length>4</Length>
-									<AccessMode>RO</AccessMode>
-									<pPort>Device</pPort>
-									<pInvalidator>pTestPatternReg</pInvalidator>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
-								<IntReg Name="pSensorColorReg">
-									<Description>True, if a color sensor has been detected.</Description>
-									<Address>0x10000048</Address>
-									<Length>4</Length>
-									<AccessMode>RO</AccessMode>
-									<pPort>Device</pPort>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
-								<IntReg Name="pSensorPolarizationReg">
-									<Description>True, if a polarization sensor has been detected.</Description>
-									<Address>0x1000004C</Address>
-									<Length>4</Length>
-									<AccessMode>RO</AccessMode>
-									<pPort>Device</pPort>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
-								<IntReg Name="pSensorHorizontalDriveModeReg">
-									<ToolTip>Horizontal Drive Mode of the sensor</ToolTip>
-									<Address>0x11000010</Address>
-									<Length>4</Length>
-									<AccessMode>RO</AccessMode>
-									<pPort>Device</pPort>
-									<pInvalidator>RegionMode</pInvalidator>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
-								<IntReg Name="pSensorVerticalDriveModeReg">
-									<ToolTip>Vertical Drive Mode of the sensor</ToolTip>
-									<Address>0x11000014</Address>
-									<Length>4</Length>
-									<AccessMode>RO</AccessMode>
-									<pPort>Device</pPort>
-									<pInvalidator>RegionMode</pInvalidator>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
 								<Boolean Name="ReverseX">
 									<ToolTip>Flips the image horizontally</ToolTip>
 									<Description>Flips the image horizontally.</Description>
@@ -7906,81 +8818,6 @@
 										<Value>2</Value>
 									</EnumEntry>
 									<pValue>pSensorShutterModeReg</pValue>
-								</Enumeration>
-								<Enumeration Name="RegionSelector" NameSpace="Standard">
-									<ToolTip>ROI to control</ToolTip>
-									<Description>Selects the Region of interest to control. The RegionSelector feature allows devices that are able to extract multiple regions out of an image, to configure the features of those individual regions independently.</Description>
-									<DisplayName>Region Selector</DisplayName>
-									<pIsLocked>TLParamsLocked</pIsLocked>
-									<EnumEntry Name="Region0" NameSpace="Standard">
-										<DisplayName>Region 0</DisplayName>
-										<pIsImplemented>pRoiAvailable</pIsImplemented>
-										<pIsAvailable>pRoiAvailable</pIsAvailable>
-										<Value>0</Value>
-									</EnumEntry>
-									<EnumEntry Name="Region1" NameSpace="Standard">
-										<DisplayName>Region 1</DisplayName>
-										<pIsImplemented>pRoi2Available</pIsImplemented>
-										<pIsAvailable>pRoi2Available</pIsAvailable>
-										<Value>1</Value>
-									</EnumEntry>
-									<EnumEntry Name="Region2" NameSpace="Standard">
-										<DisplayName>Region 2</DisplayName>
-										<pIsImplemented>pRoi4Available</pIsImplemented>
-										<pIsAvailable>pRoi4Available</pIsAvailable>
-										<Value>2</Value>
-									</EnumEntry>
-									<EnumEntry Name="Region3" NameSpace="Standard">
-										<DisplayName>Region 3</DisplayName>
-										<pIsImplemented>pRoi4Available</pIsImplemented>
-										<pIsAvailable>pRoi4Available</pIsAvailable>
-										<Value>3</Value>
-									</EnumEntry>
-									<EnumEntry Name="Region4" NameSpace="Standard">
-										<DisplayName>Region 4</DisplayName>
-										<pIsImplemented>pRoi8Available</pIsImplemented>
-										<pIsAvailable>pRoi8Available</pIsAvailable>
-										<Value>4</Value>
-									</EnumEntry>
-									<EnumEntry Name="Region5" NameSpace="Standard">
-										<DisplayName>Region 5</DisplayName>
-										<pIsImplemented>pRoi8Available</pIsImplemented>
-										<pIsAvailable>pRoi8Available</pIsAvailable>
-										<Value>5</Value>
-									</EnumEntry>
-									<EnumEntry Name="Region6" NameSpace="Standard">
-										<DisplayName>Region 6</DisplayName>
-										<pIsImplemented>pRoi8Available</pIsImplemented>
-										<pIsAvailable>pRoi8Available</pIsAvailable>
-										<Value>6</Value>
-									</EnumEntry>
-									<EnumEntry Name="Region7" NameSpace="Standard">
-										<DisplayName>Region 7</DisplayName>
-										<pIsImplemented>pRoi8Available</pIsImplemented>
-										<pIsAvailable>pRoi8Available</pIsAvailable>
-										<Value>7</Value>
-									</EnumEntry>
-									<pValue>pRegionSelectorReg</pValue>
-									<pSelected>RegionMode</pSelected>
-									<pSelected>Width</pSelected>
-									<pSelected>Height</pSelected>
-									<pSelected>OffsetX</pSelected>
-									<pSelected>OffsetY</pSelected>
-								</Enumeration>
-								<Enumeration Name="RegionMode" NameSpace="Standard">
-									<ToolTip>ROI on or off</ToolTip>
-									<Description>Controls if the selected Region of interest is active and streaming.</Description>
-									<DisplayName>Region Mode</DisplayName>
-									<pIsLocked>TLParamsLocked</pIsLocked>
-									<EnumEntry Name="Off">
-										<DisplayName>Off</DisplayName>
-										<Value>0</Value>
-									</EnumEntry>
-									<EnumEntry Name="On">
-										<DisplayName>On</DisplayName>
-										<Value>1</Value>
-									</EnumEntry>
-									<pValue>pRegionModeReg</pValue>
 								</Enumeration>
 								<Enumeration Name="PixelFormat" NameSpace="Standard">
 									<ToolTip>Pixel format of the image pixels</ToolTip>
@@ -8195,7 +9032,6 @@
 									<Description>Selects the type of test pattern that is generated by the device as image source.</Description>
 									<DisplayName>Test Pattern</DisplayName>
 									<EnumEntry Name="TestPattern0">
-										<DisplayName>Test Pattern 0</DisplayName>
 										<pIsImplemented>TestPattern0_IsAvailable</pIsImplemented>
 										<Value>0</Value>
 									</EnumEntry>
@@ -8362,6 +9198,81 @@
 									</EnumEntry>
 									<pValue>pSensorVerticalDriveModeReg</pValue>
 								</Enumeration>
+								<Enumeration Name="RegionSelector" NameSpace="Standard">
+									<ToolTip>ROI to control</ToolTip>
+									<Description>Selects the Region of interest to control. The RegionSelector feature allows devices that are able to extract multiple regions out of an image, to configure the features of those individual regions independently.</Description>
+									<DisplayName>Region Selector</DisplayName>
+									<pIsLocked>TLParamsLocked</pIsLocked>
+									<EnumEntry Name="Region0" NameSpace="Standard">
+										<DisplayName>Region 0</DisplayName>
+										<pIsImplemented>pRoiImplemented</pIsImplemented>
+										<pIsAvailable>pRoiImplemented</pIsAvailable>
+										<Value>0</Value>
+									</EnumEntry>
+									<EnumEntry Name="Region1" NameSpace="Standard">
+										<DisplayName>Region 1</DisplayName>
+										<pIsImplemented>pRoi2Implemented</pIsImplemented>
+										<pIsAvailable>pRoi2Implemented</pIsAvailable>
+										<Value>1</Value>
+									</EnumEntry>
+									<EnumEntry Name="Region2" NameSpace="Standard">
+										<DisplayName>Region 2</DisplayName>
+										<pIsImplemented>pRoi4Implemented</pIsImplemented>
+										<pIsAvailable>pRoi4Implemented</pIsAvailable>
+										<Value>2</Value>
+									</EnumEntry>
+									<EnumEntry Name="Region3" NameSpace="Standard">
+										<DisplayName>Region 3</DisplayName>
+										<pIsImplemented>pRoi4Implemented</pIsImplemented>
+										<pIsAvailable>pRoi4Implemented</pIsAvailable>
+										<Value>3</Value>
+									</EnumEntry>
+									<EnumEntry Name="Region4" NameSpace="Standard">
+										<DisplayName>Region 4</DisplayName>
+										<pIsImplemented>pRoi8Implemented</pIsImplemented>
+										<pIsAvailable>pRoi8Implemented</pIsAvailable>
+										<Value>4</Value>
+									</EnumEntry>
+									<EnumEntry Name="Region5" NameSpace="Standard">
+										<DisplayName>Region 5</DisplayName>
+										<pIsImplemented>pRoi8Implemented</pIsImplemented>
+										<pIsAvailable>pRoi8Implemented</pIsAvailable>
+										<Value>5</Value>
+									</EnumEntry>
+									<EnumEntry Name="Region6" NameSpace="Standard">
+										<DisplayName>Region 6</DisplayName>
+										<pIsImplemented>pRoi8Implemented</pIsImplemented>
+										<pIsAvailable>pRoi8Implemented</pIsAvailable>
+										<Value>6</Value>
+									</EnumEntry>
+									<EnumEntry Name="Region7" NameSpace="Standard">
+										<DisplayName>Region 7</DisplayName>
+										<pIsImplemented>pRoi8Implemented</pIsImplemented>
+										<pIsAvailable>pRoi8Implemented</pIsAvailable>
+										<Value>7</Value>
+									</EnumEntry>
+									<pValue>pRegionSelectorReg</pValue>
+									<pSelected>RegionMode</pSelected>
+									<pSelected>Width</pSelected>
+									<pSelected>Height</pSelected>
+									<pSelected>OffsetX</pSelected>
+									<pSelected>OffsetY</pSelected>
+								</Enumeration>
+								<Enumeration Name="RegionMode" NameSpace="Standard">
+									<ToolTip>ROI on or off</ToolTip>
+									<Description>Controls if the selected Region of interest is active and streaming.</Description>
+									<DisplayName>Region Mode</DisplayName>
+									<pIsLocked>TLParamsLocked</pIsLocked>
+									<EnumEntry Name="Off">
+										<DisplayName>Off</DisplayName>
+										<Value>0</Value>
+									</EnumEntry>
+									<EnumEntry Name="On">
+										<DisplayName>On</DisplayName>
+										<Value>1</Value>
+									</EnumEntry>
+									<pValue>pRegionModeReg</pValue>
+								</Enumeration>
 								<Float Name="SensorPixelWidth" NameSpace="Standard">
 									<Description>Physical size (pitch) in the x direction of a photo sensitive pixel unit.</Description>
 									<DisplayName>Sensor Pixel Width</DisplayName>
@@ -8420,29 +9331,21 @@
 									<pVariable Name="BINNING">pVerticalBinningReg</pVariable>
 									<Formula>HEIGHT / BINNING</Formula>
 								</IntSwissKnife>
-								<IntSwissKnife Name="pRoiAvailable">
-									<pVariable Name="MAXROIS">pRegionsAvailableReg</pVariable>
+								<IntSwissKnife Name="pRoiImplemented">
+									<pVariable Name="MAXROIS">pRegionsPresentReg</pVariable>
 									<Formula>MAXROIS &amp;gt; 0</Formula>
 								</IntSwissKnife>
-								<IntSwissKnife Name="pRoi2Available">
-									<pVariable Name="MAXROIS">pRegionsAvailableReg</pVariable>
+								<IntSwissKnife Name="pRoi2Implemented">
+									<pVariable Name="MAXROIS">pRegionsPresentReg</pVariable>
 									<Formula>MAXROIS &amp;gt; 1</Formula>
 								</IntSwissKnife>
-								<IntSwissKnife Name="pRoi4Available">
-									<pVariable Name="MAXROIS">pRegionsAvailableReg</pVariable>
+								<IntSwissKnife Name="pRoi4Implemented">
+									<pVariable Name="MAXROIS">pRegionsPresentReg</pVariable>
 									<Formula>MAXROIS &amp;gt;= 4</Formula>
 								</IntSwissKnife>
-								<IntSwissKnife Name="pRoi8Available">
-									<pVariable Name="MAXROIS">pRegionsAvailableReg</pVariable>
+								<IntSwissKnife Name="pRoi8Implemented">
+									<pVariable Name="MAXROIS">pRegionsPresentReg</pVariable>
 									<Formula>MAXROIS &amp;gt;= 8</Formula>
-								</IntSwissKnife>
-								<IntSwissKnife Name="pRegionMode_Reg">
-									<pVariable Name="REGION_INDEX">pRegionSelectorReg</pVariable>
-									<Formula>4 * REGION_INDEX</Formula>
-								</IntSwissKnife>
-								<IntSwissKnife Name="pRegionOffset_Reg">
-									<pVariable Name="REGION_INDEX">pRegionSelectorReg</pVariable>
-									<Formula>4 * REGION_INDEX</Formula>
 								</IntSwissKnife>
 								<IntSwissKnife Name="PixelFormatColor_IsAvailable">
 									<Visibility>Invisible</Visibility>
@@ -8606,6 +9509,14 @@
 									<pVariable Name="PATTERNMASK">pTestPatternParameterMaskReg</pVariable>
 									<Formula>(PATTERNMASK &gt;&gt; 10) &amp; 0x01</Formula>
 								</IntSwissKnife>
+								<IntSwissKnife Name="pRegionMode_Reg">
+									<pVariable Name="REGION_INDEX">pRegionSelectorReg</pVariable>
+									<Formula>4 * REGION_INDEX</Formula>
+								</IntSwissKnife>
+								<IntSwissKnife Name="pRegionOffset_Reg">
+									<pVariable Name="REGION_INDEX">pRegionSelectorReg</pVariable>
+									<Formula>4 * REGION_INDEX</Formula>
+								</IntSwissKnife>
 							</Group>
 							<Group Comment="AcquisitionControl">
 								<Category Name="AcquisitionControl" NameSpace="Standard">
@@ -8699,6 +9610,11 @@
 									<pInvalidator>AcquisitionAbort</pInvalidator>
 									<pInvalidator>pTransferBlockDurationLowReg</pInvalidator>
 									<pInvalidator>pTransferBlockDurationHighReg</pInvalidator>
+									<pInvalidator>RegionMode</pInvalidator>
+									<pInvalidator>Width</pInvalidator>
+									<pInvalidator>Height</pInvalidator>
+									<pInvalidator>OffsetX</pInvalidator>
+									<pInvalidator>OffsetY</pInvalidator>
 									<pInvalidator>ExposureTime</pInvalidator>
 									<pInvalidator>UserSetLoad</pInvalidator>
 									<Endianess>BigEndian</Endianess>
@@ -8711,15 +9627,6 @@
 									<pPort>Device</pPort>
 									<Endianess>BigEndian</Endianess>
 								</IntReg>
-								<IntReg Name="pFrameRateReg">
-									<ToolTip>Frame rate register in mHz</ToolTip>
-									<Address>0x30000008</Address>
-									<Length>4</Length>
-									<AccessMode>RW</AccessMode>
-									<pPort>Device</pPort>
-									<Cachable>WriteAround</Cachable>
-									<Endianess>BigEndian</Endianess>
-								</IntReg>
 								<IntReg Name="pAcquisitionFrameRateEnableReg">
 									<ToolTip>Acquisition Frame Rate Enable Register</ToolTip>
 									<Address>0x30000010</Address>
@@ -8727,6 +9634,15 @@
 									<AccessMode>RW</AccessMode>
 									<pPort>Device</pPort>
 									<pInvalidator>UserSetLoad</pInvalidator>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pFrameRateReg">
+									<ToolTip>Frame rate register in mHz</ToolTip>
+									<Address>0x30000008</Address>
+									<Length>4</Length>
+									<AccessMode>RW</AccessMode>
+									<pPort>Device</pPort>
+									<Cachable>WriteAround</Cachable>
 									<Endianess>BigEndian</Endianess>
 								</IntReg>
 								<IntReg Name="pAcquisitionStatusSelectorReg">
@@ -8933,6 +9849,7 @@
 									<ToolTip>Start image capture</ToolTip>
 									<Description>Start image capture using currently selected acquisition mode.</Description>
 									<DisplayName>Acquisition Start</DisplayName>
+									<pIsLocked>TLParamsLocked</pIsLocked>
 									<pValue>pAcquisitionStartReg</pValue>
 									<CommandValue>1</CommandValue>
 								</Command>
@@ -8994,7 +9911,7 @@
 								</Enumeration>
 								<Enumeration Name="AcquisitionSettingsSelector">
 									<ToolTip>Keep or reset settings on application quit</ToolTip>
-									<Description>When the application quits, the camera can reset all settings according to the default User Set or it can keep the last configured settings.</Description>
+									<Description>When the application closes the control channel, the camera can reset all settings according to the default User Set or it can keep the last configured settings.</Description>
 									<DisplayName>Acquisition Settings Selector</DisplayName>
 									<Visibility>Guru</Visibility>
 									<EnumEntry Name="KeepSettings">
@@ -9004,10 +9921,6 @@
 									<EnumEntry Name="SetDefaultUserSet">
 										<DisplayName>Default User Set</DisplayName>
 										<Value>1</Value>
-									</EnumEntry>
-									<EnumEntry Name="FactorySettings">
-										<DisplayName>Factory Settings</DisplayName>
-										<Value>2</Value>
 									</EnumEntry>
 									<pValue>pAcquisitionSettingsSelectorReg</pValue>
 								</Enumeration>
@@ -9151,6 +10064,7 @@
 									<Description>Controls the absolute exposure time in microseconds (µs).</Description>
 									<DisplayName>Exposure Time</DisplayName>
 									<pIsAvailable>ExposureTime_IsAvailable</pIsAvailable>
+									<pInvalidator>UserSetLoad</pInvalidator>
 									<pValue>pExposureTimeReg_Converter</pValue>
 									<pMin>pExposureTimeMinReg_Converter</pMin>
 									<pMax>pExposureTimeMaxReg_Converter</pMax>
@@ -11670,8 +12584,7 @@
 								<Category Name="OpticControl" NameSpace="Standard">
 									<ToolTip>Optic Control features of the camera.</ToolTip>
 									<DisplayName>Optic Control</DisplayName>
-									<pIsImplemented>OpticController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>OpticController0_IsAvailable</pIsAvailable>
+									<pIsImplemented>OpticController0_IsImplemented</pIsImplemented>
 									<pFeature>OpticControllerSelector</pFeature>
 									<pFeature>OpticControllerPresent</pFeature>
 									<pFeature>OpticControllerStatus</pFeature>
@@ -11693,6 +12606,7 @@
 									<Endianess>BigEndian</Endianess>
 								</IntReg>
 								<IntReg Name="pOpticControllerStatusReg">
+									<pIsImplemented>OpticController0_IsImplemented</pIsImplemented>
 									<Address>0x32000008</Address>
 									<Length>4</Length>
 									<AccessMode>RO</AccessMode>
@@ -11701,6 +12615,8 @@
 								</IntReg>
 								<IntReg Name="pObjectSensorDistanceReg">
 									<Description>Object Sensor Distance Register</Description>
+									<pIsImplemented>OpticController0_IsImplemented</pIsImplemented>
+									<pIsAvailable>OpticController0_IsAvailable</pIsAvailable>
 									<Address>0x32000010</Address>
 									<Length>4</Length>
 									<AccessMode>RW</AccessMode>
@@ -11718,8 +12634,7 @@
 									<ToolTip>Select an optic controller</ToolTip>
 									<Description>Select an optic controller.</Description>
 									<DisplayName>Optic Controller Selector</DisplayName>
-									<pIsImplemented>OpticController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>OpticController0_IsAvailable</pIsAvailable>
+									<pIsImplemented>OpticController0_IsImplemented</pIsImplemented>
 									<pIsLocked>TLParamsLocked</pIsLocked>
 									<EnumEntry Name="OpticController0">
 										<DisplayName>Integrated liquid lens</DisplayName>
@@ -11735,9 +12650,7 @@
 									<ToolTip>Select an optic controller</ToolTip>
 									<Description>Status of the optic controller.</Description>
 									<DisplayName>Optic Controller Status</DisplayName>
-									<pIsImplemented>OpticController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>OpticController0_IsAvailable</pIsAvailable>
-									<pIsLocked>TLParamsLocked</pIsLocked>
+									<pIsImplemented>OpticController0_IsImplemented</pIsImplemented>
 									<EnumEntry Name="NotConnected">
 										<DisplayName>Not Connected</DisplayName>
 										<Value>0</Value>
@@ -11759,7 +12672,7 @@
 								<Float Name="OpticControllerTemperature" NameSpace="Standard">
 									<Description>The temperature of the optic controller.</Description>
 									<DisplayName>Optic Controller Temperature</DisplayName>
-									<pIsImplemented>OpticController0_IsAvailable</pIsImplemented>
+									<pIsImplemented>OpticController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>OpticController0_IsAvailable</pIsAvailable>
 									<pValue>OpticControllerTemperature_Converter</pValue>
 									<Unit>C</Unit>
@@ -11769,7 +12682,7 @@
 								<Float Name="ObjectSensorDistance" NameSpace="Standard">
 									<Description>Distance from the image sensor surface to the object in millimeters (mm).</Description>
 									<DisplayName>Object Sensor Distance</DisplayName>
-									<pIsImplemented>OpticController0_IsAvailable</pIsImplemented>
+									<pIsImplemented>OpticController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>OpticController0_IsAvailable</pIsAvailable>
 									<pValue>ObjectSensorDistance_Converter</pValue>
 									<Min>40.</Min>
@@ -11779,101 +12692,58 @@
 									<Representation>Linear</Representation>
 								</Float>
 								<Converter Name="OpticControllerTemperature_Converter">
+									<pIsImplemented>OpticController0_IsImplemented</pIsImplemented>
+									<pIsAvailable>OpticController0_IsAvailable</pIsAvailable>
 									<FormulaTo>FROM * 1000</FormulaTo>
 									<FormulaFrom>TO / 1000</FormulaFrom>
 									<pValue>pDeviceTemperatureLiquidLensReg</pValue>
 									<Slope>Increasing</Slope>
 								</Converter>
 								<Converter Name="ObjectSensorDistance_Converter">
+									<pIsImplemented>OpticController0_IsImplemented</pIsImplemented>
+									<pIsAvailable>OpticController0_IsAvailable</pIsAvailable>
 									<FormulaTo>FROM * 1</FormulaTo>
 									<FormulaFrom>TO / 1</FormulaFrom>
 									<pValue>pObjectSensorDistanceReg</pValue>
 									<Slope>Increasing</Slope>
 								</Converter>
-								<IntSwissKnife Name="OpticController0_IsAvailable">
+								<IntSwissKnife Name="OpticController0_IsImplemented">
 									<Visibility>Invisible</Visibility>
 									<pVariable Name="IS_PRESENT">pOpticControllerPresentReg</pVariable>
 									<Formula>(IS_PRESENT = 1) ? 1 : 0</Formula>
 								</IntSwissKnife>
-								<IntSwissKnife Name="OpticController0_IsNotAvailable">
+								<IntSwissKnife Name="OpticController0_IsNotImplemented">
 									<Visibility>Invisible</Visibility>
 									<pVariable Name="IS_PRESENT">pOpticControllerPresentReg</pVariable>
 									<Formula>(IS_PRESENT = 0) ? 1 : 0</Formula>
+								</IntSwissKnife>
+								<IntSwissKnife Name="OpticController0_IsAvailable">
+									<Visibility>Invisible</Visibility>
+									<pIsImplemented>OpticController0_IsImplemented</pIsImplemented>
+									<pVariable Name="CONTROLLER_STATUS">pOpticControllerStatusReg</pVariable>
+									<Formula>(CONTROLLER_STATUS = 1) ? 1 : 0</Formula>
+								</IntSwissKnife>
+								<IntSwissKnife Name="OpticController0_IsNotAvailable">
+									<Visibility>Invisible</Visibility>
+									<pIsImplemented>OpticController0_IsImplemented</pIsImplemented>
+									<pVariable Name="CONTROLLER_STATUS">pOpticControllerStatusReg</pVariable>
+									<Formula>(CONTROLLER_STATUS = 1) ? 0 : 1</Formula>
 								</IntSwissKnife>
 							</Group>
 							<Group Comment="Category for light contollers.">
 								<Category Name="LightControl" NameSpace="Standard">
 									<ToolTip>Light Control features of the camera.</ToolTip>
 									<DisplayName>Light Control</DisplayName>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pFeature>LightControllerPresent</pFeature>
 									<pFeature>LightControllerSelector</pFeature>
-									<pFeature>LightController0Channel1Category</pFeature>
-									<pFeature>LightController0Channel2Category</pFeature>
-									<pFeature>LightController0Channel3Category</pFeature>
-									<pFeature>LightController0Channel4Category</pFeature>
 								</Category>
-								<Category Name="LightController0Channel1Category">
-									<ToolTip>Light setting channel 1</ToolTip>
-									<Description>The light settings of channel 1.</Description>
-									<DisplayName>Channel 1</DisplayName>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<pFeature>LightController0Channel1TriggerActive</pFeature>
-									<pFeature>LightController0Channel1Color</pFeature>
-									<pFeature>LightController0Channel1Brightness</pFeature>
-									<pFeature>LightController0Channel1TriggerMode</pFeature>
-									<pFeature>LightController0Channel1TriggerDuration</pFeature>
-									<pFeature>LightController0Channel1TriggerDelay</pFeature>
-								</Category>
-								<Category Name="LightController0Channel2Category">
-									<ToolTip>Light setting channel 2</ToolTip>
-									<Description>The light settings of channel 2.</Description>
-									<DisplayName>Channel 2</DisplayName>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<pFeature>LightController0Channel2TriggerActive</pFeature>
-									<pFeature>LightController0Channel2Color</pFeature>
-									<pFeature>LightController0Channel2Brightness</pFeature>
-									<pFeature>LightController0Channel2TriggerMode</pFeature>
-									<pFeature>LightController0Channel2TriggerDuration</pFeature>
-									<pFeature>LightController0Channel2TriggerDelay</pFeature>
-								</Category>
-								<Category Name="LightController0Channel3Category">
-									<ToolTip>Light setting channel 3</ToolTip>
-									<Description>The light settings of channel 3.</Description>
-									<DisplayName>Channel 3</DisplayName>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<pFeature>LightController0Channel3TriggerActive</pFeature>
-									<pFeature>LightController0Channel3Color</pFeature>
-									<pFeature>LightController0Channel3Brightness</pFeature>
-									<pFeature>LightController0Channel3TriggerMode</pFeature>
-									<pFeature>LightController0Channel3TriggerDuration</pFeature>
-									<pFeature>LightController0Channel3TriggerDelay</pFeature>
-								</Category>
-								<Category Name="LightController0Channel4Category">
-									<ToolTip>Light setting channel 4</ToolTip>
-									<Description>The light settings of channel 4.</Description>
-									<DisplayName>Channel 4</DisplayName>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<pFeature>LightController0Channel4TriggerActive</pFeature>
-									<pFeature>LightController0Channel4Color</pFeature>
-									<pFeature>LightController0Channel4Brightness</pFeature>
-									<pFeature>LightController0Channel4TriggerMode</pFeature>
-									<pFeature>LightController0Channel4TriggerDuration</pFeature>
-									<pFeature>LightController0Channel4TriggerDelay</pFeature>
-								</Category>
-								<Integer Name="LightController0Channel1Brightness">
+								<Integer Name="LightController0ChannelBrightness">
 									<Description>The brightness of this channel.</Description>
 									<DisplayName>Brightness</DisplayName>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<pInvalidator>pLightController0Channel1TriggerActiveReg</pInvalidator>
-									<pInvalidator>LightController0Channel1TriggerActive</pInvalidator>
-									<pValue>pLightController0Channel1BrightnessReg</pValue>
+									<pValue>pLightController0ChannelBrightnessBaseReg</pValue>
 									<Min>0</Min>
 									<Max>4095</Max>
 									<Inc>1</Inc>
@@ -11882,10 +12752,8 @@
 								<Integer Name="LightController0Channel2Brightness">
 									<Description>The brightness of this channel.</Description>
 									<DisplayName>Brightness</DisplayName>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<pInvalidator>pLightController0Channel2TriggerActiveReg</pInvalidator>
-									<pInvalidator>LightController0Channel2TriggerActive</pInvalidator>
 									<pValue>pLightController0Channel2BrightnessReg</pValue>
 									<Min>0</Min>
 									<Max>4095</Max>
@@ -11895,10 +12763,8 @@
 								<Integer Name="LightController0Channel3Brightness">
 									<Description>The brightness of this channel.</Description>
 									<DisplayName>Brightness</DisplayName>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<pInvalidator>pLightController0Channel3TriggerActiveReg</pInvalidator>
-									<pInvalidator>LightController0Channel3TriggerActive</pInvalidator>
 									<pValue>pLightController0Channel3BrightnessReg</pValue>
 									<Min>0</Min>
 									<Max>4095</Max>
@@ -11908,122 +12774,36 @@
 								<Integer Name="LightController0Channel4Brightness">
 									<Description>The brightness of this channel.</Description>
 									<DisplayName>Brightness</DisplayName>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<pInvalidator>pLightController0Channel4TriggerActiveReg</pInvalidator>
-									<pInvalidator>LightController0Channel4TriggerActive</pInvalidator>
 									<pValue>pLightController0Channel4BrightnessReg</pValue>
 									<Min>0</Min>
 									<Max>4095</Max>
 									<Inc>1</Inc>
 									<Representation>Linear</Representation>
 								</Integer>
-								<Integer Name="LightController0Channel1TriggerDuration">
+								<Integer Name="LightController0ChannelTriggerDuration">
 									<Description>Duration of the light emission.</Description>
 									<DisplayName>Duration</DisplayName>
 									<Visibility>Expert</Visibility>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<pIsLocked>LightController0Channel1Duration_isLocked</pIsLocked>
-									<pValue>pLightController0Channel1TriggerDurationReg</pValue>
+									<pIsLocked>LightController0ChannelDuration_isLocked</pIsLocked>
+									<pValue>pLightController0ChannelTriggerDurationBaseReg</pValue>
 									<Min>0</Min>
 									<Max>100000</Max>
 									<Inc>1</Inc>
 									<Unit>µs</Unit>
 									<Representation>Linear</Representation>
 								</Integer>
-								<Integer Name="LightController0Channel2TriggerDuration">
-									<Description>Duration of the light emission.</Description>
-									<DisplayName>Duration</DisplayName>
-									<Visibility>Expert</Visibility>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<pIsLocked>LightController0Channel2Duration_isLocked</pIsLocked>
-									<pValue>pLightController0Channel2TriggerDurationReg</pValue>
-									<Min>0</Min>
-									<Max>100000</Max>
-									<Inc>1</Inc>
-									<Unit>µs</Unit>
-									<Representation>Linear</Representation>
-								</Integer>
-								<Integer Name="LightController0Channel3TriggerDuration">
-									<Description>Duration of the light emission.</Description>
-									<DisplayName>Duration</DisplayName>
-									<Visibility>Expert</Visibility>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<pIsLocked>LightController0Channel3Duration_isLocked</pIsLocked>
-									<pValue>pLightController0Channel3TriggerDurationReg</pValue>
-									<Min>0</Min>
-									<Max>100000</Max>
-									<Inc>1</Inc>
-									<Unit>µs</Unit>
-									<Representation>Linear</Representation>
-								</Integer>
-								<Integer Name="LightController0Channel4TriggerDuration">
-									<Description>Duration of the light emission.</Description>
-									<DisplayName>Duration</DisplayName>
-									<Visibility>Expert</Visibility>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<pIsLocked>LightController0Channel4Duration_isLocked</pIsLocked>
-									<pValue>pLightController0Channel4TriggerDurationReg</pValue>
-									<Min>0</Min>
-									<Max>100000</Max>
-									<Inc>1</Inc>
-									<Unit>µs</Unit>
-									<Representation>Linear</Representation>
-								</Integer>
-								<Integer Name="LightController0Channel1TriggerDelay">
+								<Integer Name="LightController0ChannelTriggerDelay">
 									<Description>Delay of the light emission.</Description>
 									<DisplayName>Delay</DisplayName>
 									<Visibility>Expert</Visibility>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<pIsLocked>LightController0Channel1TriggerDelay_isLocked</pIsLocked>
-									<pValue>pLightController0Channel1TriggerDelayReg</pValue>
-									<Min>0</Min>
-									<Max>100000</Max>
-									<Inc>1</Inc>
-									<Unit>µs</Unit>
-									<Representation>Linear</Representation>
-								</Integer>
-								<Integer Name="LightController0Channel2TriggerDelay">
-									<Description>Delay of the light emission.</Description>
-									<DisplayName>Delay</DisplayName>
-									<Visibility>Expert</Visibility>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<pIsLocked>LightController0Channel2TriggerDelay_isLocked</pIsLocked>
-									<pValue>pLightController0Channel2TriggerDelayReg</pValue>
-									<Min>0</Min>
-									<Max>100000</Max>
-									<Inc>1</Inc>
-									<Unit>µs</Unit>
-									<Representation>Linear</Representation>
-								</Integer>
-								<Integer Name="LightController0Channel3TriggerDelay">
-									<Description>Delay of the light emission.</Description>
-									<DisplayName>Delay</DisplayName>
-									<Visibility>Expert</Visibility>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<pIsLocked>LightController0Channel3TriggerDelay_isLocked</pIsLocked>
-									<pValue>pLightController0Channel3TriggerDelayReg</pValue>
-									<Min>0</Min>
-									<Max>100000</Max>
-									<Inc>1</Inc>
-									<Unit>µs</Unit>
-									<Representation>Linear</Representation>
-								</Integer>
-								<Integer Name="LightController0Channel4TriggerDelay">
-									<Description>Delay of the light emission.</Description>
-									<DisplayName>Delay</DisplayName>
-									<Visibility>Expert</Visibility>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<pIsLocked>LightController0Channel4TriggerDelay_isLocked</pIsLocked>
-									<pValue>pLightController0Channel4TriggerDelayReg</pValue>
+									<pIsLocked>LightController0ChannelTriggerDelay_isLocked</pIsLocked>
+									<pValue>pLightController0ChannelTriggerDelayBaseReg</pValue>
 									<Min>0</Min>
 									<Max>100000</Max>
 									<Inc>1</Inc>
@@ -12038,8 +12818,7 @@
 									<Endianess>BigEndian</Endianess>
 								</IntReg>
 								<IntReg Name="pLightControllerSelectorReg">
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<Address>0x33000000</Address>
 									<Length>4</Length>
 									<AccessMode>RW</AccessMode>
@@ -12047,8 +12826,7 @@
 									<Endianess>BigEndian</Endianess>
 								</IntReg>
 								<IntReg Name="pLightControllerEnabledReg">
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<Address>0x33100000</Address>
 									<Length>4</Length>
 									<AccessMode>RW</AccessMode>
@@ -12056,8 +12834,7 @@
 									<Endianess>BigEndian</Endianess>
 								</IntReg>
 								<IntReg Name="pLightControllerPowerGoodReg">
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<Address>0x33100004</Address>
 									<Length>4</Length>
 									<AccessMode>RO</AccessMode>
@@ -12066,7 +12843,7 @@
 									<Endianess>BigEndian</Endianess>
 								</IntReg>
 								<IntReg Name="pLightConnectionStatusReg">
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
 									<Address>0x33000008</Address>
 									<Length>4</Length>
@@ -12074,31 +12851,40 @@
 									<pPort>Device</pPort>
 									<Endianess>BigEndian</Endianess>
 								</IntReg>
-								<IntReg Name="pLightController0Channel1TriggerActiveReg">
-									<Description>Trigger channel 1 active register</Description>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+								<IntReg Name="pLightController0ChannelSelector">
+									<Description>Light Controller0 Channel Selector register</Description>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
+									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
+									<Address>0x33000010</Address>
+									<Length>4</Length>
+									<AccessMode>RW</AccessMode>
+									<pPort>Device</pPort>
+									<Endianess>BigEndian</Endianess>
+								</IntReg>
+								<IntReg Name="pLightController0ChannelTriggerActiveBaseReg">
+									<Description>Trigger selected channel active register</Description>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
 									<Address>0x33000110</Address>
+									<pAddress>LightController0ChannelOffset_Reg</pAddress>
 									<Length>4</Length>
 									<AccessMode>RO</AccessMode>
 									<pPort>Device</pPort>
-									<Cachable>NoCache</Cachable>
 									<Endianess>BigEndian</Endianess>
 								</IntReg>
-								<IntReg Name="pLightController0Channel2TriggerActiveReg">
-									<Description>Trigger channel 2 active register</Description>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+								<IntReg Name="pLightController0Channel1TriggerActiveReg">
+									<Description>Trigger channel 1 active register</Description>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
 									<Address>0x33000114</Address>
 									<Length>4</Length>
 									<AccessMode>RO</AccessMode>
 									<pPort>Device</pPort>
-									<Cachable>NoCache</Cachable>
 									<Endianess>BigEndian</Endianess>
 								</IntReg>
-								<IntReg Name="pLightController0Channel3TriggerActiveReg">
-									<Description>Trigger channel 3 active register</Description>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+								<IntReg Name="pLightController0Channel2TriggerActiveReg">
+									<Description>Trigger channel 2 active register</Description>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
 									<Address>0x33000118</Address>
 									<Length>4</Length>
@@ -12107,22 +12893,22 @@
 									<Cachable>NoCache</Cachable>
 									<Endianess>BigEndian</Endianess>
 								</IntReg>
-								<IntReg Name="pLightController0Channel4TriggerActiveReg">
-									<Description>Trigger channel 4 active register</Description>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+								<IntReg Name="pLightController0Channel3TriggerActiveReg">
+									<Description>Trigger channel 3 active register</Description>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
 									<Address>0x3300011C</Address>
 									<Length>4</Length>
 									<AccessMode>RO</AccessMode>
 									<pPort>Device</pPort>
-									<Cachable>NoCache</Cachable>
 									<Endianess>BigEndian</Endianess>
 								</IntReg>
-								<IntReg Name="pLightController0Channel1BrightnessReg">
-									<Description>Brightness register of channel 1</Description>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+								<IntReg Name="pLightController0ChannelBrightnessBaseReg">
+									<Description>Brightness register of channel</Description>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
 									<Address>0x33000120</Address>
+									<pAddress>LightController0ChannelOffset_Reg</pAddress>
 									<Length>4</Length>
 									<AccessMode>RW</AccessMode>
 									<pPort>Device</pPort>
@@ -12130,7 +12916,7 @@
 								</IntReg>
 								<IntReg Name="pLightController0Channel2BrightnessReg">
 									<Description>Brightness register of channel 2</Description>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
 									<Address>0x33000124</Address>
 									<Length>4</Length>
@@ -12140,7 +12926,7 @@
 								</IntReg>
 								<IntReg Name="pLightController0Channel3BrightnessReg">
 									<Description>Brightness register of channel 3</Description>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
 									<Address>0x33000128</Address>
 									<Length>4</Length>
@@ -12150,7 +12936,7 @@
 								</IntReg>
 								<IntReg Name="pLightController0Channel4BrightnessReg">
 									<Description>Brightness register of channel 4</Description>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
 									<Address>0x3300012C</Address>
 									<Length>4</Length>
@@ -12158,17 +12944,18 @@
 									<pPort>Device</pPort>
 									<Endianess>BigEndian</Endianess>
 								</IntReg>
-								<IntReg Name="pLightController0Channel1TriggerModeReg">
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+								<IntReg Name="pLightController0ChannelTriggerModeBaseReg">
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
 									<Address>0x33000130</Address>
+									<pAddress>LightController0ChannelOffset_Reg</pAddress>
 									<Length>4</Length>
 									<AccessMode>RW</AccessMode>
 									<pPort>Device</pPort>
 									<Endianess>BigEndian</Endianess>
 								</IntReg>
 								<IntReg Name="pLightController0Channel2TriggerModeReg">
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
 									<Address>0x33000134</Address>
 									<Length>4</Length>
@@ -12177,7 +12964,7 @@
 									<Endianess>BigEndian</Endianess>
 								</IntReg>
 								<IntReg Name="pLightController0Channel3TriggerModeReg">
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
 									<Address>0x33000138</Address>
 									<Length>4</Length>
@@ -12186,7 +12973,7 @@
 									<Endianess>BigEndian</Endianess>
 								</IntReg>
 								<IntReg Name="pLightController0Channel4TriggerModeReg">
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
 									<Address>0x3300013C</Address>
 									<Length>4</Length>
@@ -12194,18 +12981,19 @@
 									<pPort>Device</pPort>
 									<Endianess>BigEndian</Endianess>
 								</IntReg>
-								<IntReg Name="pLightController0Channel1TriggerDurationReg">
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+								<IntReg Name="pLightController0ChannelTriggerDurationBaseReg">
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
 									<Address>0x33000140</Address>
+									<pAddress>LightController0ChannelOffset_Reg</pAddress>
 									<Length>4</Length>
 									<AccessMode>RW</AccessMode>
 									<pPort>Device</pPort>
 									<Cachable>WriteAround</Cachable>
 									<Endianess>BigEndian</Endianess>
 								</IntReg>
-								<IntReg Name="pLightController0Channel2TriggerDurationReg">
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+								<IntReg Name="pLightController0Channel1TriggerDurationReg">
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
 									<Address>0x33000144</Address>
 									<Length>4</Length>
@@ -12214,8 +13002,8 @@
 									<Cachable>WriteAround</Cachable>
 									<Endianess>BigEndian</Endianess>
 								</IntReg>
-								<IntReg Name="pLightController0Channel3TriggerDurationReg">
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+								<IntReg Name="pLightController0Channel2TriggerDurationReg">
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
 									<Address>0x33000148</Address>
 									<Length>4</Length>
@@ -12224,8 +13012,8 @@
 									<Cachable>WriteAround</Cachable>
 									<Endianess>BigEndian</Endianess>
 								</IntReg>
-								<IntReg Name="pLightController0Channel4TriggerDurationReg">
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+								<IntReg Name="pLightController0Channel3TriggerDurationReg">
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
 									<Address>0x3300014C</Address>
 									<Length>4</Length>
@@ -12234,18 +13022,19 @@
 									<Cachable>WriteAround</Cachable>
 									<Endianess>BigEndian</Endianess>
 								</IntReg>
-								<IntReg Name="pLightController0Channel1TriggerDelayReg">
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+								<IntReg Name="pLightController0ChannelTriggerDelayBaseReg">
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
 									<Address>0x33000150</Address>
+									<pAddress>LightController0ChannelOffset_Reg</pAddress>
 									<Length>4</Length>
 									<AccessMode>RW</AccessMode>
 									<pPort>Device</pPort>
 									<Cachable>WriteAround</Cachable>
 									<Endianess>BigEndian</Endianess>
 								</IntReg>
-								<IntReg Name="pLightController0Channel2TriggerDelayReg">
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+								<IntReg Name="pLightController0Channel1TriggerDelayReg">
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
 									<Address>0x33000154</Address>
 									<Length>4</Length>
@@ -12254,8 +13043,8 @@
 									<Cachable>WriteAround</Cachable>
 									<Endianess>BigEndian</Endianess>
 								</IntReg>
-								<IntReg Name="pLightController0Channel3TriggerDelayReg">
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+								<IntReg Name="pLightController0Channel2TriggerDelayReg">
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
 									<Address>0x33000158</Address>
 									<Length>4</Length>
@@ -12264,8 +13053,8 @@
 									<Cachable>WriteAround</Cachable>
 									<Endianess>BigEndian</Endianess>
 								</IntReg>
-								<IntReg Name="pLightController0Channel4TriggerDelayReg">
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+								<IntReg Name="pLightController0Channel3TriggerDelayReg">
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
 									<Address>0x3300015C</Address>
 									<Length>4</Length>
@@ -12285,8 +13074,7 @@
 									<ToolTip>Light controller enabled</ToolTip>
 									<Description>True, if the power supply to the light controller is enabled.</Description>
 									<DisplayName>Light Controller Enabled</DisplayName>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pValue>pLightControllerEnabledReg</pValue>
 								</Boolean>
 								<Boolean Name="LightControllerPowerGood">
@@ -12294,48 +13082,21 @@
 									<Description>True, if the power supply to the light controller is good.</Description>
 									<DisplayName>LED Power On</DisplayName>
 									<Visibility>Invisible</Visibility>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pValue>pLightControllerPowerGoodReg</pValue>
 								</Boolean>
-								<Boolean Name="LightController0Channel1TriggerActive">
+								<Boolean Name="LightController0ChannelTriggerActive">
 									<Description>Indicates the state of the trigger of the channel.</Description>
-									<DisplayName>TriggerActive</DisplayName>
+									<DisplayName>Trigger Active</DisplayName>
 									<Visibility>Invisible</Visibility>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<pValue>pLightController0Channel1TriggerActiveReg</pValue>
-								</Boolean>
-								<Boolean Name="LightController0Channel2TriggerActive">
-									<Description>Indicates the state of the trigger of the channel.</Description>
-									<DisplayName>TriggerActive</DisplayName>
-									<Visibility>Invisible</Visibility>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<pValue>pLightController0Channel2TriggerActiveReg</pValue>
-								</Boolean>
-								<Boolean Name="LightController0Channel3TriggerActive">
-									<Description>Indicates the state of the trigger of the channel.</Description>
-									<DisplayName>TriggerActive</DisplayName>
-									<Visibility>Invisible</Visibility>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<pValue>pLightController0Channel3TriggerActiveReg</pValue>
-								</Boolean>
-								<Boolean Name="LightController0Channel4TriggerActive">
-									<Description>Indicates the state of the trigger of the channel.</Description>
-									<DisplayName>TriggerActive</DisplayName>
-									<Visibility>Invisible</Visibility>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<pValue>pLightController0Channel4TriggerActiveReg</pValue>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
+									<pValue>pLightController0ChannelTriggerActiveBaseReg</pValue>
 								</Boolean>
 								<Enumeration Name="LightControllerSelector" NameSpace="Standard">
-									<ToolTip>Select an light controller</ToolTip>
-									<Description>Select an light controller.</Description>
+									<ToolTip>Select a light controller</ToolTip>
+									<Description>Select a light controller.</Description>
 									<DisplayName>Light Controller Selector</DisplayName>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<EnumEntry Name="LightController0">
 										<DisplayName>Integrated illumination</DisplayName>
 										<Value>0</Value>
@@ -12344,12 +13105,13 @@
 									<pSelected>LightControllerEnabled</pSelected>
 									<pSelected>LightControllerPowerGood</pSelected>
 									<pSelected>LightConnectionStatus</pSelected>
+									<pSelected>LightController0ChannelSelector</pSelected>
 								</Enumeration>
 								<Enumeration Name="LightConnectionStatus" NameSpace="Standard">
 									<ToolTip>Light connection status</ToolTip>
 									<Description>The status of the light connection.</Description>
 									<DisplayName>Light Connection Status</DisplayName>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
 									<EnumEntry Name="NotConnected">
 										<DisplayName>Not Connected</DisplayName>
@@ -12365,12 +13127,38 @@
 									</EnumEntry>
 									<pValue>pLightConnectionStatusReg</pValue>
 								</Enumeration>
-								<Enumeration Name="LightController0Channel1TriggerMode">
+								<Enumeration Name="LightController0ChannelSelector">
+									<ToolTip>Light setting channel</ToolTip>
+									<Description>The light settings of the selected channel.</Description>
+									<DisplayName>Channel</DisplayName>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
+									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
+									<EnumEntry Name="Channel0">
+										<Value>0</Value>
+									</EnumEntry>
+									<EnumEntry Name="Channel1">
+										<Value>1</Value>
+									</EnumEntry>
+									<EnumEntry Name="Channel2">
+										<Value>2</Value>
+									</EnumEntry>
+									<EnumEntry Name="Channel3">
+										<Value>3</Value>
+									</EnumEntry>
+									<pValue>pLightController0ChannelSelector</pValue>
+									<pSelected>LightController0Channel0ColorDescription</pSelected>
+									<pSelected>LightController0ChannelTriggerActive</pSelected>
+									<pSelected>LightController0ChannelBrightness</pSelected>
+									<pSelected>LightController0ChannelTriggerMode</pSelected>
+									<pSelected>LightController0ChannelTriggerDuration</pSelected>
+									<pSelected>LightController0ChannelTriggerDelay</pSelected>
+								</Enumeration>
+								<Enumeration Name="LightController0ChannelTriggerMode">
 									<ToolTip>Trigger mode channel 1</ToolTip>
 									<Description>Indicates if the duration of the impulse is controlled via sensor exposure or given duration and delay.</Description>
 									<DisplayName>Trigger Mode</DisplayName>
 									<Visibility>Expert</Visibility>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
 									<EnumEntry Name="SensorExposure">
 										<DisplayName>Sensor Exposure</DisplayName>
@@ -12380,168 +13168,97 @@
 										<DisplayName>Timed</DisplayName>
 										<Value>1</Value>
 									</EnumEntry>
-									<pValue>pLightController0Channel1TriggerModeReg</pValue>
+									<pValue>pLightController0ChannelTriggerModeBaseReg</pValue>
 								</Enumeration>
-								<Enumeration Name="LightController0Channel2TriggerMode">
-									<ToolTip>Trigger mode channel 2</ToolTip>
-									<Description>Indicates if the duration of the impulse is controlled via sensor exposure or given duration and delay.</Description>
-									<DisplayName>Trigger Mode</DisplayName>
-									<Visibility>Expert</Visibility>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<EnumEntry Name="SensorExposure">
-										<DisplayName>Sensor Exposure</DisplayName>
-										<Value>0</Value>
-									</EnumEntry>
-									<EnumEntry Name="Timed">
-										<DisplayName>Timed</DisplayName>
-										<Value>1</Value>
-									</EnumEntry>
-									<pValue>pLightController0Channel2TriggerModeReg</pValue>
-								</Enumeration>
-								<Enumeration Name="LightController0Channel3TriggerMode">
-									<ToolTip>Trigger mode channel 3</ToolTip>
-									<Description>Indicates if the duration of the impulse is controlled via sensor exposure or given duration and delay.</Description>
-									<DisplayName>Trigger Mode</DisplayName>
-									<Visibility>Expert</Visibility>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<EnumEntry Name="SensorExposure">
-										<DisplayName>Sensor Exposure</DisplayName>
-										<Value>0</Value>
-									</EnumEntry>
-									<EnumEntry Name="Timed">
-										<DisplayName>Timed</DisplayName>
-										<Value>1</Value>
-									</EnumEntry>
-									<pValue>pLightController0Channel3TriggerModeReg</pValue>
-								</Enumeration>
-								<Enumeration Name="LightController0Channel4TriggerMode">
-									<ToolTip>Trigger mode channel 4</ToolTip>
-									<Description>Indicates if the duration of the impulse is controlled via sensor exposure or given duration and delay.</Description>
-									<DisplayName>Trigger Mode</DisplayName>
-									<Visibility>Expert</Visibility>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<EnumEntry Name="SensorExposure">
-										<DisplayName>Sensor Exposure</DisplayName>
-										<Value>0</Value>
-									</EnumEntry>
-									<EnumEntry Name="Timed">
-										<DisplayName>Timed</DisplayName>
-										<Value>1</Value>
-									</EnumEntry>
-									<pValue>pLightController0Channel4TriggerModeReg</pValue>
-								</Enumeration>
-								<StringReg Name="LightController0Channel1Color">
+								<StringReg Name="LightController0Channel0ColorDescription">
 									<ToolTip>Color</ToolTip>
 									<Description>The color of the emitted light.</Description>
 									<DisplayName>Color</DisplayName>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
 									<Address>0x33001000</Address>
-									<Length>20</Length>
+									<pAddress>LightController0ChannelDescriptionOffset_Reg</pAddress>
+									<Length>32</Length>
 									<AccessMode>RO</AccessMode>
 									<pPort>Device</pPort>
 								</StringReg>
-								<StringReg Name="LightController0Channel2Color">
+								<StringReg Name="LightController0Channel1ColorDescription">
 									<ToolTip>Color</ToolTip>
 									<Description>The color of the emitted light.</Description>
 									<DisplayName>Color</DisplayName>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<Address>0x33001014</Address>
-									<Length>20</Length>
+									<Address>0x33001020</Address>
+									<Length>32</Length>
 									<AccessMode>RO</AccessMode>
 									<pPort>Device</pPort>
 								</StringReg>
-								<StringReg Name="LightController0Channel3Color">
+								<StringReg Name="LightController0Channel2ColorDescription">
 									<ToolTip>Color</ToolTip>
 									<Description>The color of the emitted light.</Description>
 									<DisplayName>Color</DisplayName>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<Address>0x33001028</Address>
-									<Length>20</Length>
+									<Address>0x33001040</Address>
+									<Length>32</Length>
 									<AccessMode>RO</AccessMode>
 									<pPort>Device</pPort>
 								</StringReg>
-								<StringReg Name="LightController0Channel4Color">
+								<StringReg Name="LightController0Channel3ColorDescription">
 									<ToolTip>Color</ToolTip>
 									<Description>The color of the emitted light.</Description>
 									<DisplayName>Color</DisplayName>
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<Address>0x3300103C</Address>
-									<Length>20</Length>
+									<Address>0x33001060</Address>
+									<Length>32</Length>
 									<AccessMode>RO</AccessMode>
 									<pPort>Device</pPort>
 								</StringReg>
-								<IntSwissKnife Name="LightController0_IsAvailable">
+								<IntSwissKnife Name="LightController0_IsImplemented">
 									<Visibility>Invisible</Visibility>
 									<pVariable Name="IS_PRESENT">pLightControllerPresentReg</pVariable>
 									<Formula>(IS_PRESENT = 1) ? 1 : 0</Formula>
 								</IntSwissKnife>
-								<IntSwissKnife Name="LightController0_IsNotAvailable">
+								<IntSwissKnife Name="LightController0_IsNotImplemented">
 									<Visibility>Invisible</Visibility>
 									<pVariable Name="IS_PRESENT">pLightControllerPresentReg</pVariable>
 									<Formula>(IS_PRESENT = 0) ? 1 : 0</Formula>
 								</IntSwissKnife>
-								<IntSwissKnife Name="LightController0Channel1Duration_isLocked">
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<pVariable Name="CTRLAVAIL">LightController0_IsAvailable</pVariable>
-									<pVariable Name="TRIGGERMODE">pLightController0Channel1TriggerModeReg</pVariable>
-									<Formula>(CTRLAVAIL = 1) &amp;&amp; (TRIGGERMODE = 0)</Formula>
+								<IntSwissKnife Name="LightController0_IsAvailable">
+									<Visibility>Invisible</Visibility>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
+									<pVariable Name="IS_ENABLED">pLightControllerEnabledReg</pVariable>
+									<Formula>(IS_ENABLED = 1) ? 1 : 0</Formula>
 								</IntSwissKnife>
-								<IntSwissKnife Name="LightController0Channel2Duration_isLocked">
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<pVariable Name="CTRLAVAIL">LightController0_IsAvailable</pVariable>
-									<pVariable Name="TRIGGERMODE">pLightController0Channel2TriggerModeReg</pVariable>
-									<Formula>(CTRLAVAIL = 1) &amp;&amp; (TRIGGERMODE = 0)</Formula>
+								<IntSwissKnife Name="LightController0_IsNotAvailable">
+									<Visibility>Invisible</Visibility>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
+									<pVariable Name="IS_ENABLED">pLightControllerEnabledReg</pVariable>
+									<Formula>(IS_ENABLED = 0) ? 1 : 0</Formula>
 								</IntSwissKnife>
-								<IntSwissKnife Name="LightController0Channel3Duration_isLocked">
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<pVariable Name="CTRLAVAIL">LightController0_IsAvailable</pVariable>
-									<pVariable Name="TRIGGERMODE">pLightController0Channel3TriggerModeReg</pVariable>
-									<Formula>(CTRLAVAIL = 1) &amp;&amp; (TRIGGERMODE = 0)</Formula>
+								<IntSwissKnife Name="LightController0ChannelOffset_Reg">
+									<Visibility>Invisible</Visibility>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
+									<pVariable Name="LightController0ChannelSelection">pLightController0ChannelSelector</pVariable>
+									<Formula>4 * LightController0ChannelSelection</Formula>
 								</IntSwissKnife>
-								<IntSwissKnife Name="LightController0Channel4Duration_isLocked">
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<pVariable Name="CTRLAVAIL">LightController0_IsAvailable</pVariable>
-									<pVariable Name="TRIGGERMODE">pLightController0Channel4TriggerModeReg</pVariable>
-									<Formula>(CTRLAVAIL = 1) &amp;&amp; (TRIGGERMODE = 0)</Formula>
+								<IntSwissKnife Name="LightController0ChannelDescriptionOffset_Reg">
+									<Visibility>Invisible</Visibility>
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
+									<pVariable Name="LightController0ChannelSelection">pLightController0ChannelSelector</pVariable>
+									<Formula>32 * LightController0ChannelSelection</Formula>
 								</IntSwissKnife>
-								<IntSwissKnife Name="LightController0Channel1TriggerDelay_isLocked">
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
+								<IntSwissKnife Name="LightController0ChannelDuration_isLocked">
+									<pIsImplemented>LightController0_IsImplemented</pIsImplemented>
 									<pVariable Name="CTRLAVAIL">LightController0_IsAvailable</pVariable>
-									<pVariable Name="TRIGGERMODE">pLightController0Channel1TriggerModeReg</pVariable>
-									<Formula>(CTRLAVAIL = 1) &amp;&amp; (TRIGGERMODE = 0)</Formula>
+									<pVariable Name="TRIGGERMODE">pLightController0ChannelTriggerModeBaseReg</pVariable>
+									<Formula>CTRLAVAIL &amp;&amp; (TRIGGERMODE = 0)</Formula>
 								</IntSwissKnife>
-								<IntSwissKnife Name="LightController0Channel2TriggerDelay_isLocked">
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
+								<IntSwissKnife Name="LightController0ChannelTriggerDelay_isLocked">
 									<pVariable Name="CTRLAVAIL">LightController0_IsAvailable</pVariable>
-									<pVariable Name="TRIGGERMODE">pLightController0Channel2TriggerModeReg</pVariable>
-									<Formula>(CTRLAVAIL = 1) &amp;&amp; (TRIGGERMODE = 0)</Formula>
-								</IntSwissKnife>
-								<IntSwissKnife Name="LightController0Channel3TriggerDelay_isLocked">
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<pVariable Name="CTRLAVAIL">LightController0_IsAvailable</pVariable>
-									<pVariable Name="TRIGGERMODE">pLightController0Channel3TriggerModeReg</pVariable>
-									<Formula>(CTRLAVAIL = 1) &amp;&amp; (TRIGGERMODE = 0)</Formula>
-								</IntSwissKnife>
-								<IntSwissKnife Name="LightController0Channel4TriggerDelay_isLocked">
-									<pIsImplemented>LightController0_IsAvailable</pIsImplemented>
-									<pIsAvailable>LightController0_IsAvailable</pIsAvailable>
-									<pVariable Name="CTRLAVAIL">LightController0_IsAvailable</pVariable>
-									<pVariable Name="TRIGGERMODE">pLightController0Channel4TriggerModeReg</pVariable>
-									<Formula>(CTRLAVAIL = 1) &amp;&amp; (TRIGGERMODE = 0)</Formula>
+									<pVariable Name="TRIGGERMODE">pLightController0ChannelTriggerModeBaseReg</pVariable>
+									<Formula>CTRLAVAIL &amp;&amp; (TRIGGERMODE = 0)</Formula>
 								</IntSwissKnife>
 							</Group>
 						</RegisterDescription>
@@ -12550,15 +13267,15 @@
 						<DeviceInformation>
 							<Version>131073</Version>
 							<DeviceMode>2147483649</DeviceMode>
-							<MacAddress>4389265680</MacAddress>
-							<IpAddress>3232235781</IpAddress>
-							<SubnetMask>4294901760</SubnetMask>
+							<MacAddress>4389265718</MacAddress>
+							<IpAddress>3232235796</IpAddress>
+							<SubnetMask>4294967040</SubnetMask>
 							<DefaultGateway>0</DefaultGateway>
 							<ManufacturerName>Beckhoff</ManufacturerName>
-							<ModelName>VCS2000-0200</ModelName>
-							<DeviceVersion>1.1.161400 alpha V1</DeviceVersion>
+							<ModelName>VUI2000-0216</ModelName>
+							<DeviceVersion>1.1.165203 alpha V1</DeviceVersion>
 							<ManufacturerInfo>Beckhoff Automation GmbH &amp; Co. KG</ManufacturerInfo>
-							<SerialNumber>BTN000tpzm5</SerialNumber>
+							<SerialNumber>BTN000tuh6x</SerialNumber>
 							<UserDefinedName/>
 							<GvcpCapability>4223926279</GvcpCapability>
 							<TimestampTickFrequency>1000000000</TimestampTickFrequency>
@@ -12626,7 +13343,7 @@
 							<CameraRegisterChild Index="11" Name="Region Selector" Address="0x30010010" Key="4" InternalKey="4" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
 								<CameraRegisterChild Index="0" Name="Region Mode" Address="0x30010800" Data="00-00-00-00" Value="0" Key="5" InternalKey="5" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 								<CameraRegisterChild Index="1" Name="Width" Address="0x10000300" Data="00-00-07-90" Value="1936" Key="6" InternalKey="6" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-								<CameraRegisterChild Index="2" Name="Height" Address="0x10000500" Data="00-00-01-90" Value="400" Key="7" InternalKey="7" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+								<CameraRegisterChild Index="2" Name="Height" Address="0x10000500" Data="00-00-04-C0" Value="1216" Key="7" InternalKey="7" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 								<CameraRegisterChild Index="3" Name="Offset X" Address="0x10000800" Data="00-00-00-00" Value="0" Key="8" InternalKey="8" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 								<CameraRegisterChild Index="4" Name="Offset Y" Address="0x10000A00" Data="00-00-00-00" Value="0" Key="9" InternalKey="9" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							</CameraRegisterChild>
@@ -12636,13 +13353,13 @@
 							<CameraRegisterChild Index="15" Name="Acquisition Mode" Address="0x10000040" Data="00-00-00-00" Value="0" Key="55" InternalKey="55" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							<CameraRegisterChild Index="16" Name="Acquisition Frame Count" Address="0xFFFFFFFF" Key="56" InternalKey="56" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							<CameraRegisterChild Index="17" Name="Acquisition Frame Rate" Address="0xFFFFFFFF" Key="57" InternalKey="57" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="18" Name="Acquisition Frame Rate Enable" Address="0x30000010" Data="00-00-00-00" Value="0" Key="58" InternalKey="58" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="18" Name="Acquisition Frame Rate Enable" Address="0xFFFFFFFF" Key="58" InternalKey="58" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							<CameraRegisterChild Index="19" Name="Acquisition Settings Selector" Address="0x10000220" Data="00-00-00-00" Value="0" Key="59" InternalKey="59" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							<CameraRegisterChild Index="20" Name="Trigger Selector" Address="0x31000008" Key="65" InternalKey="65" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
-								<CameraRegisterChild Index="0" Name="Trigger Mode" Address="0x31000400" Data="00-00-00-00" Value="0" Key="66" InternalKey="66" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-								<CameraRegisterChild Index="1" Name="Trigger Source" Address="0xFFFFFFFF" Data="00-00-00-02" Value="2" Key="67" InternalKey="67" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+								<CameraRegisterChild Index="0" Name="Trigger Mode" Address="0x31000400" Data="00-00-00-01" Value="1" Key="66" InternalKey="66" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+								<CameraRegisterChild Index="1" Name="Trigger Source" Address="0x31000408" Data="00-00-00-00" Value="0" Key="67" InternalKey="67" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 								<CameraRegisterChild Index="2" Name="Trigger Activation" Address="0xFFFFFFFF" Data="00-00-00-00" Value="0" Key="68" InternalKey="68" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-								<CameraRegisterChild Index="3" Name="Trigger Delay" Address="0xFFFFFFFF" Data="00-00-00-00" Value="0" Key="69" InternalKey="69" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+								<CameraRegisterChild Index="3" Name="Trigger Delay" Address="0x31000410" Data="00-00-00-00" Value="0" Key="69" InternalKey="69" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							</CameraRegisterChild>
 							<CameraRegisterChild Index="21" Name="Trigger Selector" Address="0x31000008" Key="60" InternalKey="60" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
 								<CameraRegisterChild Index="0" Name="Trigger Mode" Address="0x31000100" Data="00-00-00-00" Value="0" Key="61" InternalKey="61" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
@@ -12651,7 +13368,7 @@
 								<CameraRegisterChild Index="3" Name="Trigger Delay" Address="0xFFFFFFFF" Data="00-00-00-00" Value="0" Key="64" InternalKey="64" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							</CameraRegisterChild>
 							<CameraRegisterChild Index="22" Name="Exposure Mode" Address="0xFFFFFFFF" Key="70" InternalKey="70" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="23" Name="Exposure Time" Address="0x30000024" Data="00-00-C3-50" Value="50000" Key="71" InternalKey="71" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="23" Name="Exposure Time" Address="0x30000024" Data="00-00-27-10" Value="10000" Key="71" InternalKey="71" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							<CameraRegisterChild Index="24" Name="Gain Selector" Address="0x30000080" Key="74" InternalKey="74" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
 								<CameraRegisterChild Index="0" Name="Gain" Address="0x30000088" Data="00-00-00-00" Value="0" Key="75" InternalKey="75" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							</CameraRegisterChild>
@@ -12758,40 +13475,49 @@
 							<CameraRegisterChild Index="57" Name="User Set Feature Selector" Address="0x30001504" Key="125" InternalKey="125" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
 								<CameraRegisterChild Index="0" Name="User Set Feature Enable" Address="0x30001510" Data="00-00-7F-FF" Value="1" Key="126" InternalKey="126" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
 							</CameraRegisterChild>
-							<CameraRegisterChild Index="58" Name="Brightness" Address="0xFFFFFFFF" Key="155" InternalKey="155" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="59" Name="Trigger Mode" Address="0xFFFFFFFF" Key="156" InternalKey="156" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="60" Name="Duration" Address="0xFFFFFFFF" Key="157" InternalKey="157" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="61" Name="Delay" Address="0xFFFFFFFF" Key="158" InternalKey="158" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="62" Name="Brightness" Address="0xFFFFFFFF" Key="159" InternalKey="159" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="63" Name="Trigger Mode" Address="0xFFFFFFFF" Key="160" InternalKey="160" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="64" Name="Duration" Address="0xFFFFFFFF" Key="161" InternalKey="161" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="65" Name="Delay" Address="0xFFFFFFFF" Key="162" InternalKey="162" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="66" Name="Brightness" Address="0xFFFFFFFF" Key="163" InternalKey="163" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="67" Name="Trigger Mode" Address="0xFFFFFFFF" Key="164" InternalKey="164" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="68" Name="Duration" Address="0xFFFFFFFF" Key="165" InternalKey="165" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="69" Name="Delay" Address="0xFFFFFFFF" Key="166" InternalKey="166" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="70" Name="Brightness" Address="0xFFFFFFFF" Key="167" InternalKey="167" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="71" Name="Trigger Mode" Address="0xFFFFFFFF" Key="168" InternalKey="168" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="72" Name="Duration" Address="0xFFFFFFFF" Key="169" InternalKey="169" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="73" Name="Delay" Address="0xFFFFFFFF" Key="170" InternalKey="170" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="74" Name="Gev Physical Link Configuration" Address="0x01F80800" Data="00-00-00-00" Value="0" Key="173" InternalKey="173" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="75" Name="Force IP Address" Address="0x07F80800" Data="C0-A8-01-05" Value="3232235781" Key="174" InternalKey="174" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="76" Name="Force Subnet Mask" Address="0x08F80800" Data="FF-FF-00-00" Value="4294901760" Key="175" InternalKey="175" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="77" Name="Force Default Gateway" Address="0x09F80800" Data="00-00-00-00" Value="0" Key="176" InternalKey="176" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="78" Name="Gev Heartbeat Timeout" Address="0x00000938" Data="00-00-0B-B8" Value="3000" Key="177" InternalKey="177" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="79" Name="Gev Discovery Ack Delay" Address="0x00000950" Data="00-00-00-00" Value="0" Key="178" InternalKey="178" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
-							<CameraRegisterChild Index="80" Name="Gev GVSP Extended ID Mode" Address="0x00000960" Data="00-00-00-00" Value="0" Key="179" InternalKey="179" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							<CameraRegisterChild Index="58" Name="Light Controller Selector" Address="0x33000000" Key="155" InternalKey="155" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+								<CameraRegisterChild Index="0" Name="Light Controller Enabled" Address="0x33100000" Data="00-00-00-01" Value="1" Key="156" InternalKey="156" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+								<CameraRegisterChild Index="1" Name="Channel" Address="0xFFFFFFFF" Data="00-00-00-02" Value="2" Key="157" InternalKey="157" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+								<CameraRegisterChild Index="2" Name="Channel" Address="0x33000010" Key="158" InternalKey="158" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+									<CameraRegisterChild Index="0" Name="Brightness" Address="0x33000120" Data="00-00-00-00" Value="0" Key="159" InternalKey="159" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+									<CameraRegisterChild Index="1" Name="Trigger Mode" Address="0x33000130" Data="00-00-00-00" Value="0" Key="160" InternalKey="160" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+									<CameraRegisterChild Index="2" Name="Duration" Address="0xFFFFFFFF" Data="00-00-00-00" Value="0" Key="161" InternalKey="161" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+									<CameraRegisterChild Index="3" Name="Delay" Address="0xFFFFFFFF" Data="00-00-00-00" Value="0" Key="162" InternalKey="162" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+								</CameraRegisterChild>
+								<CameraRegisterChild Index="3" Name="Channel" Address="0x33000010" Key="163" InternalKey="163" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+									<CameraRegisterChild Index="0" Name="Brightness" Address="0x33000124" Data="00-00-00-00" Value="0" Key="164" InternalKey="164" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+									<CameraRegisterChild Index="1" Name="Trigger Mode" Address="0x33000134" Data="00-00-00-00" Value="0" Key="165" InternalKey="165" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+									<CameraRegisterChild Index="2" Name="Duration" Address="0xFFFFFFFF" Data="00-00-00-00" Value="0" Key="166" InternalKey="166" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+									<CameraRegisterChild Index="3" Name="Delay" Address="0xFFFFFFFF" Data="00-00-00-00" Value="0" Key="167" InternalKey="167" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+								</CameraRegisterChild>
+								<CameraRegisterChild Index="4" Name="Channel" Address="0x33000010" Key="168" InternalKey="168" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+									<CameraRegisterChild Index="0" Name="Brightness" Address="0x33000128" Data="00-00-00-00" Value="0" Key="169" InternalKey="169" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+									<CameraRegisterChild Index="1" Name="Trigger Mode" Address="0x33000138" Data="00-00-00-00" Value="0" Key="170" InternalKey="170" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+								</CameraRegisterChild>
+								<CameraRegisterChild Index="5" Name="Channel" Address="0x33000010" Key="173" InternalKey="173" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+									<CameraRegisterChild Index="0" Name="Brightness" Address="0x3300012C" Data="00-00-00-00" Value="0" Key="174" InternalKey="174" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+									<CameraRegisterChild Index="1" Name="Trigger Mode" Address="0x3300013C" Data="00-00-00-00" Value="0" Key="175" InternalKey="175" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+									<CameraRegisterChild Index="2" Name="Duration" Address="0xFFFFFFFF" Data="00-00-00-00" Value="0" Key="176" InternalKey="176" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+									<CameraRegisterChild Index="3" Name="Delay" Address="0xFFFFFFFF" Data="00-00-00-00" Value="0" Key="177" InternalKey="177" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+								</CameraRegisterChild>
+							</CameraRegisterChild>
+							<CameraRegisterChild Index="59" Name="Optic Controller Selector" Address="0x32000000" Key="178" InternalKey="178" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00">
+								<CameraRegisterChild Index="0" Name="Object Sensor Distance" Address="0x32000010" Data="00-00-02-00" Value="512" Key="179" InternalKey="179" SelectedIndex="0" SelectedValue="0" Flags="01-00-00-00"/>
+							</CameraRegisterChild>
 						</CameraRegister>
 					</InitCameraCommandsRoot>
 				</TcSmExtension>
 			</TcSmExtensions>
 		</Xml>
-		<Module Id="#x01010030" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcIoGigEVision|4.0.6.5" TcSmClass="CTComVisionObjDef">
+		<Module Id="#x01010030" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcIoGigEVision|5.8.4.0" TcSmClass="CTComVisionObjDef">
 			<Name>Camera1 Beckhoff Image Acquisition (CGevImageAcquisition)</Name>
 			<ImageId>1000</ImageId>
-			<TmcDesc GUID="{29B0E489-75B5-4F6B-A044-ACFA04320CC3}" TcSmClass="CTComVisionObjDef">
+			<TmcDesc GUID="{29B0E489-75B5-4F6B-A044-ACFA04320CC3}" TcSmClass="CTComVisionObjDef" ClassFactoryId="Beckhoff Automation GmbH|TcIoGigEVision|5.8.4.0">
 				<Name>CBeckhoffGevImageAcquisition</Name>
 				<CLSID ClassFactory="TcIoGigEVision">{29B0E489-75B5-4F6B-A044-ACFA04320CC3}</CLSID>
+				<Info>
+					<ImageData>424d360300000000000036000000280000001000000010000000010018000000000000000000c40e0000c40e00000000000000000000554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3be1d7d1e1d7d1e1d7d1e1d7d1e1d7d1e1d7d1e1d7d1dfd6cfdfd6cfdfd6cfdfd6cfdfd6cfdfd6cfdfd6cf554f3b554f3be3dbd4e3dbd4554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3bdfd6cfdfd6cf554f3b554f3be3dbd4e3dbd4554f3bc1b39ac1b399c0b299bfb097beae94bbac90b8a88cb7a488554f3bdfd6cfdfd6cf554f3b554f3bece4dfece4df554f3bc6b9a3c6b8a2c5b7a0c4b59fc2b49bbfb197bdae92baaa8d554f3bdfd6cfdfd6cf554f3b554f3bece4dfece4df554f3bcbbfaacbbeaac9bda9c9bba5c6b8a2c3b59ec0b298bdae93554f3bdfd6cfdfd6cf554f3b554f3bece4dfece4df554f3bcfc6b1d0c4b1cec3afcdc1adcabea8c7baa5c4b69ec0b298554f3be1d7d1dfd6cf554f3b554f3beee6e1eee6e1554f3bd4cabad4cabad2c9b6d1c6b3cec3afcabfa9c8baa4c4b59e554f3be1d7d1dfd6cf554f3b554f3bf2ebe7f2ebe7554f3b554f3b554f3bd7cfbed4cbbad2c7b4cec2af554f3b554f3b554f3be3dbd4e1d7d1554f3b554f3bf2ebe7f2ebe7f5eeebf2ebe7554f3bdad4c4d8cfbfd4cabad0c6b3554f3be7ded9e3dbd4e3dbd4e1d7d1554f3b554f3bf5eeebf5eeebf5eeebf5eeeb554f3bded8cbdad3c4d7cdbdd2c8b6554f3bece4dfe3dbd4e3dbd4e1d7d1554f3b554f3bf5eeebf5eeeb554f3b554f3b554f3be1dbcfdcd6c7d8cfbfd3c9b8554f3b554f3b554f3be3dbd4e1d7d1554f3b554f3bf5eeebf7f0ed554f3be8e3dbe5e1d7e1dbcfddd5c8d8cfbfd3cab7cec4b0c9bda8554f3be3dbd4e1d7d1554f3b554f3bf5eeebf5eeeb554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3be3dbd4e1d7d1554f3b554f3bf5eeebf5eeebf5eeebf5eeebf5eeebf2ebe7f2ebe7eee6e1ece4dfece4dfece4dfe3dbd4e3dbd4e1d7d1554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b</ImageData>
+				</Info>
 				<Licenses>
 					<License>
 						<LicenseId>{1DB1131F-B824-47F7-B18B-069498C683AA}</LicenseId>
@@ -12965,7 +13691,7 @@
 					</Value>
 					<Value>
 						<Name>CameraIpAddress</Name>
-						<Value>3232235780</Value>
+						<Value>3232235796</Value>
 					</Value>
 					<Value>
 						<Name>StartAcquisitionCommands[0]</Name>
@@ -12997,7 +13723,7 @@
 					</Value>
 					<Value>
 						<Name>SoftwareTriggerCommands[1]</Name>
-						<Value>822083844</Value>
+						<Value>822084612</Value>
 					</Value>
 					<Value>
 						<Name>SoftwareTriggerCommands[2]</Name>
@@ -13005,7 +13731,7 @@
 					</Value>
 					<Value>
 						<Name>InitCameraCommands</Name>
-						<Data>8b00000000000000770000000000000042cbdb1399998d428f386733fbaf00b13800000001000000010000001f0020000000000000000000496e697469616c697a6174696f6e20436f6d6d616e64732048656164657200496e697469616c697a6174696f6e20436f6d6d616e647320436f6d6d656e740000000400006c0061007300730065007300000000</Data>
+						<Data>8b00000000000000770000000000000042cbdb1399998d428f386733fbaf00b13800000001000000010000001f0020000000000000000000496e697469616c697a6174696f6e20436f6d6d616e64732048656164657200496e697469616c697a6174696f6e20436f6d6d616e647320436f6d6d656e740000000400006c006100730073006500730000006f</Data>
 					</Value>
 					<Value>
 						<Name>InitializationTimeout</Name>
@@ -13039,12 +13765,15 @@
 					</Value>
 				</InterfacePointerValues>
 			</TmcDesc>
-			<Module Id="#x01010040" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcIoGigEVision|4.0.6.5" TcSmClass="CTComVisionObjDef">
+			<Module Id="#x01010040" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcIoGigEVision|5.8.4.0" TcSmClass="CTComVisionObjDef">
 				<Name>Camera1 Gvcp Module (CGvcpProtocol)</Name>
 				<ImageId>1000</ImageId>
-				<TmcDesc GUID="{A2F12437-8A89-453B-BAFC-5E9934B8C8DC}" TcSmClass="CTComVisionObjDef">
+				<TmcDesc GUID="{A2F12437-8A89-453B-BAFC-5E9934B8C8DC}" TcSmClass="CTComVisionObjDef" ClassFactoryId="Beckhoff Automation GmbH|TcIoGigEVision|5.8.4.0">
 					<Name>CGvcpProtocol</Name>
 					<CLSID ClassFactory="TcIoGigEVision">{A2F12437-8A89-453B-BAFC-5E9934B8C8DC}</CLSID>
+					<Info>
+						<ImageData>424d360300000000000036000000280000001000000010000000010018000000000000000000c40e0000c40e00000000000000000000554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3be1d7d1e1d7d1e1d7d1e1d7d1e1d7d1e1d7d1e1d7d1dfd6cfdfd6cfdfd6cfdfd6cfdfd6cfdfd6cfdfd6cf554f3b554f3be3dbd4e3dbd4554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3bdfd6cfdfd6cf554f3b554f3be3dbd4e3dbd4554f3bc1b39ac1b399c0b299bfb097beae94bbac90b8a88cb7a488554f3bdfd6cfdfd6cf554f3b554f3bece4dfece4df554f3bc6b9a3c6b8a2c5b7a0c4b59fc2b49bbfb197bdae92baaa8d554f3bdfd6cfdfd6cf554f3b554f3bece4dfece4df554f3bcbbfaacbbeaac9bda9c9bba5c6b8a2c3b59ec0b298bdae93554f3bdfd6cfdfd6cf554f3b554f3bece4dfece4df554f3bcfc6b1d0c4b1cec3afcdc1adcabea8c7baa5c4b69ec0b298554f3be1d7d1dfd6cf554f3b554f3beee6e1eee6e1554f3bd4cabad4cabad2c9b6d1c6b3cec3afcabfa9c8baa4c4b59e554f3be1d7d1dfd6cf554f3b554f3bf2ebe7f2ebe7554f3b554f3b554f3bd7cfbed4cbbad2c7b4cec2af554f3b554f3b554f3be3dbd4e1d7d1554f3b554f3bf2ebe7f2ebe7f5eeebf2ebe7554f3bdad4c4d8cfbfd4cabad0c6b3554f3be7ded9e3dbd4e3dbd4e1d7d1554f3b554f3bf5eeebf5eeebf5eeebf5eeeb554f3bded8cbdad3c4d7cdbdd2c8b6554f3bece4dfe3dbd4e3dbd4e1d7d1554f3b554f3bf5eeebf5eeeb554f3b554f3b554f3be1dbcfdcd6c7d8cfbfd3c9b8554f3b554f3b554f3be3dbd4e1d7d1554f3b554f3bf5eeebf7f0ed554f3be8e3dbe5e1d7e1dbcfddd5c8d8cfbfd3cab7cec4b0c9bda8554f3be3dbd4e1d7d1554f3b554f3bf5eeebf5eeeb554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3be3dbd4e1d7d1554f3b554f3bf5eeebf5eeebf5eeebf5eeebf5eeebf2ebe7f2ebe7eee6e1ece4dfece4dfece4dfe3dbd4e3dbd4e1d7d1554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b</ImageData>
+					</Info>
 					<InitSequence>PSO</InitSequence>
 					<Contexts>
 						<Context>
@@ -13155,39 +13884,18 @@
 							<Name>DiscoveryTimeout</Name>
 							<Value>1000</Value>
 						</Value>
-						<Value>
-							<Name>GvcpProtocolDiagnosis.stSend.nSuccess</Name>
-							<Value>0</Value>
-						</Value>
-						<Value>
-							<Name>GvcpProtocolDiagnosis.stSend.nError</Name>
-							<Value>0</Value>
-						</Value>
-						<Value>
-							<Name>GvcpProtocolDiagnosis.stSend.nTimeout</Name>
-							<Value>0</Value>
-						</Value>
-						<Value>
-							<Name>GvcpProtocolDiagnosis.stRecv.nSuccess</Name>
-							<Value>0</Value>
-						</Value>
-						<Value>
-							<Name>GvcpProtocolDiagnosis.stRecv.nError</Name>
-							<Value>0</Value>
-						</Value>
-						<Value>
-							<Name>GvcpProtocolDiagnosis.stRecv.nIgnored</Name>
-							<Value>0</Value>
-						</Value>
 					</ParameterValues>
 				</TmcDesc>
 			</Module>
-			<Module Id="#x01010050" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcIoGigEVision|4.0.6.5" TcSmClass="CTComVisionObjDef">
+			<Module Id="#x01010050" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcIoGigEVision|5.8.4.0" TcSmClass="CTComVisionObjDef">
 				<Name>Camera1 Gvsp Module (CGvspProtocol)</Name>
 				<ImageId>1000</ImageId>
-				<TmcDesc GUID="{9D2B8D47-8462-4251-80A0-5AA35A79EF48}" TcSmClass="CTComVisionObjDef">
+				<TmcDesc GUID="{9D2B8D47-8462-4251-80A0-5AA35A79EF48}" TcSmClass="CTComVisionObjDef" ClassFactoryId="Beckhoff Automation GmbH|TcIoGigEVision|5.8.4.0">
 					<Name>CGvspProtocol</Name>
 					<CLSID ClassFactory="TcIoGigEVision">{9D2B8D47-8462-4251-80A0-5AA35A79EF48}</CLSID>
+					<Info>
+						<ImageData>424d360300000000000036000000280000001000000010000000010018000000000000000000c40e0000c40e00000000000000000000554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3be1d7d1e1d7d1e1d7d1e1d7d1e1d7d1e1d7d1e1d7d1dfd6cfdfd6cfdfd6cfdfd6cfdfd6cfdfd6cfdfd6cf554f3b554f3be3dbd4e3dbd4554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3bdfd6cfdfd6cf554f3b554f3be3dbd4e3dbd4554f3bc1b39ac1b399c0b299bfb097beae94bbac90b8a88cb7a488554f3bdfd6cfdfd6cf554f3b554f3bece4dfece4df554f3bc6b9a3c6b8a2c5b7a0c4b59fc2b49bbfb197bdae92baaa8d554f3bdfd6cfdfd6cf554f3b554f3bece4dfece4df554f3bcbbfaacbbeaac9bda9c9bba5c6b8a2c3b59ec0b298bdae93554f3bdfd6cfdfd6cf554f3b554f3bece4dfece4df554f3bcfc6b1d0c4b1cec3afcdc1adcabea8c7baa5c4b69ec0b298554f3be1d7d1dfd6cf554f3b554f3beee6e1eee6e1554f3bd4cabad4cabad2c9b6d1c6b3cec3afcabfa9c8baa4c4b59e554f3be1d7d1dfd6cf554f3b554f3bf2ebe7f2ebe7554f3b554f3b554f3bd7cfbed4cbbad2c7b4cec2af554f3b554f3b554f3be3dbd4e1d7d1554f3b554f3bf2ebe7f2ebe7f5eeebf2ebe7554f3bdad4c4d8cfbfd4cabad0c6b3554f3be7ded9e3dbd4e3dbd4e1d7d1554f3b554f3bf5eeebf5eeebf5eeebf5eeeb554f3bded8cbdad3c4d7cdbdd2c8b6554f3bece4dfe3dbd4e3dbd4e1d7d1554f3b554f3bf5eeebf5eeeb554f3b554f3b554f3be1dbcfdcd6c7d8cfbfd3c9b8554f3b554f3b554f3be3dbd4e1d7d1554f3b554f3bf5eeebf7f0ed554f3be8e3dbe5e1d7e1dbcfddd5c8d8cfbfd3cab7cec4b0c9bda8554f3be3dbd4e1d7d1554f3b554f3bf5eeebf5eeeb554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3be3dbd4e1d7d1554f3b554f3bf5eeebf5eeebf5eeebf5eeebf5eeebf2ebe7f2ebe7eee6e1ece4dfece4dfece4dfe3dbd4e3dbd4e1d7d1554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b</ImageData>
+					</Info>
 					<InitSequence>PSO</InitSequence>
 					<Contexts>
 						<Context>
@@ -13336,62 +14044,6 @@
 							<Name>BlockTimeout</Name>
 							<Value>5000</Value>
 						</Value>
-						<Value>
-							<Name>GvspCurPacketSize</Name>
-							<Value>0</Value>
-						</Value>
-						<Value>
-							<Name>GvspProtocolDiagnosis.stRecv.nSuccess</Name>
-							<Value>0</Value>
-						</Value>
-						<Value>
-							<Name>GvspProtocolDiagnosis.stRecv.nError</Name>
-							<Value>0</Value>
-						</Value>
-						<Value>
-							<Name>GvspProtocolDiagnosis.stRecv.nIgnored</Name>
-							<Value>0</Value>
-						</Value>
-						<Value>
-							<Name>GvspProtocolDiagnosis.nResendRequests</Name>
-							<Value>0</Value>
-						</Value>
-						<Value>
-							<Name>GvspProtocolDiagnosis.nCompletedBlocks</Name>
-							<Value>0</Value>
-						</Value>
-						<Value>
-							<Name>GvspProtocolDiagnosis.nAbortedBlocks</Name>
-							<Value>0</Value>
-						</Value>
-						<Value>
-							<Name>GvspProtocolDiagnosis.nTimedOutBlocks</Name>
-							<Value>0</Value>
-						</Value>
-						<Value>
-							<Name>GvspProtocolDiagnosis.nInvalidBlocks</Name>
-							<Value>0</Value>
-						</Value>
-						<Value>
-							<Name>GvspProtocolDiagnosis.nFurtherErroneousBlocks</Name>
-							<Value>0</Value>
-						</Value>
-						<Value>
-							<Name>GvspProtocolDiagnosis.nDuplicateBlocks</Name>
-							<Value>0</Value>
-						</Value>
-						<Value>
-							<Name>GvspProtocolDiagnosis.nMissingBlocks</Name>
-							<Value>0</Value>
-						</Value>
-						<Value>
-							<Name>GvspProtocolDiagnosis.nUnexpectedBlocks</Name>
-							<Value>0</Value>
-						</Value>
-						<Value>
-							<Name>GvspProtocolDiagnosis.nBlockIdOverflows</Name>
-							<Value>0</Value>
-						</Value>
 					</ParameterValues>
 					<InterfacePointerValues>
 						<Value>
@@ -13402,12 +14054,15 @@
 				</TmcDesc>
 			</Module>
 		</Module>
-		<Module Id="#x01010060" Disabled="true" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcIoGigEVision|4.0.6.5" TcSmClass="CTComVisionObjDef">
+		<Module Id="#x01010060" Disabled="true" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcIoGigEVision|5.8.4.0" TcSmClass="CTComVisionObjDef">
 			<Name>Camera1 Image Acquisition Simulation (CGevImageAcquisitionSimulation)</Name>
 			<ImageId>1000</ImageId>
-			<TmcDesc GUID="{F6C5A2D8-F17E-45DE-A68A-B78B3B54B4EC}" TcSmClass="CTComVisionObjDef">
+			<TmcDesc GUID="{F6C5A2D8-F17E-45DE-A68A-B78B3B54B4EC}" TcSmClass="CTComVisionObjDef" ClassFactoryId="Beckhoff Automation GmbH|TcIoGigEVision|5.8.4.0">
 				<Name>CGevImageAcquisitionSimulation</Name>
 				<CLSID ClassFactory="TcIoGigEVision">{F6C5A2D8-F17E-45DE-A68A-B78B3B54B4EC}</CLSID>
+				<Info>
+					<ImageData>424d360300000000000036000000280000001000000010000000010018000000000000000000c40e0000c40e00000000000000000000554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3be1d7d1e1d7d1e1d7d1e1d7d1e1d7d1e1d7d1e1d7d1dfd6cfdfd6cfdfd6cfdfd6cfdfd6cfdfd6cfdfd6cf554f3b554f3be3dbd4e3dbd4554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3bdfd6cfdfd6cf554f3b554f3be3dbd4e3dbd4554f3bc1b39ac1b399c0b299bfb097beae94bbac90b8a88cb7a488554f3bdfd6cfdfd6cf554f3b554f3bece4dfece4df554f3bc6b9a3c6b8a2c5b7a0c4b59fc2b49bbfb197bdae92baaa8d554f3bdfd6cfdfd6cf554f3b554f3bece4dfece4df554f3bcbbfaacbbeaac9bda9c9bba5c6b8a2c3b59ec0b298bdae93554f3bdfd6cfdfd6cf554f3b554f3bece4dfece4df554f3bcfc6b1d0c4b1cec3afcdc1adcabea8c7baa5c4b69ec0b298554f3be1d7d1dfd6cf554f3b554f3beee6e1eee6e1554f3bd4cabad4cabad2c9b6d1c6b3cec3afcabfa9c8baa4c4b59e554f3be1d7d1dfd6cf554f3b554f3bf2ebe7f2ebe7554f3b554f3b554f3bd7cfbed4cbbad2c7b4cec2af554f3b554f3b554f3be3dbd4e1d7d1554f3b554f3bf2ebe7f2ebe7f5eeebf2ebe7554f3bdad4c4d8cfbfd4cabad0c6b3554f3be7ded9e3dbd4e3dbd4e1d7d1554f3b554f3bf5eeebf5eeebf5eeebf5eeeb554f3bded8cbdad3c4d7cdbdd2c8b6554f3bece4dfe3dbd4e3dbd4e1d7d1554f3b554f3bf5eeebf5eeeb554f3b554f3b554f3be1dbcfdcd6c7d8cfbfd3c9b8554f3b554f3b554f3be3dbd4e1d7d1554f3b554f3bf5eeebf7f0ed554f3be8e3dbe5e1d7e1dbcfddd5c8d8cfbfd3cab7cec4b0c9bda8554f3be3dbd4e1d7d1554f3b554f3bf5eeebf5eeeb554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3be3dbd4e1d7d1554f3b554f3bf5eeebf5eeebf5eeebf5eeebf5eeebf2ebe7f2ebe7eee6e1ece4dfece4dfece4dfe3dbd4e3dbd4e1d7d1554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b</ImageData>
+				</Info>
 				<InitSequence>SO</InitSequence>
 				<Contexts>
 					<Context>
@@ -13540,12 +14195,15 @@
 				</InterfacePointerValues>
 			</TmcDesc>
 		</Module>
-		<Module Id="#x01010070" Disabled="true" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcIoGigEVision|4.0.6.5" TcSmClass="CTComVisionObjDef">
+		<Module Id="#x01010070" Disabled="true" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcIoGigEVision|5.8.4.0" TcSmClass="CTComVisionObjDef">
 			<Name>Camera1 Ads Communicator (CGevAdsCommunicator)</Name>
 			<ImageId>1000</ImageId>
-			<TmcDesc GUID="{D3AC2B42-00B6-4F04-B20D-A1A9E3949D9B}" TcSmClass="CTComVisionObjDef">
+			<TmcDesc GUID="{D3AC2B42-00B6-4F04-B20D-A1A9E3949D9B}" TcSmClass="CTComVisionObjDef" ClassFactoryId="Beckhoff Automation GmbH|TcIoGigEVision|5.8.4.0">
 				<Name>CGevAdsCommunicator</Name>
 				<CLSID ClassFactory="TcIoGigEVision">{D3AC2B42-00B6-4F04-B20D-A1A9E3949D9B}</CLSID>
+				<Info>
+					<ImageData>424d360300000000000036000000280000001000000010000000010018000000000000000000c40e0000c40e00000000000000000000554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3be1d7d1e1d7d1e1d7d1e1d7d1e1d7d1e1d7d1e1d7d1dfd6cfdfd6cfdfd6cfdfd6cfdfd6cfdfd6cfdfd6cf554f3b554f3be3dbd4e3dbd4554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3bdfd6cfdfd6cf554f3b554f3be3dbd4e3dbd4554f3bc1b39ac1b399c0b299bfb097beae94bbac90b8a88cb7a488554f3bdfd6cfdfd6cf554f3b554f3bece4dfece4df554f3bc6b9a3c6b8a2c5b7a0c4b59fc2b49bbfb197bdae92baaa8d554f3bdfd6cfdfd6cf554f3b554f3bece4dfece4df554f3bcbbfaacbbeaac9bda9c9bba5c6b8a2c3b59ec0b298bdae93554f3bdfd6cfdfd6cf554f3b554f3bece4dfece4df554f3bcfc6b1d0c4b1cec3afcdc1adcabea8c7baa5c4b69ec0b298554f3be1d7d1dfd6cf554f3b554f3beee6e1eee6e1554f3bd4cabad4cabad2c9b6d1c6b3cec3afcabfa9c8baa4c4b59e554f3be1d7d1dfd6cf554f3b554f3bf2ebe7f2ebe7554f3b554f3b554f3bd7cfbed4cbbad2c7b4cec2af554f3b554f3b554f3be3dbd4e1d7d1554f3b554f3bf2ebe7f2ebe7f5eeebf2ebe7554f3bdad4c4d8cfbfd4cabad0c6b3554f3be7ded9e3dbd4e3dbd4e1d7d1554f3b554f3bf5eeebf5eeebf5eeebf5eeeb554f3bded8cbdad3c4d7cdbdd2c8b6554f3bece4dfe3dbd4e3dbd4e1d7d1554f3b554f3bf5eeebf5eeeb554f3b554f3b554f3be1dbcfdcd6c7d8cfbfd3c9b8554f3b554f3b554f3be3dbd4e1d7d1554f3b554f3bf5eeebf7f0ed554f3be8e3dbe5e1d7e1dbcfddd5c8d8cfbfd3cab7cec4b0c9bda8554f3be3dbd4e1d7d1554f3b554f3bf5eeebf5eeeb554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3be3dbd4e1d7d1554f3b554f3bf5eeebf5eeebf5eeebf5eeebf5eeebf2ebe7f2ebe7eee6e1ece4dfece4dfece4dfe3dbd4e3dbd4e1d7d1554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b</ImageData>
+				</Info>
 				<InitSequence>PSO</InitSequence>
 				<Contexts>
 					<Context>
@@ -13648,12 +14306,15 @@
 				</InterfacePointerValues>
 			</TmcDesc>
 		</Module>
-		<Module Id="#x01010080" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcVision|4.0.6.5" TcSmClass="CTComVisionObjDef">
+		<Module Id="#x01010080" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcVision|5.8.4.0" TcSmClass="CTComVisionObjDef">
 			<Name>Camera1 Image Provider (CGevImageProvider)</Name>
 			<ImageId>1000</ImageId>
-			<TmcDesc GUID="{F81ECC63-F412-4CF1-ABEC-DA193F5F64AE}" TcSmClass="CTComVisionObjDef">
+			<TmcDesc GUID="{F81ECC63-F412-4CF1-ABEC-DA193F5F64AE}" TcSmClass="CTComVisionObjDef" ClassFactoryId="Beckhoff Automation GmbH|TcVision|5.8.4.0">
 				<Name>CTcVnGevImageProvider</Name>
 				<CLSID ClassFactory="TcVision">{F81ECC63-F412-4CF1-ABEC-DA193F5F64AE}</CLSID>
+				<Info>
+					<ImageData>424d360300000000000036000000280000001000000010000000010018000000000000000000c40e0000c40e00000000000000000000554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3be1d7d1e1d7d1e1d7d1e1d7d1e1d7d1e1d7d1e1d7d1dfd6cfdfd6cfdfd6cfdfd6cfdfd6cfdfd6cfdfd6cf554f3b554f3be3dbd4e3dbd4554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3bdfd6cfdfd6cf554f3b554f3be3dbd4e3dbd4554f3bc1b39ac1b399c0b299bfb097beae94bbac90b8a88cb7a488554f3bdfd6cfdfd6cf554f3b554f3bece4dfece4df554f3bc6b9a3c6b8a2c5b7a0c4b59fc2b49bbfb197bdae92baaa8d554f3bdfd6cfdfd6cf554f3b554f3bece4dfece4df554f3bcbbfaacbbeaac9bda9c9bba5c6b8a2c3b59ec0b298bdae93554f3bdfd6cfdfd6cf554f3b554f3bece4dfece4df554f3bcfc6b1d0c4b1cec3afcdc1adcabea8c7baa5c4b69ec0b298554f3be1d7d1dfd6cf554f3b554f3beee6e1eee6e1554f3bd4cabad4cabad2c9b6d1c6b3cec3afcabfa9c8baa4c4b59e554f3be1d7d1dfd6cf554f3b554f3bf2ebe7f2ebe7554f3b554f3b554f3bd7cfbed4cbbad2c7b4cec2af554f3b554f3b554f3be3dbd4e1d7d1554f3b554f3bf2ebe7f2ebe7f5eeebf2ebe7554f3bdad4c4d8cfbfd4cabad0c6b3554f3be7ded9e3dbd4e3dbd4e1d7d1554f3b554f3bf5eeebf5eeebf5eeebf5eeeb554f3bded8cbdad3c4d7cdbdd2c8b6554f3bece4dfe3dbd4e3dbd4e1d7d1554f3b554f3bf5eeebf5eeeb554f3b554f3b554f3be1dbcfdcd6c7d8cfbfd3c9b8554f3b554f3b554f3be3dbd4e1d7d1554f3b554f3bf5eeebf7f0ed554f3be8e3dbe5e1d7e1dbcfddd5c8d8cfbfd3cab7cec4b0c9bda8554f3be3dbd4e1d7d1554f3b554f3bf5eeebf5eeeb554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3be3dbd4e1d7d1554f3b554f3bf5eeebf5eeebf5eeebf5eeebf5eeebf2ebe7f2ebe7eee6e1ece4dfece4dfece4dfe3dbd4e3dbd4e1d7d1554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b</ImageData>
+				</Info>
 				<InitSequence>PSO</InitSequence>
 				<Contexts>
 					<Context>
@@ -13774,39 +14435,39 @@
 				<ParentOTCID>#x06020010</ParentOTCID>
 				<ParameterValues>
 					<Value>
-						<Name>CameraMatrix[0][0]</Name>
+						<Name>CameraMatrix[0,0]</Name>
 						<Value>0</Value>
 					</Value>
 					<Value>
-						<Name>CameraMatrix[0][1]</Name>
+						<Name>CameraMatrix[0,1]</Name>
 						<Value>0</Value>
 					</Value>
 					<Value>
-						<Name>CameraMatrix[0][2]</Name>
+						<Name>CameraMatrix[0,2]</Name>
 						<Value>0</Value>
 					</Value>
 					<Value>
-						<Name>CameraMatrix[1][0]</Name>
+						<Name>CameraMatrix[1,0]</Name>
 						<Value>0</Value>
 					</Value>
 					<Value>
-						<Name>CameraMatrix[1][1]</Name>
+						<Name>CameraMatrix[1,1]</Name>
 						<Value>0</Value>
 					</Value>
 					<Value>
-						<Name>CameraMatrix[1][2]</Name>
+						<Name>CameraMatrix[1,2]</Name>
 						<Value>0</Value>
 					</Value>
 					<Value>
-						<Name>CameraMatrix[2][0]</Name>
+						<Name>CameraMatrix[2,0]</Name>
 						<Value>0</Value>
 					</Value>
 					<Value>
-						<Name>CameraMatrix[2][1]</Name>
+						<Name>CameraMatrix[2,1]</Name>
 						<Value>0</Value>
 					</Value>
 					<Value>
-						<Name>CameraMatrix[2][2]</Name>
+						<Name>CameraMatrix[2,2]</Name>
 						<Value>0</Value>
 					</Value>
 					<Value>
@@ -13842,39 +14503,39 @@
 						<Value>0</Value>
 					</Value>
 					<Value>
-						<Name>RotationMatrix[0][0]</Name>
+						<Name>RotationMatrix[0,0]</Name>
 						<Value>0</Value>
 					</Value>
 					<Value>
-						<Name>RotationMatrix[0][1]</Name>
+						<Name>RotationMatrix[0,1]</Name>
 						<Value>0</Value>
 					</Value>
 					<Value>
-						<Name>RotationMatrix[0][2]</Name>
+						<Name>RotationMatrix[0,2]</Name>
 						<Value>0</Value>
 					</Value>
 					<Value>
-						<Name>RotationMatrix[1][0]</Name>
+						<Name>RotationMatrix[1,0]</Name>
 						<Value>0</Value>
 					</Value>
 					<Value>
-						<Name>RotationMatrix[1][1]</Name>
+						<Name>RotationMatrix[1,1]</Name>
 						<Value>0</Value>
 					</Value>
 					<Value>
-						<Name>RotationMatrix[1][2]</Name>
+						<Name>RotationMatrix[1,2]</Name>
 						<Value>0</Value>
 					</Value>
 					<Value>
-						<Name>RotationMatrix[2][0]</Name>
+						<Name>RotationMatrix[2,0]</Name>
 						<Value>0</Value>
 					</Value>
 					<Value>
-						<Name>RotationMatrix[2][1]</Name>
+						<Name>RotationMatrix[2,1]</Name>
 						<Value>0</Value>
 					</Value>
 					<Value>
-						<Name>RotationMatrix[2][2]</Name>
+						<Name>RotationMatrix[2,2]</Name>
 						<Value>0</Value>
 					</Value>
 					<Value>
@@ -13902,6 +14563,6 @@
 				</InterfacePointerValues>
 			</TmcDesc>
 		</Module>
-		<MacAddress>00:01:05:9e:e1:10</MacAddress>
+		<MacAddress>00:01:05:9e:e1:36</MacAddress>
 	</TreeItem>
 </TcSmItem>

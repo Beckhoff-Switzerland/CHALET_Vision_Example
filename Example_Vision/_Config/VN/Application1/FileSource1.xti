@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.65" ClassName="CVisionFileSourceDef">
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.17" ClassName="CVisionFileSourceDef">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{C10B6EE2-EA6E-4FED-AC4E-D3C8366F26C0}">ITcVnData</Name>
@@ -218,6 +218,11 @@
 				<Text><![CDATA[TCVN_PPM_MONO12P]]></Text>
 				<Enum>12</Enum>
 				<Comment><![CDATA[Mono12p or BayerXX12p]]></Comment>
+			</EnumInfo>
+			<EnumInfo>
+				<Text><![CDATA[TCVN_PPM_MONO14P]]></Text>
+				<Enum>13</Enum>
+				<Comment><![CDATA[Mono14p or BayerXX14p]]></Comment>
 			</EnumInfo>
 			<Hides>
 				<Hide GUID="{799146EA-48E8-46D9-B478-8FCDE0DA4294}"/>
@@ -860,6 +865,9 @@
 					<Name>docuFolder</Name>
 					<Value>Interfaces\Images</Value>
 				</Property>
+				<Property>
+					<Name>CppApi_NoSmartPointer</Name>
+				</Property>
 			</Properties>
 			<Hides>
 				<Hide GUID="{A11EF414-FACA-4B76-AABF-90C5A8455B82}"/>
@@ -1127,12 +1135,15 @@
 				</TcSmExtension>
 			</TcSmExtensions>
 		</Xml>
-		<Module Id="#x010100a0" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcVision|4.0.6.5" TcSmClass="CTComVisionObjDef">
+		<Module Id="#x010100a0" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcVision|5.8.4.0" TcSmClass="CTComVisionObjDef">
 			<Name>FileSource1 Image Acquisition (CTcIoFileImageAcquisition)</Name>
 			<ImageId>1000</ImageId>
-			<TmcDesc GUID="{BB647BE1-7AC0-46E5-AE93-462BDD16DE1F}" TcSmClass="CTComVisionObjDef">
+			<TmcDesc GUID="{BB647BE1-7AC0-46E5-AE93-462BDD16DE1F}" TcSmClass="CTComVisionObjDef" ClassFactoryId="Beckhoff Automation GmbH|TcVision|5.8.4.0">
 				<Name>CTcIoFileImageAcquisition</Name>
 				<CLSID ClassFactory="TcVision">{BB647BE1-7AC0-46E5-AE93-462BDD16DE1F}</CLSID>
+				<Info>
+					<ImageData>424d360300000000000036000000280000001000000010000000010018000000000000000000c40e0000c40e00000000000000000000554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3be1d7d1e1d7d1e1d7d1e1d7d1e1d7d1e1d7d1e1d7d1dfd6cfdfd6cfdfd6cfdfd6cfdfd6cfdfd6cfdfd6cf554f3b554f3be3dbd4e3dbd4554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3bdfd6cfdfd6cf554f3b554f3be3dbd4e3dbd4554f3bc1b39ac1b399c0b299bfb097beae94bbac90b8a88cb7a488554f3bdfd6cfdfd6cf554f3b554f3bece4dfece4df554f3bc6b9a3c6b8a2c5b7a0c4b59fc2b49bbfb197bdae92baaa8d554f3bdfd6cfdfd6cf554f3b554f3bece4dfece4df554f3bcbbfaacbbeaac9bda9c9bba5c6b8a2c3b59ec0b298bdae93554f3bdfd6cfdfd6cf554f3b554f3bece4dfece4df554f3bcfc6b1d0c4b1cec3afcdc1adcabea8c7baa5c4b69ec0b298554f3be1d7d1dfd6cf554f3b554f3beee6e1eee6e1554f3bd4cabad4cabad2c9b6d1c6b3cec3afcabfa9c8baa4c4b59e554f3be1d7d1dfd6cf554f3b554f3bf2ebe7f2ebe7554f3b554f3b554f3bd7cfbed4cbbad2c7b4cec2af554f3b554f3b554f3be3dbd4e1d7d1554f3b554f3bf2ebe7f2ebe7f5eeebf2ebe7554f3bdad4c4d8cfbfd4cabad0c6b3554f3be7ded9e3dbd4e3dbd4e1d7d1554f3b554f3bf5eeebf5eeebf5eeebf5eeeb554f3bded8cbdad3c4d7cdbdd2c8b6554f3bece4dfe3dbd4e3dbd4e1d7d1554f3b554f3bf5eeebf5eeeb554f3b554f3b554f3be1dbcfdcd6c7d8cfbfd3c9b8554f3b554f3b554f3be3dbd4e1d7d1554f3b554f3bf5eeebf7f0ed554f3be8e3dbe5e1d7e1dbcfddd5c8d8cfbfd3cab7cec4b0c9bda8554f3be3dbd4e1d7d1554f3b554f3bf5eeebf5eeeb554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3be3dbd4e1d7d1554f3b554f3bf5eeebf5eeebf5eeebf5eeebf5eeebf2ebe7f2ebe7eee6e1ece4dfece4dfece4dfe3dbd4e3dbd4e1d7d1554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b</ImageData>
+				</Info>
 				<InitSequence>SO</InitSequence>
 				<Contexts>
 					<Context>
@@ -1241,10 +1252,6 @@
 						<Name>ServiceTimeout</Name>
 						<Value>5000</Value>
 					</Value>
-					<Value>
-						<Name>IsRunning</Name>
-						<EnumText>FALSE</EnumText>
-					</Value>
 				</ParameterValues>
 				<InterfacePointerValues>
 					<Value>
@@ -1254,12 +1261,15 @@
 				</InterfacePointerValues>
 			</TmcDesc>
 		</Module>
-		<Module Id="#x010100b0" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcVision|4.0.6.5" TcSmClass="CTComVisionObjDef">
+		<Module Id="#x010100b0" KeepUnrestoredLinks="2" ClassFactoryId="Beckhoff Automation GmbH|TcVision|5.8.4.0" TcSmClass="CTComVisionObjDef">
 			<Name>FileSource1 Image Provider (CTcVnFileImageProvider)</Name>
 			<ImageId>1000</ImageId>
-			<TmcDesc GUID="{CA3A2AC6-9655-406B-B405-BFDCFD83E1BC}" TcSmClass="CTComVisionObjDef">
+			<TmcDesc GUID="{CA3A2AC6-9655-406B-B405-BFDCFD83E1BC}" TcSmClass="CTComVisionObjDef" ClassFactoryId="Beckhoff Automation GmbH|TcVision|5.8.4.0">
 				<Name>CTcVnFileImageProvider</Name>
 				<CLSID ClassFactory="TcVision">{CA3A2AC6-9655-406B-B405-BFDCFD83E1BC}</CLSID>
+				<Info>
+					<ImageData>424d360300000000000036000000280000001000000010000000010018000000000000000000c40e0000c40e00000000000000000000554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3be1d7d1e1d7d1e1d7d1e1d7d1e1d7d1e1d7d1e1d7d1dfd6cfdfd6cfdfd6cfdfd6cfdfd6cfdfd6cfdfd6cf554f3b554f3be3dbd4e3dbd4554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3bdfd6cfdfd6cf554f3b554f3be3dbd4e3dbd4554f3bc1b39ac1b399c0b299bfb097beae94bbac90b8a88cb7a488554f3bdfd6cfdfd6cf554f3b554f3bece4dfece4df554f3bc6b9a3c6b8a2c5b7a0c4b59fc2b49bbfb197bdae92baaa8d554f3bdfd6cfdfd6cf554f3b554f3bece4dfece4df554f3bcbbfaacbbeaac9bda9c9bba5c6b8a2c3b59ec0b298bdae93554f3bdfd6cfdfd6cf554f3b554f3bece4dfece4df554f3bcfc6b1d0c4b1cec3afcdc1adcabea8c7baa5c4b69ec0b298554f3be1d7d1dfd6cf554f3b554f3beee6e1eee6e1554f3bd4cabad4cabad2c9b6d1c6b3cec3afcabfa9c8baa4c4b59e554f3be1d7d1dfd6cf554f3b554f3bf2ebe7f2ebe7554f3b554f3b554f3bd7cfbed4cbbad2c7b4cec2af554f3b554f3b554f3be3dbd4e1d7d1554f3b554f3bf2ebe7f2ebe7f5eeebf2ebe7554f3bdad4c4d8cfbfd4cabad0c6b3554f3be7ded9e3dbd4e3dbd4e1d7d1554f3b554f3bf5eeebf5eeebf5eeebf5eeeb554f3bded8cbdad3c4d7cdbdd2c8b6554f3bece4dfe3dbd4e3dbd4e1d7d1554f3b554f3bf5eeebf5eeeb554f3b554f3b554f3be1dbcfdcd6c7d8cfbfd3c9b8554f3b554f3b554f3be3dbd4e1d7d1554f3b554f3bf5eeebf7f0ed554f3be8e3dbe5e1d7e1dbcfddd5c8d8cfbfd3cab7cec4b0c9bda8554f3be3dbd4e1d7d1554f3b554f3bf5eeebf5eeeb554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3be3dbd4e1d7d1554f3b554f3bf5eeebf5eeebf5eeebf5eeebf5eeebf2ebe7f2ebe7eee6e1ece4dfece4dfece4dfe3dbd4e3dbd4e1d7d1554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b554f3b</ImageData>
+				</Info>
 				<InitSequence>SO</InitSequence>
 				<Contexts>
 					<Context>

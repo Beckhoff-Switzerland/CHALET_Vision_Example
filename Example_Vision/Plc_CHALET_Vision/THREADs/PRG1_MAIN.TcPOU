@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.12">
   <POU Name="PRG1_MAIN" Id="{19f277bd-4097-4636-9c24-875ea110dece}" SpecialFunc="None">
     <Declaration><![CDATA[//This program is called by a task with high priority. 
 //It is therefore called cyclically with high precision. For exact triggering, motion, fast reaction, ....
@@ -12,10 +12,16 @@ VAR
 	(* Settings *)
 	nExposure_1us 			: UDINT := 40_000;
 	eTriggerSource			: E_TriggerSource := E_TriggerSource.EtherCAT;
+	nOpticControlSensorDist : UDINT := 200; 	//40-1024mm
+	fPercentOrange			: LREAL := 50; 	//0-100%
+	fPercentGreen			: LREAL := 50;	//0-100%
+	fPercentBlue			: LREAL := 100;	//0-100%
+	fPercentIR				: LREAL := 0;	//0-100%
 
 	(* Commands *)
 	bInitDone				: BOOL;
-	bReset					: BOOL;
+	bResetOnce				: BOOL; //Reset once if in error state
+	bResetAuto				: BOOL; //Reset automatic and immidiatley if in errorstate
 	nFixRateDelayMs 		: ULINT := 2000;
 	nNextTrigger			: T_DCTIME64;
 	bTriggerOnceEC			: BOOL; //Send an EtherCAT Trigger (Timestamp)	
@@ -43,17 +49,23 @@ IF bTriggerOnceEC THEN
 	fbCamera.TriggerEtherCat.Trigger(nNextTrigger);
 END_IF
 
-//Example 2: Send an EtherCAT timestamp each 2ms
+
+//Example 2: Send an EtherCAT timestamp cyclical each 2ms
 IF bTriggerFixRateEC AND nFixRateDelayMs > 0 AND fbCamera.TriggerEtherCat.EmptySpaceInBuffer THEN
-	//Trigger here cyclical nonstop - each x ms
-	nNextTrigger := fbCamera.TriggerEtherCAT.LastTriggerTime + nFixRateDelayMs * 1_000_000(*ms in ns*);			
-	//Validate if possible
-	nNextTrigger :=  MAX(nNextTrigger, fbCamera.TriggerEtherCAT.EarliestPossibleTriggerTime);
-	fbCamera.TriggerEtherCat.Trigger(nNextTrigger);
+	nNextTrigger := fbCamera.TriggerEtherCAT.LastTriggerTime + nFixRateDelayMs * 1_000_000(*ms to ns*);			
+	(* Send the effective and definitive recording time to the camera as late as possible. 
+	This may be relevant for synchronization with a motor in order to correct a possible drift error. 
+	However, it must be early enough so as not to miss the moment - use 1.5x cycletime[ns]. *)
+	IF (nNextTrigger - TO_UDINT(TO_LREAL(fbCamera.TriggerEtherCAT.TaskCycleTime) * 1.5)) <= fbCamera.TriggerEtherCAT.EarliestPossibleTriggerTime THEN
+		//If it is already too late to send a trigger, then the next possible time is used
+		nNextTrigger :=  MAX(nNextTrigger, fbCamera.TriggerEtherCAT.EarliestPossibleTriggerTime);
+		fbCamera.TriggerEtherCat.Trigger(nNextTrigger);
+	END_IF
 END_IF	
 
+
 //Example 3: Send a trigger request via Gige-Vision. 
-//To do this, the trigger source must be switched to software trigger in the camera register
+//To do this, the trigger source must be switched to software trigger in the camera register. See example "Access to the Gige-Vision register"
 IF bTriggerOnceSW AND (fbCamera.Simulation OR (eTriggerSource = E_TriggerSource.SoftwareTrigger))THEN
 	bTriggerOnceSW := FALSE;
 	fbCamera.TriggerSoftware();
@@ -66,21 +78,31 @@ IF bTriggerOnceFileSource THEN
 	fbFileSource.TriggerImage();
 END_IF
 
-//Access to the Gige-Vision register
-IF fbCamera.RegisterCamera <> 0 THEN
+
+//Example: Access to the Gige-Vision register
+IF fbCamera.RegisterBeckhoffCamera <> 0 THEN
 	//Easy read and write of the common camera parameters. 
 	//A change will force the camera state machine in the "opened" state and automatic back to "acquiring"
-	fbCamera.RegisterCamera.Exposure_1us := nExposure_1us;
+	fbCamera.RegisterBeckhoffCamera.Exposure_1us := nExposure_1us;
 	
 	//Select triggersource EtherCAT or Softtrigger
-	fbCamera.RegisterCamera.TriggerSource := eTriggerSource;
+	fbCamera.RegisterBeckhoffCamera.TriggerSource := eTriggerSource;
 	
 	//And many more...
 END_IF
+IF fbCamera.RegisterLighting <> 0 THEN
+	fbCamera.RegisterLighting.BrightnessOrange 		:= TO_UDINT(4095*fPercentOrange);
+	fbCamera.RegisterLighting.BrightnessGreen 		:= TO_UDINT(4095*fPercentGreen);
+	fbCamera.RegisterLighting.BrightnessBlue 		:= TO_UDINT(4095*fPercentBlue);
+	fbCamera.RegisterLighting.BrightnessInfrared 	:= TO_UDINT(4095*fPercentIR);
+END_IF
+IF fbCamera.RegisterOpticControl <> 0 THEN
+	fbCamera.RegisterOpticControl.SensorDistance := nOpticControlSensorDist;//40-1024mm
+END_IF
 
 //Reset here if camera is in error state
-IF bReset AND (fbCamera.State = TCVN_CS_ERROR) THEN
-	bReset := FALSE;
+IF (bResetOnce OR bResetAuto) AND (fbCamera.State = ETcVnCameraState.TCVN_CS_ERROR) THEN
+	bResetOnce := FALSE;
 	fbCamera.Reset();
 END_IF
 
