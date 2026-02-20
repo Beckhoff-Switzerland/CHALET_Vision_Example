@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.17" ClassName="CDevEthernetAdapterDef" SubType="109">
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.20" ClassName="CDevEthernetAdapterDef" SubType="109">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{03010035-0000-0000-E000-000000000064}" TcBaseType="true">ITcIoEthProtocol</Name>
@@ -42,8 +42,7 @@
 			</Method>
 		</DataType>
 		<DataType>
-			<Name GUID="{478C4436-6F33-4F6F-B4A8-88074B54DCD4}">ETYPE_VLAN_HEADER</Name>
-			<Comment><![CDATA[VLAN header.]]></Comment>
+			<Name GUID="{478C4436-6F33-4F6F-B4A8-88074B54DCD4}" TcBaseType="true">ETYPE_VLAN_HEADER</Name>
 			<BitSize>32</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
 		</DataType>
@@ -200,195 +199,148 @@
 		</DataType>
 		<DataType>
 			<Name GUID="{0301009D-0000-0000-E000-000000000064}" TcBaseType="true">ITcIoIpStackControl</Name>
-			<Comment><![CDATA[Interface for IP stack control.]]></Comment>
 			<BitSize X64="64">32</BitSize>
 			<BaseType GUID="{00000001-0000-0000-E000-000000000064}">ITcUnknown</BaseType>
 			<Method>
 				<Name>DeleteArpCache</Name>
-				<Comment><![CDATA[Delete the ARP cache.]]></Comment>
 				<ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
 				<ReturnBitSize>32</ReturnBitSize>
 			</Method>
 			<Method>
 				<Name>GetIpData</Name>
-				<Comment><![CDATA[Get the IP data]]></Comment>
 				<ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
 				<ReturnBitSize>32</ReturnBitSize>
 				<Parameter>
 					<Name>pIpAddr</Name>
-					<Comment><![CDATA[IP address]]></Comment>
 					<Type GUID="{18071995-0000-0000-0000-000000000008}" PointerTo="1">UDINT</Type>
 					<BitSize X64="64">32</BitSize>
 				</Parameter>
 				<Parameter>
 					<Name>pIpSubnetMask</Name>
-					<Comment><![CDATA[Subnet mask]]></Comment>
 					<Type GUID="{18071995-0000-0000-0000-000000000008}" PointerTo="1">UDINT</Type>
 					<BitSize X64="64">32</BitSize>
 				</Parameter>
 				<Parameter>
 					<Name>pIpGateway</Name>
-					<Comment><![CDATA[IP gateway]]></Comment>
 					<Type GUID="{18071995-0000-0000-0000-000000000008}" PointerTo="1">UDINT</Type>
 					<BitSize X64="64">32</BitSize>
 				</Parameter>
 			</Method>
-			<Properties>
-				<Property>
-					<Name>docuFolder</Name>
-					<Value>Interfaces\GigEVision</Value>
-				</Property>
-			</Properties>
 		</DataType>
 		<DataType>
 			<Name GUID="{03010095-0000-0000-E000-000000000064}" TcBaseType="true">ITcIoUdpProtocolRecv</Name>
-			<Comment><![CDATA[Interface for a UDP protocol receiver.]]></Comment>
 			<BitSize X64="64">32</BitSize>
 			<BaseType GUID="{00000001-0000-0000-E000-000000000064}">ITcUnknown</BaseType>
 			<Method>
 				<Name>ReceiveData</Name>
-				<Comment><![CDATA[Receive data.]]></Comment>
 				<ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
 				<ReturnBitSize>32</ReturnBitSize>
 				<Parameter>
 					<Name>ipAddr</Name>
-					<Comment><![CDATA[IP address]]></Comment>
 					<Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
 					<BitSize>32</BitSize>
 				</Parameter>
 				<Parameter>
 					<Name>udpDestPort</Name>
-					<Comment><![CDATA[UDP destination port]]></Comment>
 					<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
 					<BitSize>16</BitSize>
 				</Parameter>
 				<Parameter>
 					<Name>udpSrcPort</Name>
-					<Comment><![CDATA[UDP source port]]></Comment>
 					<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
 					<BitSize>16</BitSize>
 				</Parameter>
 				<Parameter>
 					<Name>nData</Name>
-					<Comment><![CDATA[Size of the data]]></Comment>
 					<Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
 					<BitSize>32</BitSize>
 				</Parameter>
 				<Parameter>
 					<Name>pData</Name>
-					<Comment><![CDATA[Pointer to the data]]></Comment>
 					<Type GUID="{18071995-0000-0000-0000-000000000018}">PVOID</Type>
 					<BitSize X64="64">32</BitSize>
 				</Parameter>
 				<Parameter>
 					<Name>pVlan</Name>
-					<Comment><![CDATA[VLAN header]]></Comment>
 					<Type GUID="{478C4436-6F33-4F6F-B4A8-88074B54DCD4}" PointerTo="1" Optional="0">ETYPE_VLAN_HEADER</Type>
 					<BitSize X64="64">32</BitSize>
 				</Parameter>
 			</Method>
-			<Properties>
-				<Property>
-					<Name>docuFolder</Name>
-					<Value>Interfaces\GigEVision</Value>
-				</Property>
-			</Properties>
 		</DataType>
 		<DataType>
 			<Name GUID="{03010097-0000-0000-E000-000000000064}" TcBaseType="true">ITcIoUdpProtocol</Name>
-			<Comment><![CDATA[Interface for a UDP protocol.]]></Comment>
 			<BitSize X64="64">32</BitSize>
 			<BaseType GUID="{00000001-0000-0000-E000-000000000064}">ITcUnknown</BaseType>
 			<Method>
 				<Name>SendData</Name>
-				<Comment><![CDATA[Send data.]]></Comment>
 				<ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
 				<ReturnBitSize>32</ReturnBitSize>
 				<Parameter>
 					<Name>ipDestAddr</Name>
-					<Comment><![CDATA[Destination IP address]]></Comment>
 					<Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
 					<BitSize>32</BitSize>
 				</Parameter>
 				<Parameter>
 					<Name>udpDestPort</Name>
-					<Comment><![CDATA[Destination UDP port]]></Comment>
 					<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
 					<BitSize>16</BitSize>
 				</Parameter>
 				<Parameter>
 					<Name>udpSrcPort</Name>
-					<Comment><![CDATA[Source UDP port]]></Comment>
 					<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
 					<BitSize>16</BitSize>
 				</Parameter>
 				<Parameter>
 					<Name>nData</Name>
-					<Comment><![CDATA[Size of the data]]></Comment>
 					<Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
 					<BitSize>32</BitSize>
 				</Parameter>
 				<Parameter>
 					<Name>pData</Name>
-					<Comment><![CDATA[Pointer to the data]]></Comment>
 					<Type GUID="{18071995-0000-0000-0000-000000000018}">PVOID</Type>
 					<BitSize X64="64">32</BitSize>
 				</Parameter>
 				<Parameter>
 					<Name>bCalcUdpCheckSum</Name>
-					<Comment><![CDATA[Specify if the UDP checksum should be calculated]]></Comment>
 					<Type GUID="{18071995-0000-0000-0000-000000000030}" Optional="0">BOOL</Type>
 					<BitSize>8</BitSize>
 				</Parameter>
 				<Parameter>
 					<Name>pVlan</Name>
-					<Comment><![CDATA[VLAN header.]]></Comment>
 					<Type GUID="{478C4436-6F33-4F6F-B4A8-88074B54DCD4}" PointerTo="1" Optional="0">ETYPE_VLAN_HEADER</Type>
 					<BitSize X64="64">32</BitSize>
 				</Parameter>
 			</Method>
 			<Method>
 				<Name>CheckReceived</Name>
-				<Comment><![CDATA[Check for received data and process it.]]></Comment>
 				<ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
 				<ReturnBitSize>32</ReturnBitSize>
 			</Method>
 			<Method>
 				<Name>RegisterReceiver</Name>
-				<Comment><![CDATA[Register a UDP receiver.]]></Comment>
 				<ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
 				<ReturnBitSize>32</ReturnBitSize>
 				<Parameter>
 					<Name>udpPort</Name>
-					<Comment><![CDATA[UDP port]]></Comment>
 					<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
 					<BitSize>16</BitSize>
 				</Parameter>
 				<Parameter>
 					<Name>ipRecv</Name>
-					<Comment><![CDATA[Interface containing the callback methods]]></Comment>
 					<Type GUID="{03010095-0000-0000-E000-000000000064}">ITcIoUdpProtocolRecv</Type>
 					<BitSize X64="64">32</BitSize>
 				</Parameter>
 			</Method>
 			<Method>
 				<Name>UnregisterReceiver</Name>
-				<Comment><![CDATA[Unregister a UDP receiver]]></Comment>
 				<ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
 				<ReturnBitSize>32</ReturnBitSize>
 				<Parameter>
 					<Name>udpPort</Name>
-					<Comment><![CDATA[UDP port]]></Comment>
 					<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
 					<BitSize>16</BitSize>
 				</Parameter>
 			</Method>
-			<Properties>
-				<Property>
-					<Name>docuFolder</Name>
-					<Value>Interfaces\GigEVision</Value>
-				</Property>
-			</Properties>
 		</DataType>
 		<DataType>
 			<Name GUID="{7CECC506-F55F-4594-B611-972D650865D2}" TcBaseType="true">TCPIP_EVENT</Name>
@@ -752,9 +704,9 @@
 		<Name>__FILENAME__</Name>
 		<AddressInfo>
 			<Pnp>
-				<DeviceDesc>LAN2 (TwinCAT-Intel PCI Ethernet Adapter (Gigabit) </DeviceDesc>
-				<DeviceName>\DEVICE\{35461A64-447D-4970-A267-3AA70C26BA21}</DeviceName>
-				<DeviceData>00010565ba32</DeviceData>
+				<DeviceDesc>LAN3 (TwinCAT-Intel PCI Ethernet Adapter (Gigabit) </DeviceDesc>
+				<DeviceName>\DEVICE\{24FF9D0C-21F1-456E-A902-864BA69F86A4}</DeviceName>
+				<DeviceData>0001056c1120</DeviceData>
 			</Pnp>
 		</AddressInfo>
 		<Module Id="#x01010020" KeepUnrestoredLinks="2">
@@ -1069,6 +1021,18 @@
 						<Name>ChildCategory</Name>
 						<Value>IpProtocol</Value>
 					</Property>
+					<Property>
+						<Name>Category</Name>
+						<Value>NeedEthernetAdapterPort</Value>
+					</Property>
+					<Property>
+						<Name>Category</Name>
+						<Value>NeedIoIdleTask</Value>
+					</Property>
+					<Property>
+						<Name>ChildCategory</Name>
+						<Value>IpProtocol</Value>
+					</Property>
 				</Properties>
 				<ParentOTCID>#x03010010</ParentOTCID>
 				<ParameterValues>
@@ -1185,7 +1149,7 @@
 				</InterfacePointerValues>
 			</TmcDesc>
 		</Module>
-		<Ethernet DeviceDesc="LAN2 (TwinCAT-Intel PCI Ethernet Adapter (Gigabit) V2 #2)" Ports="1" VLanIds="0a0014001e00280032003c00460050005a0064006e00780082008c009600a000aa00b400be00c800d200dc00e600f000fa0004010e01180122012c01360140014a0154015e01680172017c01860190019a01a401ae01b801c201cc01d601e001ea01f401fe01080212021c02260230023a0244024e02580262026c0276028002">
+		<Ethernet DeviceDesc="LAN3 (TwinCAT-Intel PCI Ethernet Adapter (Gigabit) #3)" Ports="1" VLanIds="0a0014001e00280032003c00460050005a0064006e00780082008c009600a000aa00b400be00c800d200dc00e600f000fa0004010e01180122012c01360140014a0154015e01680172017c01860190019a01a401ae01b801c201cc01d601e001ea01f401fe01080212021c02260230023a0244024e02580262026c0276028002">
 			<Esl SyncSlaveProtocolPort="-1"/>
 		</Ethernet>
 	</Device>

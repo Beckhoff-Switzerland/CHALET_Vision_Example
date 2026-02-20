@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.17" ClassName="CNestedPlcProjDef">
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.20" ClassName="CNestedPlcProjDef">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{1A9F01DF-CEB6-1DB1-8004-58A2E47A173D}" Namespace="Tc2_EtherCAT" AutoDeleteType="true">T_DCTIME64</Name>
@@ -14,9 +14,49 @@
 		</DataType>
 	</DataTypes>
 	<Project GUID="{0234F32A-48A0-4F76-9E06-4DD517A1494C}" Name="Plc_CHALET_Vision" PrjFilePath="..\..\Plc_CHALET_Vision\Plc_CHALET_Vision.plcproj" TmcFilePath="..\..\Plc_CHALET_Vision\Plc_CHALET_Vision.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-		<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{7D63A8C5-43CD-391B-44E3-3076E44BCE76}" TmcPath="Plc_CHALET_Vision\Plc_CHALET_Vision.tmc">
+		<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{0703989E-9F8F-3FB7-10C9-983529656F1A}" TmcPath="Plc_CHALET_Vision\Plc_CHALET_Vision.tmc">
 			<Name>Plc_CHALET_Vision Instance</Name>
 			<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+			<Vars VarGrpType="2" ContextId="1" AreaNo="17">
+				<Name>Task_PlcVisionApplication Outputs</Name>
+				<Var>
+					<Name>PRG1_MAIN.fbLigth.nBrightnessBlue</Name>
+					<Comment><![CDATA[[0-1000‰]]]></Comment>
+					<Type>UINT</Type>
+				</Var>
+				<Var>
+					<Name>PRG1_MAIN.fbLigth.nBrightnessGreen</Name>
+					<Comment><![CDATA[[0-1000‰]]]></Comment>
+					<Type>UINT</Type>
+				</Var>
+				<Var>
+					<Name>PRG1_MAIN.fbLigth.nBrightnessOrange</Name>
+					<Comment><![CDATA[[0-1000‰]]]></Comment>
+					<Type>UINT</Type>
+				</Var>
+				<Var>
+					<Name>PRG1_MAIN.fbLigth.nBrightnessInfrared</Name>
+					<Comment><![CDATA[[0-1000‰]]]></Comment>
+					<Type>UINT</Type>
+				</Var>
+				<Var>
+					<Name>PRG1_MAIN.fbLigth.nDurationImpuls</Name>
+					<Comment><![CDATA[[ns]]]></Comment>
+					<Type>UDINT</Type>
+				</Var>
+				<Var>
+					<Name>PRG1_MAIN.fbLigth.nTimestamp</Name>
+					<Comment><![CDATA[ Trigger time stamp start]]></Comment>
+					<Type GUID="{1A9F01DF-CEB6-1DB1-8004-58A2E47A173D}" Namespace="Tc2_EtherCAT">T_DCTIME64</Type>
+				</Var>
+			</Vars>
+			<Vars VarGrpType="1" ContextId="1" AreaNo="16">
+				<Name>Task_PlcVisionApplication Inputs</Name>
+				<Var>
+					<Name>PRG1_MAIN.fbLigth.bReady</Name>
+					<Type>BOOL</Type>
+				</Var>
+			</Vars>
 			<Vars VarGrpType="2" AreaNo="1">
 				<Name>Task_PlcMain Outputs</Name>
 				<Var>
@@ -81,7 +121,7 @@
 	</Project>
 	<Mappings>
 		<OwnerA Name="Plc_CHALET_Vision Instance">
-			<OwnerB Name="TIID^Device 2 (EtherCAT)^Box 3 (VCS2000-0200)">
+			<OwnerB Name="TIID^Device 2 (EtherCAT)^Box 5 (VUI2000-0216)">
 				<Link VarA="Task_PlcMain Outputs^PRG1_MAIN.fbCamera.fbTriggerEtherCat.nTimestamp" VarB="Gerät^DC Timestamp^Timestamp"/>
 			</OwnerB>
 		</OwnerA>

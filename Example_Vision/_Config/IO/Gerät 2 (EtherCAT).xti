@@ -1,12 +1,15 @@
 <?xml version="1.0"?>
-<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.17" ClassName="CDevEtherCATDef" SubType="111">
-	<Device Id="2" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="192.168.1.31.3.1" RemoteName="Gerät 2 (EtherCAT)" InfoImageId="2">
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.20" ClassName="CDevEtherCATDef" SubType="111">
+	<ImageDatas>
+		<ImageData Id="1000">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000232e0000232e00000000000000000000ff00ff3c3c3c3c3c3cff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c292a2b292a2b292a2b292a2b292a2b292a2b292a2b292a2b292a2b292a2b3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff292a2b3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff292a2b3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3cb2b0af3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c12d5ff292a2b3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3cb2b0af3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c12d5ff292a2b3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3cb2b0af3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c12d5ff292a2b0f00e30f00e30f00e30f00e30f00e33c3c3cb2b0af3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c12d5ff292a2b3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3cb2b0af3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c12d5ff292a2b3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3cb2b0af3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c12d5ff292a2b3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3cb2b0af3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c12d5ff292a2b3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff292a2b3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff292a2b3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c292a2b292a2b292a2b292a2b292a2b292a2b292a2b292a2b292a2b292a2b</ImageData>
+	</ImageDatas>
+	<Device Id="2" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="192.168.1.20.3.1" RemoteName="Gerät 2 (EtherCAT)" InfoImageId="2">
 		<Name>__FILENAME__</Name>
 		<AddressInfo>
 			<Pnp>
-				<DeviceDesc>LAN3 (TwinCAT-Intel PCI Ethernet Adapter (Gigabit) </DeviceDesc>
-				<DeviceName>\DEVICE\{8567520F-90EB-498F-B8FE-4E0D1A837CD2}</DeviceName>
-				<DeviceData>00010565ba31</DeviceData>
+				<DeviceDesc>LAN4 (TwinCAT-Intel PCI Ethernet Adapter (Gigabit) </DeviceDesc>
+				<DeviceName>\DEVICE\{065E1DD4-D31F-4D36-8B83-3F89106B762B}</DeviceName>
+				<DeviceData>0001056c1121</DeviceData>
 			</Pnp>
 		</AddressInfo>
 		<Image Id="1" AddrType="9" ImageType="3">
@@ -15,8 +18,107 @@
 		<Box File="Klemme 1 (EK1100).xti" Id="1">
 			<EtherCAT PortABoxInfo="#x00ffffff"/>
 		</Box>
-		<Box File="Box 3 (VCS2000-0200).xti" Id="3">
-			<EtherCAT PortABoxInfo="#x01000002"/>
+		<Box Id="5" BoxType="9099" BoxFlags="#x00000020">
+			<Name>Box 5 (VUI2000-0216)</Name>
+			<ImageId>1000</ImageId>
+			<EtherCAT SlaveType="2" PdiType="#x0c80" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="39" FoeType="1" VendorId="#x00000002" ProductCode="#x38bc6a08" RevisionNo="#x000000d8" InfoDataAddr="true" InfoDataDcTimes="true" TimeoutStateChange1="15000" TimeoutStateChange2="15000" TimeoutStateChange3="15000" TimeoutMailbox2="2000" DownloadSlotCfg="true" PortPhys="1" MaxSlotCount="26" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="VUI2000-0216 | Area scan camera unit, 2.5 GBit/s, Sony IMX392, monochrome, 2.3 MP, integrated illumination and variable focus lens, f = 16 mm" Desc="VUI2000-0216" PortABoxInfo="#x01000002">
+				<SyncMan>001080002600010001000000240080008000001026010000</SyncMan>
+				<SyncMan>801080002200010002000000240080008000801022010000</SyncMan>
+				<SyncMan>001100006400000003000000000000008000001164010000</SyncMan>
+				<SyncMan>001400002000000004000000000000008000001420010000</SyncMan>
+				<SyncMan>900908000000000003000000000000000800900900050000</SyncMan>
+				<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
+				<Fmmu>0000000000000000000000020000000001000000060000000200020000000000</Fmmu>
+				<Fmmu>0000000000000000000000010000000002000000020000000300000000000000</Fmmu>
+				<Fmmu>0000000000000000900900020100000001000000060000000400040000000000</Fmmu>
+				<SuName></SuName>
+				<SuName></SuName>
+				<SuName></SuName>
+				<SuName></SuName>
+				<SuName></SuName>
+				<SuTask>#x00000000</SuTask>
+				<SuTask>#x00000000</SuTask>
+				<SuTask>#x00000000</SuTask>
+				<SuTask>#x00000000</SuTask>
+				<SuTask>#x00000000</SuTask>
+				<DcData>000b000000000000000000000000000000000000010000000000000000000000</DcData>
+				<DcMode>53796e6368726f6e0000000000000000534d2d53796e6368726f6e0000000000000000000000000000000000000000000000000000000000000000000000000b0000000000000000000000000000000000000000000000000000000000000000</DcMode>
+				<DcMode>444300000000000000000000000000004443206163746976652028436f6e74726f6c6c65722068616e646c65642900000000000000000000000000000000000b0000000000000000000000000000000000000000000000000000000000000000</DcMode>
+				<Pdo Name="DC Timestamp" Index="#x161f" InOut="1" Flags="#x00b0" SyncMan="4" SyncUnit="4">
+					<Entry Name="Timestamp" Index="#xf71f" Sub="#x01">
+						<Type>ULINT</Type>
+						<Comment><![CDATA[When the timestamp is hit, a trigger is issued.]]></Comment>
+					</Entry>
+				</Pdo>
+				<CoeProfile ProfileNo="5001"/>
+				<EtherCATp>
+					<Device>
+						<Us DevCurrent="0.4"/>
+						<Up DevCurrent="0.4"/>
+					</Device>
+					<Port>
+						<Us Resistance="0.11"/>
+						<Up Resistance="0.11"/>
+					</Port>
+				</EtherCATp>
+				<Slot Name="Betriebsmodus">
+					<SlotData>0000000001000600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>1107296257</ModuleIdent>
+					<ModuleIdent>1107296258</ModuleIdent>
+					<Module Id="#x03090001" Type="Opmode DC Timestamp" Class="">
+						<Name>Gerät</Name>
+						<ImageId>551</ImageId>
+						<ModuleData>0200000001000042000004000000000000000000000000000000000000000000</ModuleData>
+						<PdoIndex>5663</PdoIndex>
+						<CoeProfile ProfileNo="#x044c1389"/>
+					</Module>
+				</Slot>
+				<Slot Name="Aufnahme">
+					<SlotData>0100000001000600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>1124073473</ModuleIdent>
+				</Slot>
+				<Slot Name="Flüssiglinse">
+					<SlotData>0200000001000600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>2272</ModuleIdent>
+				</Slot>
+				<Slot Name="Infrarot">
+					<SlotData>0a00000001000600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>2017</ModuleIdent>
+				</Slot>
+				<Slot Name="Blau">
+					<SlotData>0b00000001000600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>2017</ModuleIdent>
+				</Slot>
+				<Slot Name="Grün">
+					<SlotData>0c00000001000600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>2017</ModuleIdent>
+				</Slot>
+				<Slot Name="Orange">
+					<SlotData>0d00000001000600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>2017</ModuleIdent>
+				</Slot>
+				<SlotGroupData Name="Gerät">
+					<SlotGroup>0</SlotGroup>
+				</SlotGroupData>
+				<SlotGroupData Name="GenICam">
+					<SlotGroup>1</SlotGroup>
+				</SlotGroupData>
+				<SlotGroupData Name="Flüssiglinse">
+					<SlotGroup>2</SlotGroup>
+				</SlotGroupData>
+				<SlotGroupData Name="Kanal Infrarot">
+					<SlotGroup>10</SlotGroup>
+				</SlotGroupData>
+				<SlotGroupData Name="Kanal Blau">
+					<SlotGroup>11</SlotGroup>
+				</SlotGroupData>
+				<SlotGroupData Name="Kanal Grün">
+					<SlotGroup>12</SlotGroup>
+				</SlotGroupData>
+				<SlotGroupData Name="Kanal Orange">
+					<SlotGroup>13</SlotGroup>
+				</SlotGroupData>
+			</EtherCAT>
 		</Box>
 		<EtherCAT DcSyncMode="3"/>
 	</Device>

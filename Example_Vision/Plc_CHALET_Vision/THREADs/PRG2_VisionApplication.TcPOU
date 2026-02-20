@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.12">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.17">
   <POU Name="PRG2_VisionApplication" Id="{3044bfc2-af47-4475-aa52-20e83efee7e7}" SpecialFunc="None">
     <Declaration><![CDATA[//This program is called by a task with medium-low priority. 
 //Since complex image processing takes several cycles, it is important that this task can be interrupted by others. 
@@ -12,6 +12,7 @@ VAR
 	(* Image data *)
 	stImageWithInfo : ST_ImageWithInfo;
 	stRawImageWithInfo : ST_ImageWithInfo;
+	ipDisplayableRawImage 	: ITcVnDisplayableImage;
 	ipDisplayableImage 	: ITcVnDisplayableImage;
 	nImageCounter 	: UDINT;
 	nSharpness		: ULINT;
@@ -20,7 +21,7 @@ VAR
 	afWhiteBalance 	: TcVnVector4_LREAL := [1.0, 1.0, 1.0, 1.0]; //RGBA
 	sTextInImage 	: STRING;
 	//image size reduction [0.0-1.0]
-	fReduceImageSizeFactor : LREAL := 0.2;
+	fReduceImageSizeFactor : LREAL := 1.0;
 
 	//Different to the use of HRESULT, this FB automatically generates a TC3_Eventlogger message
 	fbFeedback 	 : FB_CH_Feedback(ipSourceInfo := fbSourceInfo); //hrImage	 : HRESULT;
@@ -52,7 +53,7 @@ ELSE
 END_IF
 
 
-//New image in the variable “stImageWithInfo”, start processing
+//New image in the variable “stRawImageWithInfo”, start processing
 IF bNewImageReceived THEN
 	nImageCounter := nImageCounter +1;
 	nStartTime := F_GetActualDcTime64();
@@ -61,7 +62,7 @@ IF bNewImageReceived THEN
 	fbFeedback.HR := S_OK;
 
 	(* Creates a copy of raw image. *)
-	fbFeedback.ActiveCommand := 'F_VN_CopyImage Raw Image';	
+	fbFeedback.ActiveCommand := 'F_VN_CopyImage - RawImage';	
 	fbFeedback.hr := F_VN_CopyImage(
 						ipSrcImage		:=stRawImageWithInfo.ipImage, 
 						ipDestImage		:=stImageWithInfo.ipImage,
@@ -69,6 +70,13 @@ IF bNewImageReceived THEN
 	stImageWithInfo.sCurrentImageFileName 	:= stRawImageWithInfo.sCurrentImageFileName;
 	stImageWithInfo.stGvspInfo 				:= stRawImageWithInfo.stGvspInfo;
 	stImageWithInfo.stInfo 					:= stRawImageWithInfo.stInfo;
+	
+	(* Copys an image into a displayable image *)
+	fbFeedback.ActiveCommand := 'F_VN_CopyIntoDisplayableImage - RawImage';	
+	fbFeedback.hr := F_VN_CopyIntoDisplayableImage(
+						ipSrcImage		:=stImageWithInfo.ipImage,
+						ipDestImage		:=ipDisplayableRawImage,
+						hrPrev			:=fbFeedback.hr);
 	
 	
 	(* If pixel are encoded in bayer bg convert to rgb - cameraImage is rb, imageFromFile is non rg *)
@@ -89,50 +97,71 @@ IF bNewImageReceived THEN
 						nKernelSize		:= 5, 
 						hrPrev			:= fbFeedback.hr, 
 						nSharpness=> nSharpness);
+	nSharpness := TO_UINT(nSharpness / 1_000_000);
 	
-						
-	(*Resize an image using a specific interpolation type.*)
-	fbFeedback.ActiveCommand := 'F_VN_ResizeImage';	
-	fbFeedback.hr := F_VN_ResizeImage(
-						ipSrcImage		:= stImageWithInfo.ipImage, 
-						ipDestImage		:= stImageWithInfo.ipImage, 
-						nWidth			:= TO_UDINT(stImageWithInfo.stInfo.nWidth*fReduceImageSizeFactor),//or fix size: 400(*px*), 
-						nHeight			:= TO_UDINT(stImageWithInfo.stInfo.nHeight*fReduceImageSizeFactor),//or fix size: 200(*px*), 
-						eInterpolationType:= ETcVnInterpolationType.TCVN_IT_AREA_BASED, 
-						hrPrev			:= fbFeedback.hr);
 	
-						
-	(* Gets a struct containing all common meta infos of the image. *)
-	fbFeedback.ActiveCommand := 'F_VN_GetImageInfo';	
-	fbFeedback.hr := F_VN_GetImageInfo(
-						ipImage			:= stImageWithInfo.ipImage, 
-						stImageInfo		:= stImageWithInfo.stInfo, 
-						hrPrev			:= fbFeedback.hr);						
+	(* Resize Image *)		
+	IF fReduceImageSizeFactor <> 1.0 THEN
+		(*Resize an image using a specific interpolation type.*)
+		fbFeedback.ActiveCommand := CONCAT('F_VN_ResizeImage to ', LREAL_TO_STRING(fReduceImageSizeFactor));	
+		fbFeedback.hr := F_VN_ResizeImage(
+							ipSrcImage		:= stImageWithInfo.ipImage, 
+							ipDestImage		:= stImageWithInfo.ipImage, 
+							nWidth			:= TO_UDINT(stImageWithInfo.stInfo.nWidth*fReduceImageSizeFactor),//or fix size: 400(*px*), 
+							nHeight			:= TO_UDINT(stImageWithInfo.stInfo.nHeight*fReduceImageSizeFactor),//or fix size: 200(*px*), 
+							eInterpolationType:= ETcVnInterpolationType.TCVN_IT_AREA_BASED, 
+							hrPrev			:= fbFeedback.hr);
 							
-							
-	(* Multiply each image pixel by a vector (1 element for each image channel) using saturation arithmetics. *)
-	fbFeedback.ActiveCommand := 'F_VN_MultiplyImageWithVector - WhiteBalance';	
-	fbFeedback.hr := F_VN_MultiplyImageWithVector(
-						aVector			:= afWhiteBalance , 
-						ipSrcImage		:= stImageWithInfo.ipImage, 
-						ipDestImage		:= stImageWithInfo.ipImage, 
-						hrPrev			:= fbFeedback.hr  );
+		(* Gets a struct containing all common meta infos of the image. *)
+		fbFeedback.ActiveCommand := 'F_VN_GetImageInfo';	
+		fbFeedback.hr := F_VN_GetImageInfo(
+							ipImage			:= stImageWithInfo.ipImage, 
+							stImageInfo		:= stImageWithInfo.stInfo, 
+							hrPrev			:= fbFeedback.hr);						
+	END_IF
+			
 	
+	(* White Balance *)				
+	IF afWhiteBalance[0] <> 1.0 OR afWhiteBalance[1] <> 1.0 OR afWhiteBalance[2] <> 1.0 OR afWhiteBalance[3] <> 1.0 THEN
+		(* Multiply each image pixel by a vector (1 element for each image channel) using saturation arithmetics. *)
+		fbFeedback.ActiveCommand := 'F_VN_MultiplyImageWithVector - WhiteBalance';	
+		fbFeedback.hr := F_VN_MultiplyImageWithVector(
+							aVector			:= afWhiteBalance , 
+							ipSrcImage		:= stImageWithInfo.ipImage, 
+							ipDestImage		:= stImageWithInfo.ipImage, 
+							hrPrev			:= fbFeedback.hr  );
+	END_IF
+      										
+
 						
 	(* Write text into an image. *)
-	fbFeedback.ActiveCommand := 'F_VN_PutText';	
+	fbFeedback.ActiveCommand := 'F_VN_PutText - Image Coutner';	
 	//Variant 1: Use enumeration
 	  //aColor := F_ColorEnumToVector4(eColor := E_Colors_ARGB.Tomato);
 	//Variant 2: Use constant
 	  aColor := ColorVector4.Tomato;
 	//Variant 3: freely definable
 	  //aColor[0] := 255; aColor[1] := 99; aColor[2] := 71; aColor[3] := 255;	
-	sTextInImage := CONCAT('Hello World - ', TO_STRING(nImageCounter));
+	sTextInImage := CONCAT('ImgCounter: ', TO_STRING(nImageCounter));
 	fbFeedback.hr := F_VN_PutText(
 						sText			:= sTextInImage,
 						ipDestImage		:= stImageWithInfo.ipImage, 
 						nX				:= 5, 
 						nY				:= (stImageWithInfo.stInfo.nHeight/2), 
+						eFontType		:= ETcVnFontType.TCVN_FT_HERSHEY_COMPLEX, 
+						fFontScale		:= 1, 
+						aColor			:= aColor, 
+						hrPrev			:= fbFeedback.hr);	
+						
+	(* Write text into an image. *)				
+	fbFeedback.ActiveCommand := 'F_VN_PutText - Sharpness';	
+	sTextInImage := CONCAT('Sharpness: ', TO_STRING(nSharpness));
+	IF (nSharpness >= nSharpnessLastImg) THEN aColor := ColorVector4.Green; ELSE aColor := ColorVector4.Orangered; END_IF
+	fbFeedback.hr := F_VN_PutText(
+						sText			:= sTextInImage,
+						ipDestImage		:= stImageWithInfo.ipImage, 
+						nX				:= 5, 
+						nY				:= (stImageWithInfo.stInfo.nHeight/2) + 50, 
 						eFontType		:= ETcVnFontType.TCVN_FT_HERSHEY_COMPLEX, 
 						fFontScale		:= 1, 
 						aColor			:= aColor, 

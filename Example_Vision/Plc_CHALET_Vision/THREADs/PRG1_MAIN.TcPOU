@@ -1,22 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.12">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.17">
   <POU Name="PRG1_MAIN" Id="{19f277bd-4097-4636-9c24-875ea110dece}" SpecialFunc="None">
     <Declaration><![CDATA[//This program is called by a task with high priority. 
 //It is therefore called cyclically with high precision. For exact triggering, motion, fast reaction, ....
 PROGRAM PRG1_MAIN
 VAR
 	(* Camera and file souce*)
-	fbCamera 				: CHALET_Vision.FB_GigE_Standalone;
+	fbCamera 				: CHALET_Vision.FB_GigeCamera_Any;
 	fbFileSource 			: CHALET_Vision.FB_FileSource;
+	fbLigth		 			: CHALET_Vision.FB_Light;
 	
 	(* Settings *)
-	nExposure_1us 			: UDINT := 40_000;
+	nExposure_1us 			: UDINT := 1000;
 	eTriggerSource			: E_TriggerSource := E_TriggerSource.EtherCAT;
-	nOpticControlSensorDist : UDINT := 200; 	//40-1024mm
-	fPercentOrange			: LREAL := 50; 	//0-100%
-	fPercentGreen			: LREAL := 50;	//0-100%
-	fPercentBlue			: LREAL := 100;	//0-100%
-	fPercentIR				: LREAL := 0;	//0-100%
+	nOpticControlSensorDist : UDINT := 200; 	//40-4000mm
+	nPermilleOrange			: UINT := 1000; 	//Lighting brightness in permill [0-1000‰]
+	nPermilleGreen			: UINT := 1000;		//Lighting brightness in permill [0-1000‰]
+	nPermilleBlue			: UINT := 1000;		//Lighting brightness in permill [0-1000‰]
+	nPermilletIR			: UINT := 0;		//Lighting brightness in permill [0-1000‰] (infrared channel)
 
 	(* Commands *)
 	bInitDone				: BOOL;
@@ -71,6 +72,7 @@ IF bTriggerOnceSW AND (fbCamera.Simulation OR (eTriggerSource = E_TriggerSource.
 	fbCamera.TriggerSoftware();
 END_IF
 
+
 //Example 4: Trigger image from file source
 //For test purposes, an FB_VN_FileSourceControl can also be used in parallel with the camera to retrieve images that have already been saved.
 IF bTriggerOnceFileSource THEN
@@ -91,13 +93,13 @@ IF fbCamera.RegisterBeckhoffCamera <> 0 THEN
 	//And many more...
 END_IF
 IF fbCamera.RegisterLighting <> 0 THEN
-	fbCamera.RegisterLighting.BrightnessOrange 		:= TO_UDINT(4095*fPercentOrange);
-	fbCamera.RegisterLighting.BrightnessGreen 		:= TO_UDINT(4095*fPercentGreen);
-	fbCamera.RegisterLighting.BrightnessBlue 		:= TO_UDINT(4095*fPercentBlue);
-	fbCamera.RegisterLighting.BrightnessInfrared 	:= TO_UDINT(4095*fPercentIR);
+	fbCamera.RegisterLighting.BrightnessOrangePermille 		:= nPermilleOrange;
+	fbCamera.RegisterLighting.BrightnessGreenPermille 		:= nPermilleGreen;
+	fbCamera.RegisterLighting.BrightnessBluePermille 		:= nPermilleBlue;
+	fbCamera.RegisterLighting.BrightnessInfraredPermille 	:= nPermilletIR;
 END_IF
 IF fbCamera.RegisterOpticControl <> 0 THEN
-	fbCamera.RegisterOpticControl.SensorDistance := nOpticControlSensorDist;//40-1024mm
+	fbCamera.RegisterOpticControl.SensorDistance := nOpticControlSensorDist;//40-4000mm
 END_IF
 
 //Reset here if camera is in error state
@@ -106,6 +108,13 @@ IF (bResetOnce OR bResetAuto) AND (fbCamera.State = ETcVnCameraState.TCVN_CS_ERR
 	fbCamera.Reset();
 END_IF
 
+(* LED lighting in use?
+fbLigth.BrightnessOrangePermille 		:= nPermilleOrange;
+fbLigth.BrightnessGreenPermille 		:= nPermilleGreen;
+fbLigth.BrightnessBluePermille 			:= nPermilleBlue;
+fbLigth.BrightnessInfraredPermille 		:= nPermilletIR;
+fbLigth.Trigger(nNextTrigger);
+fbLigth();  *)
 
 //Cyclic call
 fbCamera.Update();
