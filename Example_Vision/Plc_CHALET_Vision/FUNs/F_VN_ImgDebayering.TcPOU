@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <POU Name="F_VN_ImgDebayering" Id="{00ec12c4-94ea-40fc-9a83-2f462d5d5855}" SpecialFunc="None">
+    <Declaration><![CDATA[//Debayering the image and returning it in the same object
+FUNCTION F_VN_ImgDebayering  : HRESULT
+VAR_INPUT
+	stImageWithInfo  :  REFERENCE TO ST_ImageWithInfo; 
+	hrPrev           :   HRESULT;
+END_VAR
+VAR
+	hrConvert : HRESULT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//Initially, FAILED(hrPrev) is used to check whether an error has occurred in the previous processing chain. If so, the same error is displayed and the function is ended directly.
+IF FAILED(hrPrev) THEN
+	F_VN_ImgDebayering := hrPrev;
+	RETURN;
+END_IF
+
+//The program then checks whether all interface pointers and references passed to the function as VAR_INPUT are valid. 
+//The check is carried out for interface pointers by means of comparison with 0 and for references via __ISVALIDREF(). 
+//If at least one parameter is invalid, the function cannot work correctly and returns INVALIDPARM.
+IF NOT __ISVALIDREF(stImageWithInfo) THEN
+    F_VN_ImgDebayering := Tc2_System.E_HRESULTAdsErr.INVALIDPARM;
+    RETURN;
+END_IF
+
+(* If pixel are encoded in bayer bg convert to rgb - cameraImage is rb, imageFromFile is non rg *)
+IF stImageWithInfo.stInfo.stPixelFormat.ePixelEncoding = ETcVnPixelEncoding.TCVN_PE_BAYER_RG THEN
+	hrConvert := F_VN_ConvertColorSpace(
+						ipSrcImage	:=stImageWithInfo.ipImage, 
+						ipDestImage	:=stImageWithInfo.ipImage, 
+						eTransform	:=ETcVnColorSpaceTransform.TCVN_CST_BAYER_RG_TO_RGB, 
+						hrPrev		:=hrPrev );
+						
+ELSIF stImageWithInfo.stInfo.stPixelFormat.ePixelEncoding = ETcVnPixelEncoding.TCVN_PE_BAYER_BG THEN
+	hrConvert := F_VN_ConvertColorSpace(
+						ipSrcImage	:=stImageWithInfo.ipImage, 
+						ipDestImage	:=stImageWithInfo.ipImage, 
+						eTransform	:=ETcVnColorSpaceTransform.TCVN_CST_BAYER_BG_TO_RGB, 
+						hrPrev		:=hrPrev );		
+					
+ELSIF stImageWithInfo.stInfo.stPixelFormat.ePixelEncoding = ETcVnPixelEncoding.TCVN_PE_BAYER_GB THEN
+	hrConvert := F_VN_ConvertColorSpace(
+						ipSrcImage	:=stImageWithInfo.ipImage, 
+						ipDestImage	:=stImageWithInfo.ipImage, 
+						eTransform	:=ETcVnColorSpaceTransform.TCVN_CST_BAYER_GB_TO_RGB, 
+						hrPrev		:=hrPrev );		
+					
+ELSIF stImageWithInfo.stInfo.stPixelFormat.ePixelEncoding = ETcVnPixelEncoding.TCVN_PE_BAYER_GR THEN
+	hrConvert := F_VN_ConvertColorSpace(
+						ipSrcImage	:=stImageWithInfo.ipImage, 
+						ipDestImage	:=stImageWithInfo.ipImage, 
+						eTransform	:=ETcVnColorSpaceTransform.TCVN_CST_BAYER_GR_TO_RGB, 
+						hrPrev		:=hrPrev );			
+	
+ELSE
+	//Function was executed successfully but did not reach a complete result. 
+	F_VN_ImgDebayering := S_FALSE;
+	RETURN;
+END_IF
+
+//Gets a struct containing all common meta infos of the image.
+F_VN_ImgDebayering := F_VN_GetImageInfo(
+						ipImage			:= stImageWithInfo.ipImage, 
+						stImageInfo		:= stImageWithInfo.stInfo, 
+						hrPrev			:= hrConvert);	]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

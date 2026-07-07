@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.17">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
   <POU Name="PRG1_MAIN" Id="{19f277bd-4097-4636-9c24-875ea110dece}" SpecialFunc="None">
     <Declaration><![CDATA[//This program is called by a task with high priority. 
 //It is therefore called cyclically with high precision. For exact triggering, motion, fast reaction, ....
@@ -11,9 +11,9 @@ VAR
 	fbLigth		 			: CHALET_Vision.FB_Light;
 	
 	(* Settings *)
-	nExposure_1us 			: UDINT := 1000;
+	nExposure_1us 			: UDINT := 500; //[us]
 	eTriggerSource			: E_TriggerSource := E_TriggerSource.EtherCAT;
-	nOpticControlSensorDist : UDINT := 200; 	//40-4000mm
+	nOpticControlSensorDist : UDINT := 100; 	//40-1024mm
 	nPermilleOrange			: UINT := 1000; 	//Lighting brightness in permill [0-1000‰]
 	nPermilleGreen			: UINT := 1000;		//Lighting brightness in permill [0-1000‰]
 	nPermilleBlue			: UINT := 1000;		//Lighting brightness in permill [0-1000‰]
@@ -32,12 +32,38 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF NOT bInitDone THEN
+      <ST><![CDATA[(***********************************************************************************************
+💡 BEST PRACTICE: IP ADDRESS ASSIGNMENT VIA ETHERCAT
+===============================================================================================
+It is good practice to assign the camera's IP address via EtherCAT. 
+
+CONFIGURATION INSTRUCTION:
+Do NOT write this directly in the "CoE-Online" tab! 
+Always configure this via the "Startup" tab (Startup list). This ensures the 
+IP address is written automatically every time the connection is established.
+In 99% of cases, the following 4 values are relevant when assigning a fixed IP:
+- F84E:0F  Force IP Address        (RW) 16#C0A8012A
+- F84E:10  Force Subnet Mask       (RW)	16#FFFFFF00
+- F84E:11  Force Default Gateway   (RW)	16#0
+- F84E:12  Force IP Activate       (WO)	TRUE
+
+GOOD TO KNOW:
+-	The "Force IP Address" takes precedence over other IP settings and is 
+	NOT saved persistently on the camera (which is why the Startup list is essential).
+- 	The IP address is written and interpreted as a hexadecimal value (4 blocks).
+	Example: 192.168.1.42  ➔  C0.A8.01.2A  ➔  16#C0A8012A
+
+BENEFIT: 
+This allows the camera to be replaced at any time without manual IP configuration. 
+Since the IP address is now set, other parameters can be transmitted normally via GigE Vision.
+***********************************************************************************************)
+
+IF NOT bInitDone THEN
 	bInitDone := TRUE;
 	//Remove camera or filesource if not used
 	fbCamera.Initialize();
 	bInitDone := bInitDone AND fbCamera.Initialized; 
-	
+	//Remove camera or filesource if not used	
 	fbFileSource.Initialize();
 	bInitDone := bInitDone AND fbFileSource.Initialized;
 	RETURN;

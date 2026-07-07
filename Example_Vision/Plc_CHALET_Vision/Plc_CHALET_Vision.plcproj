@@ -8,7 +8,7 @@
     <WriteProductVersion>true</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
     <Name>Plc_CHALET_Vision</Name>
-    <ProgramVersion>3.1.4026.20</ProgramVersion>
+    <ProgramVersion>3.1.4026.24</ProgramVersion>
     <Application>{93a4ac9c-f3b7-4da0-bd78-f6c396de53f4}</Application>
     <TypeSystem>{55e0eab5-0d01-42ff-9205-08d61a695095}</TypeSystem>
     <Implicit_Task_Info>{10e43833-4945-4397-af31-49c760b84bc0}</Implicit_Task_Info>
@@ -34,11 +34,15 @@
     </DeploymentEvents>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="FUNs" />
     <Folder Include="THREADs">
       <ExcludeFromBuild>false</ExcludeFromBuild>
     </Folder>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FUNs\F_VN_ImgDebayering.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Task_PlcVisionApplication.TcTTO">
       <SubType>Code</SubType>
     </Compile>
@@ -102,11 +106,8 @@
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
-    <PlaceholderResolution Include="CHALET_BaseComponents">
-      <Resolution>CHALET_BaseComponents, 3.7.1 (Beckhoff CH)</Resolution>
-    </PlaceholderResolution>
     <PlaceholderResolution Include="CHALET_Vision">
-      <Resolution>CHALET_Vision, 4.4.0 (Beckhoff CH)</Resolution>
+      <Resolution>CHALET_Vision, 4.5.0 (Beckhoff CH)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="Tc2_EtherCAT">
       <Resolution>Tc2_EtherCAT, * (Beckhoff Automation GmbH)</Resolution>

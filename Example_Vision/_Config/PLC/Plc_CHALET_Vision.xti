@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.20" ClassName="CNestedPlcProjDef">
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.24" ClassName="CNestedPlcProjDef">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{1A9F01DF-CEB6-1DB1-8004-58A2E47A173D}" Namespace="Tc2_EtherCAT" AutoDeleteType="true">T_DCTIME64</Name>
@@ -14,7 +14,7 @@
 		</DataType>
 	</DataTypes>
 	<Project GUID="{0234F32A-48A0-4F76-9E06-4DD517A1494C}" Name="Plc_CHALET_Vision" PrjFilePath="..\..\Plc_CHALET_Vision\Plc_CHALET_Vision.plcproj" TmcFilePath="..\..\Plc_CHALET_Vision\Plc_CHALET_Vision.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-		<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{0703989E-9F8F-3FB7-10C9-983529656F1A}" TmcPath="Plc_CHALET_Vision\Plc_CHALET_Vision.tmc">
+		<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{CDE93708-5B48-C3EC-A2FD-115F1814A9E9}" TmcPath="Plc_CHALET_Vision\Plc_CHALET_Vision.tmc">
 			<Name>Plc_CHALET_Vision Instance</Name>
 			<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 			<Vars VarGrpType="2" ContextId="1" AreaNo="17">
@@ -65,6 +65,13 @@
 					<Type GUID="{1A9F01DF-CEB6-1DB1-8004-58A2E47A173D}" Namespace="Tc2_EtherCAT">T_DCTIME64</Type>
 				</Var>
 			</Vars>
+			<UnrestoredVarLinks ImportTime="2026-07-07T16:54:19">
+				<OwnerA Name="InputDst" Prefix="TIPC^Plc_CHALET_Vision^Plc_CHALET_Vision Instance" Type="1">
+					<OwnerB Name="TIID^Device 2 (EtherCAT)^Box 5 (VUI2001-0516)">
+						<Link VarA="PRG1_MAIN.nOutputShift" TypeA="DINT" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000009}" VarB="InfoData^DcOutputShift" RestoreInfo="ANotFound"/>
+					</OwnerB>
+				</OwnerA>
+			</UnrestoredVarLinks>
 			<Contexts>
 				<Context>
 					<Id>0</Id>
@@ -113,6 +120,7 @@
 					</Properties>
 				</InitSymbol>
 			</InitSymbols>
+			<JsonDynPous><![CDATA[null]]></JsonDynPous>
 			<TaskPouOids>
 				<TaskPouOid Prio="1" OTCID="#x08502001"/>
 				<TaskPouOid Prio="3" OTCID="#x08502002"/>
@@ -121,8 +129,8 @@
 	</Project>
 	<Mappings>
 		<OwnerA Name="Plc_CHALET_Vision Instance">
-			<OwnerB Name="TIID^Device 2 (EtherCAT)^Box 5 (VUI2000-0216)">
-				<Link VarA="Task_PlcMain Outputs^PRG1_MAIN.fbCamera.fbTriggerEtherCat.nTimestamp" VarB="Gerät^DC Timestamp^Timestamp"/>
+			<OwnerB Name="TIID^Device 2 (EtherCAT)^Box 5 (VUI2001-0516)">
+				<Link VarA="Task_PlcMain Outputs^PRG1_MAIN.fbCamera.fbTriggerEtherCat.nTimestamp" VarB="Device^DC Timestamp^Timestamp"/>
 			</OwnerB>
 		</OwnerA>
 	</Mappings>

@@ -1,15 +1,53 @@
 <?xml version="1.0"?>
-<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.20" ClassName="CDevEtherCATDef" SubType="111">
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.24" ClassName="CDevEtherCATDef" SubType="111">
+	<DataTypes>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-002000000008}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..0] OF BYTE</Name>
+			<BitSize>8</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>1</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-002000000003}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..2] OF BIT</Name>
+			<BitSize>3</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>3</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-002000000007}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..6] OF BIT</Name>
+			<BitSize>7</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>7</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-002000000020}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..3] OF BYTE</Name>
+			<BitSize>32</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>4</Elements>
+			</ArrayInfo>
+		</DataType>
+	</DataTypes>
 	<ImageDatas>
 		<ImageData Id="1000">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000232e0000232e00000000000000000000ff00ff3c3c3c3c3c3cff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c292a2b292a2b292a2b292a2b292a2b292a2b292a2b292a2b292a2b292a2b3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff292a2b3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff292a2b3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3cb2b0af3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c12d5ff292a2b3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3cb2b0af3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c12d5ff292a2b3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3cb2b0af3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c12d5ff292a2b0f00e30f00e30f00e30f00e30f00e33c3c3cb2b0af3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c12d5ff292a2b3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3cb2b0af3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c12d5ff292a2b3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3cb2b0af3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c12d5ff292a2b3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3cb2b0af3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c12d5ff292a2b3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff292a2b3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff12d5ff292a2b3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c292a2b292a2b292a2b292a2b292a2b292a2b292a2b292a2b292a2b292a2b</ImageData>
 	</ImageDatas>
-	<Device Id="2" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="192.168.1.20.3.1" RemoteName="Gerät 2 (EtherCAT)" InfoImageId="2">
+	<Device Id="2" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="192.168.1.31.3.1" RemoteName="Gerät 2 (EtherCAT)" InfoImageId="2">
 		<Name>__FILENAME__</Name>
 		<AddressInfo>
 			<Pnp>
 				<DeviceDesc>LAN4 (TwinCAT-Intel PCI Ethernet Adapter (Gigabit) </DeviceDesc>
-				<DeviceName>\DEVICE\{065E1DD4-D31F-4D36-8B83-3F89106B762B}</DeviceName>
-				<DeviceData>0001056c1121</DeviceData>
+				<DeviceName></DeviceName>
+				<DeviceData>00010564f250</DeviceData>
 			</Pnp>
 		</AddressInfo>
 		<Image Id="1" AddrType="9" ImageType="3">
@@ -19,17 +57,17 @@
 			<EtherCAT PortABoxInfo="#x00ffffff"/>
 		</Box>
 		<Box Id="5" BoxType="9099" BoxFlags="#x00000020">
-			<Name>Box 5 (VUI2000-0216)</Name>
+			<Name>Box 5 (VUI2001-0516)</Name>
 			<ImageId>1000</ImageId>
-			<EtherCAT SlaveType="2" PdiType="#x0c80" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="39" FoeType="1" VendorId="#x00000002" ProductCode="#x38bc6a08" RevisionNo="#x000000d8" InfoDataAddr="true" InfoDataDcTimes="true" TimeoutStateChange1="15000" TimeoutStateChange2="15000" TimeoutStateChange3="15000" TimeoutMailbox2="2000" DownloadSlotCfg="true" PortPhys="1" MaxSlotCount="26" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="VUI2000-0216 | Area scan camera unit, 2.5 GBit/s, Sony IMX392, monochrome, 2.3 MP, integrated illumination and variable focus lens, f = 16 mm" Desc="VUI2000-0216" PortABoxInfo="#x01000002">
+			<EtherCAT SlaveType="2" PdiType="#x0c80" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="39" FoeType="1" VendorId="#x00000002" ProductCode="#x38bc6a18" RevisionNo="#x00120204" BIC="1P274984SBTN000u80oq1KVUI2001-0516                  Q1    " InfoDataAddr="true" InfoDataDcTimes="true" TimeoutStateChange1="15000" TimeoutStateChange2="15000" TimeoutStateChange3="15000" TimeoutMailbox2="2000" DownloadSlotCfg="true" PortPhys="1" SdoUploadWithMaxLength="true" MaxSlotCount="26" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="VUI2001-0516 | Area scan camera unit, 2.5 GBit/s, Sony IMX264, color, 5.0 MP, integrated illumination and variable focus lens, f = 16 mm" Desc="VUI2001-0516" PortABoxInfo="#x01000002">
 				<SyncMan>001080002600010001000000240080008000001026010000</SyncMan>
 				<SyncMan>801080002200010002000000240080008000801022010000</SyncMan>
-				<SyncMan>001100006400000003000000000000008000001164010000</SyncMan>
-				<SyncMan>001400002000000004000000000000008000001420010000</SyncMan>
+				<SyncMan>001109006400010003000000000000000900001164010000</SyncMan>
+				<SyncMan>001402002000010004000000000000000200001420010000</SyncMan>
 				<SyncMan>900908000000000003000000000000000800900900050000</SyncMan>
 				<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
-				<Fmmu>0000000000000000000000020000000001000000060000000200020000000000</Fmmu>
-				<Fmmu>0000000000000000000000010000000002000000020000000300000000000000</Fmmu>
+				<Fmmu>0000000000000000001100020100000001000000060000000200020000000000</Fmmu>
+				<Fmmu>0000000000000000001400010100000002000000060000000300030000000000</Fmmu>
 				<Fmmu>0000000000000000900900020100000001000000060000000400040000000000</Fmmu>
 				<SuName></SuName>
 				<SuName></SuName>
@@ -42,12 +80,59 @@
 				<SuTask>#x00000000</SuTask>
 				<SuTask>#x00000000</SuTask>
 				<DcData>000b000000000000000000000000000000000000010000000000000000000000</DcData>
-				<DcMode>53796e6368726f6e0000000000000000534d2d53796e6368726f6e0000000000000000000000000000000000000000000000000000000000000000000000000b0000000000000000000000000000000000000000000000000000000000000000</DcMode>
+				<DcMode>53796e6368726f6e0000000000000000534d2d53796e6368726f6e000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</DcMode>
 				<DcMode>444300000000000000000000000000004443206163746976652028436f6e74726f6c6c65722068616e646c65642900000000000000000000000000000000000b0000000000000000000000000000000000000000000000000000000000000000</DcMode>
-				<Pdo Name="DC Timestamp" Index="#x161f" InOut="1" Flags="#x00b0" SyncMan="4" SyncUnit="4">
-					<Entry Name="Timestamp" Index="#xf71f" Sub="#x01">
+				<MBoxUserCmdData>004003000a00000031000000030000000000000000000000000000000000000020f31005020000000100446961676e6f736973206d65737361676573206172652073656e7420617320656d657267656e6379206d6573736167657300</MBoxUserCmdData>
+				<Pdo Name="DC Timestamp" Index="#x1600" InOut="1" Flags="#x00b0" SyncMan="4" SyncUnit="4">
+					<Entry Name="Timestamp" Index="#x7000" Sub="#x14">
 						<Type>ULINT</Type>
 						<Comment><![CDATA[When the timestamp is hit, a trigger is issued.]]></Comment>
+					</Entry>
+				</Pdo>
+				<Pdo Name="Device Status Inputs" Index="#x1a02" Flags="#x0091" SyncMan="3" SyncUnit="3">
+					<Entry Name="Ready" Index="#x6020" Sub="#x01">
+						<Type>BIT</Type>
+						<Comment><![CDATA[Device is ready for operation.]]></Comment>
+					</Entry>
+					<Entry Name="Info" Index="#x6020" Sub="#x02">
+						<Type>BIT</Type>
+						<Comment><![CDATA[A diagnosis info message is unread.]]></Comment>
+					</Entry>
+					<Entry Name="Warning" Index="#x6020" Sub="#x03">
+						<Type>BIT</Type>
+						<Comment><![CDATA[A diagnosis warning is active.]]></Comment>
+					</Entry>
+					<Entry Name="Error" Index="#x6020" Sub="#x04">
+						<Type>BIT</Type>
+						<Comment><![CDATA[A diagnosis error is active.]]></Comment>
+					</Entry>
+					<Entry>
+						<Type GUID="{18071995-0000-0000-0000-002000000008}">ARRAY [0..0] OF BYTE</Type>
+					</Entry>
+					<Entry Name="Diag" Index="#x6020" Sub="#x0d">
+						<Type>BIT</Type>
+						<Comment><![CDATA[New diagnosis messages are available (0x10F3).]]></Comment>
+					</Entry>
+					<Entry>
+						<Type GUID="{18071995-0000-0000-0000-002000000003}">ARRAY [0..2] OF BIT</Type>
+					</Entry>
+				</Pdo>
+				<Pdo Name="Device Status Outputs" Index="#x1602" InOut="1" Flags="#x0090" SyncMan="2" SyncUnit="2">
+					<Entry Name="Reset" Index="#x7020" Sub="#x01">
+						<Type>BIT</Type>
+						<Comment><![CDATA[Rising edge (0 to 1) clears the latched diagnosis error.]]></Comment>
+					</Entry>
+					<Entry>
+						<Type GUID="{18071995-0000-0000-0000-002000000007}">ARRAY [0..6] OF BIT</Type>
+					</Entry>
+				</Pdo>
+				<Pdo Name="Acquisition Outputs" Index="#x1609" InOut="1" Flags="#x0091" SyncMan="2" SyncUnit="2">
+					<Entry>
+						<Type GUID="{18071995-0000-0000-0000-002000000020}">ARRAY [0..3] OF BYTE</Type>
+					</Entry>
+					<Entry Name="Exposure Time" Index="#x7090" Sub="#x12">
+						<Type>UDINT</Type>
+						<Comment><![CDATA[The exposure time of the sensor in microseconds (µs). Invalid values are ignored and the last valid value is used.]]></Comment>
 					</Entry>
 				</Pdo>
 				<CoeProfile ProfileNo="5001"/>
@@ -61,65 +146,286 @@
 						<Up Resistance="0.11"/>
 					</Port>
 				</EtherCATp>
-				<Slot Name="Betriebsmodus">
-					<SlotData>0000000001000600010000001000000000000000000000000000000000000000</SlotData>
-					<ModuleIdent>1107296257</ModuleIdent>
-					<ModuleIdent>1107296258</ModuleIdent>
+				<Slot Name="Operating Mode">
+					<SlotData>0000010001001600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>2687954</ModuleIdent>
+					<ModuleIdent>3212242</ModuleIdent>
+					<ModuleIdent>0</ModuleIdent>
 					<Module Id="#x03090001" Type="Opmode DC Timestamp" Class="">
-						<Name>Gerät</Name>
+						<Name>Device</Name>
 						<ImageId>551</ImageId>
-						<ModuleData>0200000001000042000004000000000000000000000000000000000000000000</ModuleData>
-						<PdoIndex>5663</PdoIndex>
-						<CoeProfile ProfileNo="#x044c1389"/>
+						<ModuleData>02000000d2032900000004000000000000000000000000000000000000000000</ModuleData>
+						<PdoIndex>5632</PdoIndex>
+						<CoeProfile ProfileNo="#x03d21389"/>
 					</Module>
 				</Slot>
-				<Slot Name="Aufnahme">
-					<SlotData>0100000001000600010000001000000000000000000000000000000000000000</SlotData>
-					<ModuleIdent>1124073473</ModuleIdent>
+				<Slot Name="Empty Slot 1">
+					<SlotData>0000010001001600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>0</ModuleIdent>
+					<Module Id="#x03090002" Type="Empty Module" Class="">
+						<Name>Device</Name>
+						<ImageId>699</ImageId>
+						<ModuleData>0200000000000000000004000000000000000000000000000000000000000000</ModuleData>
+						<CoeProfile ProfileNo="#x00001389"/>
+					</Module>
 				</Slot>
-				<Slot Name="Flüssiglinse">
-					<SlotData>0200000001000600010000001000000000000000000000000000000000000000</SlotData>
-					<ModuleIdent>2272</ModuleIdent>
+				<Slot Name="Diagnosis Status">
+					<SlotData>0000010001001600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>1114964</ModuleIdent>
+					<Module Id="#x03090003" Type="Device Status" Class="">
+						<Name>Device</Name>
+						<ImageId>551</ImageId>
+						<ModuleData>0200000054031100000004000000000000000000000000000000000000000000</ModuleData>
+						<PdoIndex>6658</PdoIndex>
+						<PdoIndex>5634</PdoIndex>
+						<CoeProfile ProfileNo="#x00001389"/>
+					</Module>
 				</Slot>
-				<Slot Name="Infrarot">
+				<Slot Name="Empty Slot 3">
+					<SlotData>0000010001001600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>0</ModuleIdent>
+					<Module Id="#x03090004" Type="Empty Module" Class="">
+						<Name>Device</Name>
+						<ImageId>699</ImageId>
+						<ModuleData>0200000000000000000004000000000000000000000000000000000000000000</ModuleData>
+						<CoeProfile ProfileNo="#x00001389"/>
+					</Module>
+				</Slot>
+				<Slot Name="Empty Slot 4">
+					<SlotData>0000010001001600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>0</ModuleIdent>
+					<Module Id="#x03090005" Type="Empty Module" Class="">
+						<Name>Device</Name>
+						<ImageId>699</ImageId>
+						<ModuleData>0200000000000000000004000000000000000000000000000000000000000000</ModuleData>
+						<CoeProfile ProfileNo="#x00001389"/>
+					</Module>
+				</Slot>
+				<Slot Name="Empty Slot 5">
+					<SlotData>0000010001001600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>0</ModuleIdent>
+					<Module Id="#x03090006" Type="Empty Module" Class="">
+						<Name>Device</Name>
+						<ImageId>699</ImageId>
+						<ModuleData>0200000000000000000004000000000000000000000000000000000000000000</ModuleData>
+						<CoeProfile ProfileNo="#x00001389"/>
+					</Module>
+				</Slot>
+				<Slot Name="Empty Slot 6">
+					<SlotData>0000010001001600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>0</ModuleIdent>
+					<Module Id="#x03090007" Type="Empty Module" Class="">
+						<Name>Device</Name>
+						<ImageId>699</ImageId>
+						<ModuleData>0200000000000000000004000000000000000000000000000000000000000000</ModuleData>
+						<CoeProfile ProfileNo="#x00001389"/>
+					</Module>
+				</Slot>
+				<Slot Name="Empty Slot 7">
+					<SlotData>0000010001001600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>0</ModuleIdent>
+					<Module Id="#x03090008" Type="Empty Module" Class="">
+						<Name>Device</Name>
+						<ImageId>699</ImageId>
+						<ModuleData>0200000000000000000004000000000000000000000000000000000000000000</ModuleData>
+						<CoeProfile ProfileNo="#x00001389"/>
+					</Module>
+				</Slot>
+				<Slot Name="Empty Slot 8">
+					<SlotData>0000010001001600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>0</ModuleIdent>
+					<Module Id="#x03090009" Type="Empty Module" Class="">
+						<Name>Device</Name>
+						<ImageId>699</ImageId>
+						<ModuleData>0200000000000000000004000000000000000000000000000000000000000000</ModuleData>
+						<CoeProfile ProfileNo="#x00001389"/>
+					</Module>
+				</Slot>
+				<Slot Name="Acquisition">
+					<SlotData>0200010001000600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>1639253</ModuleIdent>
+					<ModuleIdent>0</ModuleIdent>
+					<Module Id="#x0309000a" Type="Acquisition" Class="">
+						<Name>GenICam</Name>
+						<ImageId>551</ImageId>
+						<ModuleData>0200000055031900000004000000000000000000000000000000000000000000</ModuleData>
+						<PdoIndex>5641</PdoIndex>
+						<CoeProfile ProfileNo="#x03551389"/>
+					</Module>
+				</Slot>
+				<Slot Name="Transport Layer Control">
+					<SlotData>0200010001000600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>2687831</ModuleIdent>
+					<Module Id="#x0309000b" Type="Transport Layer Control" Class="">
+						<Name>GenICam</Name>
+						<ImageId>699</ImageId>
+						<ModuleData>0200000057032900000004000000000000000000000000000000000000000000</ModuleData>
+						<CoeProfile ProfileNo="#x03571389"/>
+					</Module>
+				</Slot>
+				<Slot Name="Image Format Control">
+					<SlotData>0200010001000600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>3212120</ModuleIdent>
+					<Module Id="#x0309000c" Type="Image Format Control" Class="">
+						<Name>GenICam</Name>
+						<ImageId>699</ImageId>
+						<ModuleData>0200000058033100000004000000000000000000000000000000000000000000</ModuleData>
+						<CoeProfile ProfileNo="#x03581389"/>
+					</Module>
+				</Slot>
+				<Slot Name="Analog Controls">
+					<SlotData>0200010001000600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>3736409</ModuleIdent>
+					<Module Id="#x0309000d" Type="Analog Controls" Class="">
+						<Name>GenICam</Name>
+						<ImageId>699</ImageId>
+						<ModuleData>0200000059033900000004000000000000000000000000000000000000000000</ModuleData>
+						<CoeProfile ProfileNo="#x03591389"/>
+					</Module>
+				</Slot>
+				<Slot Name="Device Control">
+					<SlotData>0200010001000600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>4260698</ModuleIdent>
+					<Module Id="#x0309000e" Type="Device Control" Class="">
+						<Name>GenICam</Name>
+						<ImageId>699</ImageId>
+						<ModuleData>020000005a034100000004000000000000000000000000000000000000000000</ModuleData>
+						<CoeProfile ProfileNo="#x035a1389"/>
+					</Module>
+				</Slot>
+				<Slot Name="Optic Control">
+					<SlotData>0200010001000600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>4784987</ModuleIdent>
+					<Module Id="#x0309000f" Type="Optic Control" Class="">
+						<Name>GenICam</Name>
+						<ImageId>699</ImageId>
+						<ModuleData>020000005b034900000004000000000000000000000000000000000000000000</ModuleData>
+						<CoeProfile ProfileNo="#x035b1389"/>
+					</Module>
+				</Slot>
+				<Slot Name="Light Control">
+					<SlotData>0200010001000600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>7406432</ModuleIdent>
+					<Module Id="#x03090010" Type="Light Control" Class="">
+						<Name>GenICam</Name>
+						<ImageId>699</ImageId>
+						<ModuleData>0200000060037100000004000000000000000000000000000000000000000000</ModuleData>
+						<CoeProfile ProfileNo="#x03601389"/>
+					</Module>
+				</Slot>
+				<Slot Name="EtherCAT Control">
+					<SlotData>0200010001000600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>1124073481</ModuleIdent>
+					<Module Id="#x03090011" Type="EtherCAT Control" Class="">
+						<Name>GenICam</Name>
+						<ImageId>699</ImageId>
+						<ModuleData>0200000009000043000004000000000000000000000000000000000000000000</ModuleData>
+						<CoeProfile ProfileNo="#x00001389"/>
+					</Module>
+				</Slot>
+				<Slot Name="Transfer Control">
+					<SlotData>0200010001000600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>5833565</ModuleIdent>
+					<Module Id="#x03090012" Type="Transfer Control" Class="">
+						<Name>GenICam</Name>
+						<ImageId>699</ImageId>
+						<ModuleData>020000005d035900000004000000000000000000000000000000000000000000</ModuleData>
+						<CoeProfile ProfileNo="#x035d1389"/>
+					</Module>
+				</Slot>
+				<Slot Name="Counter/Timer Slot">
+					<SlotData>0200010001000600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>8455010</ModuleIdent>
+					<Module Id="#x03090013" Type="Counter and Timer Control Settings" Class="">
+						<Name>GenICam</Name>
+						<ImageId>699</ImageId>
+						<ModuleData>0200000062038100000004000000000000000000000000000000000000000000</ModuleData>
+						<CoeProfile ProfileNo="#x03621389"/>
+					</Module>
+				</Slot>
+				<Slot Name="UserSet Control">
+					<SlotData>0200010001000600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>9503588</ModuleIdent>
+					<Module Id="#x03090014" Type="UserSet Control" Class="">
+						<Name>GenICam</Name>
+						<ImageId>699</ImageId>
+						<ModuleData>0200000064039100000004000000000000000000000000000000000000000000</ModuleData>
+						<CoeProfile ProfileNo="#x03641389"/>
+					</Module>
+				</Slot>
+				<Slot Name="LUT Control">
+					<SlotData>0200010001000600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>10027877</ModuleIdent>
+					<Module Id="#x03090015" Type="LUT Control" Class="">
+						<Name>GenICam</Name>
+						<ImageId>699</ImageId>
+						<ModuleData>0200000065039900000004000000000000000000000000000000000000000000</ModuleData>
+						<CoeProfile ProfileNo="#x03651389"/>
+					</Module>
+				</Slot>
+				<Slot Name="Digital IO Control">
+					<SlotData>0200010001000600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>7930721</ModuleIdent>
+					<Module Id="#x03090016" Type="Digital IO Control" Class="">
+						<Name>GenICam</Name>
+						<ImageId>699</ImageId>
+						<ModuleData>0200000061037900000004000000000000000000000000000000000000000000</ModuleData>
+						<CoeProfile ProfileNo="#x03611389"/>
+					</Module>
+				</Slot>
+				<Slot Name="Liquid Lens">
+					<SlotData>0500010001000600010000001000000000000000000000000000000000000000</SlotData>
+					<ModuleIdent>6882143</ModuleIdent>
+					<ModuleIdent>0</ModuleIdent>
+					<Module Id="#x03090017" Type="Empty Module" Class="">
+						<Name>Liquid Lens</Name>
+						<ImageId>699</ImageId>
+						<ModuleData>0200000000000000000004000000000000000000000000000000000000000000</ModuleData>
+						<CoeProfile ProfileNo="#x00001389"/>
+					</Module>
+				</Slot>
+				<Slot Name="Infrared">
 					<SlotData>0a00000001000600010000001000000000000000000000000000000000000000</SlotData>
-					<ModuleIdent>2017</ModuleIdent>
+					<ModuleIdent>2163666</ModuleIdent>
 				</Slot>
-				<Slot Name="Blau">
+				<Slot Name="Blue">
 					<SlotData>0b00000001000600010000001000000000000000000000000000000000000000</SlotData>
-					<ModuleIdent>2017</ModuleIdent>
+					<ModuleIdent>2163666</ModuleIdent>
 				</Slot>
-				<Slot Name="Grün">
+				<Slot Name="Green">
 					<SlotData>0c00000001000600010000001000000000000000000000000000000000000000</SlotData>
-					<ModuleIdent>2017</ModuleIdent>
+					<ModuleIdent>2163666</ModuleIdent>
 				</Slot>
 				<Slot Name="Orange">
 					<SlotData>0d00000001000600010000001000000000000000000000000000000000000000</SlotData>
-					<ModuleIdent>2017</ModuleIdent>
+					<ModuleIdent>2163666</ModuleIdent>
 				</Slot>
-				<SlotGroupData Name="Gerät">
+				<SlotGroupData Name="Device">
 					<SlotGroup>0</SlotGroup>
 				</SlotGroupData>
-				<SlotGroupData Name="GenICam">
+				<SlotGroupData Name="Debug">
 					<SlotGroup>1</SlotGroup>
 				</SlotGroupData>
-				<SlotGroupData Name="Flüssiglinse">
+				<SlotGroupData Name="GenICam">
 					<SlotGroup>2</SlotGroup>
 				</SlotGroupData>
-				<SlotGroupData Name="Kanal Infrarot">
+				<SlotGroupData Name="Liquid Lens">
+					<SlotGroup>5</SlotGroup>
+				</SlotGroupData>
+				<SlotGroupData Name="Channel Infrared">
 					<SlotGroup>10</SlotGroup>
 				</SlotGroupData>
-				<SlotGroupData Name="Kanal Blau">
+				<SlotGroupData Name="Channel Blue">
 					<SlotGroup>11</SlotGroup>
 				</SlotGroupData>
-				<SlotGroupData Name="Kanal Grün">
+				<SlotGroupData Name="Channel Green">
 					<SlotGroup>12</SlotGroup>
 				</SlotGroupData>
-				<SlotGroupData Name="Kanal Orange">
+				<SlotGroupData Name="Channel Orange">
 					<SlotGroup>13</SlotGroup>
 				</SlotGroupData>
 			</EtherCAT>
 		</Box>
-		<EtherCAT DcSyncMode="3"/>
+		<EtherCAT VirtualDeviceName="true" DcSyncMode="3"/>
 	</Device>
 </TcSmItem>

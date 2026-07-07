@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.17">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
   <POU Name="PRG2_VisionApplication" Id="{3044bfc2-af47-4475-aa52-20e83efee7e7}" SpecialFunc="None">
     <Declaration><![CDATA[//This program is called by a task with medium-low priority. 
 //Since complex image processing takes several cycles, it is important that this task can be interrupted by others. 
@@ -39,10 +39,13 @@ END_VAR]]></Declaration>
       <ST><![CDATA[//If TryGetImage returns S_OK(0), a new image is available
 IF (PRG1_MAIN.fbCamera.TryGetImage(stRawImageWithInfo) = S_OK) THEN
 	bNewImageReceived := TRUE;
+	fbFeedback.ActiveCommand := 'F_VN_ImgDebayering';	
+	F_VN_ImgDebayering(	stImageWithInfo	:=stRawImageWithInfo, 
+						hrPrev			:= S_OK );
 
 //In order to react to images from the filesource in parallel, these are also queried here
 ELSIF (PRG1_MAIN.fbFileSource.TryGetImage(stRawImageWithInfo) = S_OK) THEN
-	bNewImageReceived := TRUE;
+	bNewImageReceived := TRUE;	
 
 //Manual trigger here to repeade last image processing with same stImageWithInfo
 ELSIF bRepeatLastProcessing AND stRawImageWithInfo.ipImage <> 0 THEN
@@ -78,17 +81,6 @@ IF bNewImageReceived THEN
 						ipDestImage		:=ipDisplayableRawImage,
 						hrPrev			:=fbFeedback.hr);
 	
-	
-	(* If pixel are encoded in bayer bg convert to rgb - cameraImage is rb, imageFromFile is non rg *)
-	IF stImageWithInfo.stInfo.stPixelFormat.ePixelEncoding = ETcVnPixelEncoding.TCVN_PE_BAYER_RG THEN
-		fbFeedback.ActiveCommand := 'F_VN_ConvertColorSpace TCVN_CST_BAYER_RG_TO_RGB';
-		fbFeedback.hr := F_VN_ConvertColorSpace(
-							ipSrcImage	:=stImageWithInfo.ipImage, 
-							ipDestImage	:=stImageWithInfo.ipImage, 
-							eTransform	:=ETcVnColorSpaceTransform.TCVN_CST_BAYER_RG_TO_RGB, 
-							hrPrev		:=fbFeedback.hr );
-	END_IF
-	
 	(* Calculate a number that describes the sharpness of the image *)
 	fbFeedback.ActiveCommand := 'F_VND_Sharpness_SumModifiedLaplace';	
 	nSharpnessLastImg := nSharpness;
@@ -98,7 +90,6 @@ IF bNewImageReceived THEN
 						hrPrev			:= fbFeedback.hr, 
 						nSharpness=> nSharpness);
 	nSharpness := TO_UINT(nSharpness / 1_000_000);
-	
 	
 	(* Resize Image *)		
 	IF fReduceImageSizeFactor <> 1.0 THEN
@@ -132,7 +123,6 @@ IF bNewImageReceived THEN
 							hrPrev			:= fbFeedback.hr  );
 	END_IF
       										
-
 						
 	(* Write text into an image. *)
 	fbFeedback.ActiveCommand := 'F_VN_PutText - Image Coutner';	
@@ -201,7 +191,6 @@ fbWriteImage(
 IF NOT fbWriteImage.bBusy THEN
 	bSaveImage := FALSE;
 END_IF
-
 
 //----------------------------------------------------------------------------------------------------
 
